@@ -116,3 +116,282 @@ Antes de escribir código:
 5. Generar código.
 
 Nunca comenzar escribiendo código directamente.
+# 10. TECNOLOGÍAS OFICIALES
+
+La aplicación debe construirse utilizando exclusivamente:
+
+## Frontend
+
+* Next.js App Router
+* React
+* TypeScript
+* Tailwind CSS
+* Shadcn UI
+* Framer Motion
+
+## Backend
+
+* Supabase
+* PostgreSQL
+* Supabase Edge Functions
+
+## Inteligencia Artificial
+
+* OpenAI API
+
+## Hosting
+
+* Vercel
+
+## Repositorio
+
+* GitHub
+
+---
+
+# 11. REGLAS DE TYPESCRIPT
+
+Siempre:
+
+* strict mode habilitado.
+* Tipado explícito.
+* Interfaces reutilizables.
+* Evitar any.
+
+Nunca:
+
+* Desactivar TypeScript.
+* Usar any innecesariamente.
+* Crear tipos duplicados.
+
+---
+
+# 12. CLEAN ARCHITECTURE
+
+Separar claramente:
+
+Presentation Layer
+
+↓
+
+Application Layer
+
+↓
+
+Domain Layer
+
+↓
+
+Infrastructure Layer
+
+---
+
+No mezclar:
+
+* UI
+* lógica de negocio
+* acceso a datos
+
+en el mismo archivo.
+
+---
+
+# 13. PRINCIPIOS SOLID
+
+Todo desarrollo debe respetar:
+
+S - Single Responsibility
+
+O - Open/Closed
+
+L - Liskov Substitution
+
+I - Interface Segregation
+
+D - Dependency Inversion
+
+---
+
+# 14. ESTRUCTURA OFICIAL DEL PROYECTO
+
+/source
+
+/app
+
+/components
+
+/features
+
+/services
+
+/lib
+
+/hooks
+
+/types
+
+/constants
+
+/styles
+
+/public
+
+---
+
+# 15. ESTRUCTURA DE COMPONENTES
+
+Cada componente debe contener:
+
+Component
+
+Types
+
+Hooks
+
+Tests (futuro)
+
+---
+
+Ejemplo:
+
+/components/project-card
+
+project-card.tsx
+
+project-card.types.ts
+
+project-card.hooks.ts
+
+---
+
+# 16. REGLAS FRONTEND
+
+Crear componentes:
+
+* pequeños
+* reutilizables
+* desacoplados
+
+Evitar:
+
+* componentes gigantes
+* lógica compleja dentro del JSX
+
+---
+
+# 17. REGLAS BACKEND
+
+Toda lógica de negocio debe vivir en:
+
+/services
+
+No colocar lógica compleja dentro de:
+
+* páginas
+* componentes
+
+---
+
+# 18. REGLAS DE API
+
+Toda comunicación externa debe pasar por:
+
+/services
+
+Ejemplos:
+
+OpenAI Service
+
+Trend Service
+
+Export Service
+
+Marketing Service
+
+---
+
+Nunca llamar APIs directamente desde componentes visuales.
+
+---
+
+# 19. REGLAS DE BASE DE DATOS
+
+Respetar estrictamente DDD.md
+
+Toda tabla debe incluir:
+
+* PK
+* FK
+* timestamps
+
+No crear tablas fuera del DDD sin justificación.
+
+---
+
+# 20. SUPABASE
+
+Usar:
+
+* Authentication
+* Database
+* Storage
+
+Preparar soporte para:
+
+* Edge Functions
+* Row Level Security
+
+---
+
+# 21. STORAGE
+
+Buckets oficiales:
+
+wallpapers
+
+icons
+
+mockups
+
+exports
+
+assets
+
+---
+
+# 22. VARIABLES DE ENTORNO
+
+Toda credencial debe vivir en:
+
+.env.local
+
+Nunca hardcodear:
+
+* API Keys
+* Tokens
+* Secrets
+
+---
+
+# 23. MANEJO DE ERRORES
+
+Todo proceso debe manejar:
+
+* errores de red
+* errores IA
+* errores de exportación
+* errores de base de datos
+
+Mostrar mensajes amigables al usuario.
+
+---
+
+# 24. LOGGING
+
+Registrar:
+
+* errores
+* exportaciones
+* generación IA
+
+Preparar sistema para monitoreo futuro.
