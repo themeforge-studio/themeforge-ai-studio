@@ -395,3 +395,324 @@ Registrar:
 * generación IA
 
 Preparar sistema para monitoreo futuro.
+# 25. FORGE AI
+
+Forge AI es el asistente principal de ThemeForge AI Studio.
+
+Debe estar disponible en todos los módulos.
+
+---
+
+## Responsabilidades
+
+* Generar ideas.
+* Crear prompts.
+* Mejorar prompts.
+* Analizar tendencias.
+* Recomendar nichos.
+* Recomendar colores.
+* Recomendar estilos.
+* Recomendar nombres comerciales.
+* Generar marketing.
+
+---
+
+## Reglas
+
+Siempre explicar el razonamiento.
+
+Siempre ofrecer alternativas.
+
+Siempre proponer mejoras.
+
+---
+
+# 26. SISTEMA DE PROYECTOS
+
+Todo recurso debe pertenecer a un proyecto.
+
+Ejemplo:
+
+Proyecto
+
+├── Wallpapers
+
+├── Iconos
+
+├── Marketing
+
+├── Mockups
+
+└── Exportaciones
+
+---
+
+Ningún recurso puede existir fuera de un proyecto.
+
+---
+
+# 27. REGLAS UI/UX
+
+Seguir estrictamente UIUX.md.
+
+---
+
+## Principios
+
+* Dark Mode Premium.
+* Diseño limpio.
+* Productividad.
+* IA visible.
+* Navegación intuitiva.
+
+---
+
+## Inspiración
+
+* Figma
+* Linear
+* Notion
+* Midjourney
+* Adobe
+
+---
+
+# 28. FORGE AI PANEL
+
+Ubicación:
+
+Panel derecho permanente.
+
+---
+
+Funciones:
+
+* Chat IA
+* Ideas
+* Tendencias
+* Ayuda contextual
+
+---
+
+No ocultar el panel IA.
+
+---
+
+# 29. DASHBOARD
+
+Debe mostrar:
+
+* Proyectos recientes
+* Wallpapers
+* Packs de iconos
+* Tendencias
+* Actividad
+* Recomendaciones IA
+
+---
+
+# 30. SIMULADOR
+
+El simulador es un módulo crítico.
+
+Debe incluir:
+
+Android
+
+iPhone
+
+---
+
+Capas:
+
+Wallpaper
+
+Iconos
+
+Widgets
+
+---
+
+Funciones:
+
+Zoom
+
+Captura
+
+Comparación
+
+Exportación
+
+---
+
+# 31. SISTEMA DE EXPORTACIÓN
+
+Exportar:
+
+PNG
+
+JPG
+
+WEBP
+
+SVG
+
+ZIP
+
+PDF
+
+---
+
+Todo archivo exportado debe registrarse en la base de datos.
+
+---
+
+# 32. COPYRIGHT CHECKER
+
+Implementar sistema de evaluación.
+
+Niveles:
+
+Verde
+
+Amarillo
+
+Rojo
+
+---
+
+La IA debe proporcionar:
+
+* Riesgo estimado
+* Explicación
+* Recomendaciones
+
+---
+
+# 33. TESTING
+
+Todo módulo debe ser:
+
+* Probable
+* Reutilizable
+* Escalable
+
+---
+
+Antes de considerar terminado un módulo:
+
+Verificar:
+
+* errores
+* estados vacíos
+* carga
+* excepciones
+
+---
+
+# 34. SEGURIDAD
+
+Proteger:
+
+* API Keys
+* Tokens
+* Secrets
+
+---
+
+Nunca exponer:
+
+OpenAI API Keys
+
+Supabase Service Keys
+
+---
+
+Validar:
+
+* entradas
+* formularios
+* datos IA
+
+---
+
+# 35. RENDIMIENTO
+
+Objetivos:
+
+Carga inicial < 3 segundos
+
+Respuesta IA < 10 segundos
+
+Exportación < 30 segundos
+
+---
+
+# 36. FUTURAS VERSIONES
+
+Preparar arquitectura para:
+
+* Personajes IA
+* Modo Caos
+* Launcher Inteligente
+* Noticias Temáticas
+* Mascotas Virtuales
+
+---
+
+No implementar todavía.
+
+Preparar soporte arquitectónico únicamente.
+
+---
+
+# 37. PROCESO OBLIGATORIO DE DESARROLLO
+
+Antes de generar código:
+
+1. Analizar requerimientos.
+2. Revisar documentación.
+3. Identificar dependencias.
+4. Explicar arquitectura.
+5. Explicar estructura de archivos.
+6. Generar código.
+
+---
+
+Nunca generar código sin explicación previa.
+
+---
+
+# 38. FORMATO DE RESPUESTA OBLIGATORIO
+
+Cuando se solicite un módulo:
+
+Responder siempre en este orden:
+
+## Objetivo
+
+## Arquitectura
+
+## Archivos a Crear
+
+## Dependencias
+
+## Código
+
+## Explicación
+
+## Cómo Probar
+
+---
+
+# 39. REGLA FINAL
+
+La prioridad máxima es mantener ThemeForge AI Studio:
+
+* Escalable
+* Modular
+* Profesional
+* Mantenible
+* Preparado para crecimiento futuro
+
+Nunca sacrificar arquitectura por velocidad de implementación.
