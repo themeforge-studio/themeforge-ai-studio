@@ -1,4 +1,5 @@
 import Sidebar from "../components/layout/Sidebar";
+import StatsCards from "../components/dashboard/StatsCards";
 
 export default function Home() {
   return (
@@ -13,6 +14,9 @@ export default function Home() {
         <p className="mt-4 text-slate-400">
           Dashboard principal
         </p>
+        <div className="mt-8">
+  <StatsCards />
+</div>
       </section>
     </main>
   );
