@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { themeSuggestions } from "./aiData";
+import { generatePrompt } from "./promptEngine";
 
 export default function ThemeGenerator() {
   const [themeName, setThemeName] = useState("");
@@ -54,13 +55,24 @@ export default function ThemeGenerator() {
         style as keyof typeof themeSuggestions
       ];
 
+    const prompts = generatePrompt(
+      style,
+      "theme"
+    );
+
     setGeneratedTheme({
       style,
       name: themeName || "Cyber Samurai Theme",
+
       wallpaper: data.wallpapers[0],
       iconPack: data.iconPacks[0],
       character: data.characters[0],
       widget: data.widgets[0],
+
+      wallpaperPrompt: prompts.wallpaper,
+      iconPrompt: prompts.iconPack,
+      characterPrompt: prompts.character,
+      widgetPrompt: prompts.widget,
     });
   };
 
@@ -74,7 +86,9 @@ export default function ThemeGenerator() {
         type="text"
         placeholder="Type a theme idea..."
         value={themeName}
-        onChange={(e) => setThemeName(e.target.value)}
+        onChange={(e) =>
+          setThemeName(e.target.value)
+        }
         className="w-full bg-slate-800 rounded-lg p-3 mb-4"
       />
 
@@ -87,43 +101,97 @@ export default function ThemeGenerator() {
 
       {generatedTheme && (
         <div className="mt-8 border-t border-slate-700 pt-6">
+
           <h3 className="text-xl font-bold mb-4">
             Generated Theme
           </h3>
 
-          <div className="space-y-3">
+          <div className="space-y-3 mb-8">
 
             <div>
-              <span className="font-bold">Style:</span>{" "}
+              <strong>Style:</strong>{" "}
               {generatedTheme.style}
             </div>
 
             <div>
-              <span className="font-bold">Theme:</span>{" "}
+              <strong>Theme:</strong>{" "}
               {generatedTheme.name}
             </div>
 
             <div>
-              <span className="font-bold">Wallpaper:</span>{" "}
+              <strong>Wallpaper:</strong>{" "}
               {generatedTheme.wallpaper}
             </div>
 
             <div>
-              <span className="font-bold">Icon Pack:</span>{" "}
+              <strong>Icon Pack:</strong>{" "}
               {generatedTheme.iconPack}
             </div>
 
             <div>
-              <span className="font-bold">Character:</span>{" "}
+              <strong>Character:</strong>{" "}
               {generatedTheme.character}
             </div>
 
             <div>
-              <span className="font-bold">Widget:</span>{" "}
+              <strong>Widget:</strong>{" "}
               {generatedTheme.widget}
             </div>
 
           </div>
+
+          <div className="border-t border-slate-700 pt-6">
+
+            <h3 className="text-xl font-bold mb-6">
+              AI Generation Prompts
+            </h3>
+
+            <div className="space-y-6">
+
+              <div>
+                <div className="font-bold mb-2">
+                  Wallpaper Prompt
+                </div>
+
+                <div className="bg-slate-800 p-4 rounded-lg text-slate-300">
+                  {generatedTheme.wallpaperPrompt}
+                </div>
+              </div>
+
+              <div>
+                <div className="font-bold mb-2">
+                  Icon Pack Prompt
+                </div>
+
+                <div className="bg-slate-800 p-4 rounded-lg text-slate-300">
+                  {generatedTheme.iconPrompt}
+                </div>
+              </div>
+
+              <div>
+                <div className="font-bold mb-2">
+                  Character Prompt
+                </div>
+
+                <div className="bg-slate-800 p-4 rounded-lg text-slate-300">
+                  {generatedTheme.characterPrompt}
+                </div>
+              </div>
+
+              <div>
+                <div className="font-bold mb-2">
+                  Widget Prompt
+                </div>
+
+                <div className="bg-slate-800 p-4 rounded-lg text-slate-300">
+                  {generatedTheme.widgetPrompt}
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
         </div>
       )}
     </div>
