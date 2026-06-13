@@ -3,10 +3,16 @@ export default function MobilePreview({
 }: {
   generatedTheme: any;
 }) {
-  if (!generatedTheme) return null;
-
+  const theme =
+    generatedTheme || {
+      name: "Cyber Samurai",
+      style: "cyberpunk",
+      wallpaper: "Neo Tokyo Rain",
+      widget: "Cyber Clock",
+      character: "Female Cyber Ninja",
+    };
   const getThemeColors = () => {
-    switch (generatedTheme.style) {
+    switch (theme.style) {
       case "anime":
         return {
           background:
@@ -54,8 +60,23 @@ export default function MobilePreview({
   return (
     <div className="rounded-xl border border-slate-800 bg-slate-900 p-6 mt-8">
       <h2 className="text-2xl font-bold mb-6">
-        Android Emulator
+        Device Preview
       </h2>
+      <div className="flex gap-2 mb-6">
+
+  <button className="px-4 py-2 rounded-lg bg-violet-600 text-white text-sm">
+    Android
+  </button>
+
+  <button className="px-4 py-2 rounded-lg bg-slate-800 text-slate-300 text-sm">
+    iPhone
+  </button>
+
+  <button className="px-4 py-2 rounded-lg bg-slate-800 text-slate-300 text-sm">
+    Tablet
+  </button>
+
+</div>
 
       <div className="flex justify-center">
         <div className="w-[290px] h-[600px] rounded-[40px] border-4 border-slate-700 bg-black p-3">
@@ -75,11 +96,11 @@ export default function MobilePreview({
 
             <div className="text-center mb-3">
               <h3 className="font-bold">
-                {generatedTheme.name}
+                {theme.name}
               </h3>
 
               <p className="text-xs opacity-70">
-                {generatedTheme.style}
+                {theme.style}
               </p>
             </div>
 
@@ -90,20 +111,20 @@ export default function MobilePreview({
 <div
   className={`h-40 rounded-xl flex items-center justify-center mb-4 text-center font-bold text-lg
   ${
-    generatedTheme.style === "anime"
+    theme.style === "anime"
       ? "bg-gradient-to-br from-pink-400 to-purple-600"
-      : generatedTheme.style === "fantasy"
+      : theme.style === "fantasy"
       ? "bg-gradient-to-br from-green-500 to-yellow-700"
-      : generatedTheme.style === "gaming"
+      : theme.style === "gaming"
       ? "bg-gradient-to-br from-green-500 to-black"
-      : generatedTheme.style === "amoled"
+      : theme.style === "amoled"
       ? "bg-gradient-to-br from-black to-slate-800"
       : "bg-gradient-to-br from-cyan-500 to-blue-800"
   }`}
 >
   <div>
     <div className="text-xl">
-      {generatedTheme.wallpaper}
+      {theme.wallpaper}
     </div>
 
     <div className="text-xs opacity-80 mt-2">
@@ -118,7 +139,7 @@ export default function MobilePreview({
               className={`rounded-xl p-3 text-center mb-4 ${colors.widget}`}
             >
               <div className="text-sm">
-                {generatedTheme.widget}
+                {theme.widget}
               </div>
 
               <div className="text-xl font-bold">
@@ -137,13 +158,13 @@ export default function MobilePreview({
         key={index}
         className={`h-12 rounded-xl flex items-center justify-center text-lg font-bold ${colors.icon}`}
       >
-        {generatedTheme.style === "anime"
+        {theme.style === "anime"
           ? "♥"
-          : generatedTheme.style === "fantasy"
+          : theme.style === "fantasy"
           ? "✦"
-          : generatedTheme.style === "gaming"
+          : theme.style === "gaming"
           ? "🎮"
-          : generatedTheme.style === "amoled"
+          : theme.style === "amoled"
           ? "⬢"
           : "◉"}
       </div>
@@ -159,19 +180,19 @@ export default function MobilePreview({
   <div className="rounded-xl bg-black/20 p-3 text-center">
 
     <div className="text-4xl mb-2">
-      {generatedTheme.style === "anime"
+      {theme.style === "anime"
         ? "👧"
-        : generatedTheme.style === "fantasy"
+        : theme.style === "fantasy"
         ? "🧙"
-        : generatedTheme.style === "gaming"
+        : theme.style === "gaming"
         ? "🎮"
-        : generatedTheme.style === "amoled"
+        : theme.style === "amoled"
         ? "🕶️"
         : "🥷"}
     </div>
 
     <div className="text-sm">
-      {generatedTheme.character}
+      {theme.character}
     </div>
 
   </div>
@@ -182,13 +203,13 @@ export default function MobilePreview({
 <div className="grid grid-cols-4 gap-2">
 
   {(
-    generatedTheme.style === "anime"
+    theme.style === "anime"
       ? ["💖", "🎀", "🌸", "⭐"]
-      : generatedTheme.style === "fantasy"
+      : theme.style === "fantasy"
       ? ["⚔️", "🛡️", "🏹", "🔮"]
-      : generatedTheme.style === "gaming"
+      : theme.style === "gaming"
       ? ["🎮", "🕹️", "🏆", "⚡"]
-      : generatedTheme.style === "amoled"
+      : theme.style === "amoled"
       ? ["⬛", "🌑", "🕶️", "⚫"]
       : ["🤖", "⚙️", "💾", "🌐"]
   ).map((icon, index) => (
