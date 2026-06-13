@@ -57,9 +57,13 @@ export default function ProjectsPage() {
 />
 
 {activeTab === "overview" && (
-  <ThemeGenerator
-    onGenerate={setGeneratedTheme}
-  />
+  <>
+    <ThemeGenerator
+      onGenerate={setGeneratedTheme}
+    />
+
+    <ProjectsManager />
+  </>
 )}
 
 {activeTab === "assets" && (

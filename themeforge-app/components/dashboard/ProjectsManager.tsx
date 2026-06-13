@@ -1,21 +1,42 @@
+"use client";
+
+import { useState } from "react";
+
 export default function ProjectsManager() {
-  const projects = [
+  const [projects, setProjects] = useState([
     {
+      id: 1,
       name: "Neon Future",
       type: "Wallpaper Pack",
       status: "Published",
     },
     {
+      id: 2,
       name: "Cyber Icons",
       type: "Icon Pack",
       status: "Draft",
     },
     {
+      id: 3,
       name: "Dark AMOLED",
       type: "Theme",
       status: "Published",
     },
-  ];
+  ]);
+
+  const createProject = () => {
+    const newProject = {
+      id: Date.now(),
+      name: `Project ${projects.length + 1}`,
+      type: "Theme",
+      status: "Draft",
+    };
+
+    setProjects([
+      newProject,
+      ...projects,
+    ]);
+  };
 
   return (
     <div className="mt-8">
@@ -24,7 +45,10 @@ export default function ProjectsManager() {
           Projects
         </h2>
 
-        <button className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg transition">
+        <button
+          onClick={createProject}
+          className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg transition"
+        >
           + New Project
         </button>
       </div>
@@ -32,7 +56,7 @@ export default function ProjectsManager() {
       <div className="grid gap-4">
         {projects.map((project) => (
           <div
-            key={project.name}
+            key={project.id}
             className="rounded-xl border border-slate-800 bg-slate-900 p-5"
           >
             <h3 className="text-xl font-semibold">
