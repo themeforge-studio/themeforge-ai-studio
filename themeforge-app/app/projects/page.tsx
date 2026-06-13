@@ -7,6 +7,7 @@ import ProjectForm from "../../components/dashboard/ProjectForm";
 import AIAssistant from "../../components/dashboard/AIAssistant";
 import ThemeGenerator from "../../components/dashboard/ThemeGenerator";
 import AssetStudio from "../../components/dashboard/AssetStudio";
+import MobilePreview from "../../components/dashboard/MobilePreview";
 
 export default function ProjectsPage() {
   const [generatedTheme, setGeneratedTheme] =
@@ -42,6 +43,12 @@ export default function ProjectsPage() {
 
       <div className="mt-8">
         <AssetStudio
+          generatedTheme={generatedTheme}
+        />
+      </div>
+
+      <div className="mt-8">
+        <MobilePreview
           generatedTheme={generatedTheme}
         />
       </div>
