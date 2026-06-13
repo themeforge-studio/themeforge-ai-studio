@@ -5,13 +5,39 @@ type ExportPanelProps = {
 export default function ExportPanel({
   generatedTheme,
 }: ExportPanelProps) {
- const handleExport = (type: string) => {
-  const data = {
-    theme: "Cyber Samurai",
-    exportType: type,
-    version: "1.0",
-    generatedBy: "ThemeForge AI Studio",
-  };
+  const handleExport = (type: string) => {
+ const data = {
+  theme:
+    generatedTheme?.name ||
+    "Cyber Samurai",
+
+  style:
+    generatedTheme?.style ||
+    "cyberpunk",
+
+  wallpaper:
+    generatedTheme?.wallpaper ||
+    "Neo Tokyo Rain",
+
+  iconPack:
+    generatedTheme?.iconPack ||
+    "Cyber Glass",
+
+  character:
+    generatedTheme?.character ||
+    "Female Cyber Ninja",
+
+  widget:
+    generatedTheme?.widget ||
+    "Cyber Clock",
+
+  exportType: type,
+
+  version: "1.0",
+
+  generatedBy:
+    "ThemeForge AI Studio",
+};
 
   const blob = new Blob(
     [JSON.stringify(data, null, 2)],
