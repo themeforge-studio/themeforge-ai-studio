@@ -379,9 +379,21 @@ const totalCharacters =
                     {project.type}
                   </p>
 
-                  <p className="mt-3 text-sm">
-                    {project.status}
-                  </p>
+                  <div className="mt-3">
+
+  <span
+    className={`rounded-full px-3 py-1 text-xs font-semibold ${
+      project.status === "Published"
+        ? "bg-green-500/20 text-green-400"
+        : project.status === "Archived"
+        ? "bg-red-500/20 text-red-400"
+        : "bg-yellow-500/20 text-yellow-400"
+    }`}
+  >
+    {project.status}
+  </span>
+
+</div>
                 </div>
 
                 <div className="flex gap-2">
