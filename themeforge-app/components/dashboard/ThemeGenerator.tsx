@@ -4,7 +4,11 @@ import { useState } from "react";
 import { themeSuggestions } from "./aiData";
 import { generatePrompt } from "./promptEngine";
 
-export default function ThemeGenerator() {
+export default function ThemeGenerator({
+  onGenerate,
+}: {
+  onGenerate?: (theme: any) => void;
+}) {
   const [themeName, setThemeName] = useState("");
   const [generatedTheme, setGeneratedTheme] = useState<any>(null);
 
@@ -60,7 +64,7 @@ export default function ThemeGenerator() {
       "theme"
     );
 
-    setGeneratedTheme({
+    const themeData = {
       style,
       name: themeName || "Cyber Samurai Theme",
 
@@ -73,7 +77,13 @@ export default function ThemeGenerator() {
       iconPrompt: prompts.iconPack,
       characterPrompt: prompts.character,
       widgetPrompt: prompts.widget,
-    });
+    };
+
+    setGeneratedTheme(themeData);
+
+    if (onGenerate) {
+      onGenerate(themeData);
+    }
   };
 
   return (
@@ -101,13 +111,11 @@ export default function ThemeGenerator() {
 
       {generatedTheme && (
         <div className="mt-8 border-t border-slate-700 pt-6">
-
           <h3 className="text-xl font-bold mb-4">
             Generated Theme
           </h3>
 
           <div className="space-y-3 mb-8">
-
             <div>
               <strong>Style:</strong>{" "}
               {generatedTheme.style}
@@ -137,17 +145,14 @@ export default function ThemeGenerator() {
               <strong>Widget:</strong>{" "}
               {generatedTheme.widget}
             </div>
-
           </div>
 
           <div className="border-t border-slate-700 pt-6">
-
             <h3 className="text-xl font-bold mb-6">
               AI Generation Prompts
             </h3>
 
             <div className="space-y-6">
-
               <div>
                 <div className="font-bold mb-2">
                   Wallpaper Prompt
@@ -187,11 +192,8 @@ export default function ThemeGenerator() {
                   {generatedTheme.widgetPrompt}
                 </div>
               </div>
-
             </div>
-
           </div>
-
         </div>
       )}
     </div>

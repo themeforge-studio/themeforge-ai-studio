@@ -1,9 +1,17 @@
+"use client";
+
+import { useState } from "react";
+
 import ProjectsManager from "../../components/dashboard/ProjectsManager";
 import ProjectForm from "../../components/dashboard/ProjectForm";
 import AIAssistant from "../../components/dashboard/AIAssistant";
 import ThemeGenerator from "../../components/dashboard/ThemeGenerator";
+import AssetStudio from "../../components/dashboard/AssetStudio";
 
 export default function ProjectsPage() {
+  const [generatedTheme, setGeneratedTheme] =
+    useState<any>(null);
+
   return (
     <div className="p-8 text-white">
       <h1 className="text-4xl font-bold">
@@ -27,7 +35,15 @@ export default function ProjectsPage() {
       </div>
 
       <div className="mt-8">
-        <ThemeGenerator />
+        <ThemeGenerator
+          onGenerate={setGeneratedTheme}
+        />
+      </div>
+
+      <div className="mt-8">
+        <AssetStudio
+          generatedTheme={generatedTheme}
+        />
       </div>
     </div>
   );
