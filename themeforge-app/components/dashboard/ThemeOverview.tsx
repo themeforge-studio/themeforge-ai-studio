@@ -1,4 +1,12 @@
-export default function ThemeOverview() {
+type ThemeOverviewProps = {
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
+};
+
+export default function ThemeOverview({
+  activeTab,
+  setActiveTab,
+}: ThemeOverviewProps) {
   return (
     <div className="rounded-2xl border border-slate-800 bg-slate-900 overflow-hidden">
 
@@ -26,35 +34,35 @@ export default function ThemeOverview() {
 
       </div>
 
-      {/* Tabs */}
+{/* Tabs */}
 
-      <div className="border-t border-slate-800 px-6">
+<div className="border-t border-slate-800 px-6">
 
-        <div className="flex gap-8">
+  <div className="flex gap-8">
 
-          <button className="border-b-2 border-violet-500 py-4 text-white font-medium">
-            Overview
-          </button>
+    {[
+      "overview",
+      "assets",
+      "preview",
+      "export",
+      "settings",
+    ].map((tab) => (
+      <button
+        key={tab}
+        onClick={() => setActiveTab(tab)}
+        className={`py-4 capitalize transition ${
+          activeTab === tab
+            ? "border-b-2 border-violet-500 text-white font-medium"
+            : "text-slate-400 hover:text-white"
+        }`}
+      >
+        {tab}
+      </button>
+    ))}
 
-          <button className="py-4 text-slate-400 hover:text-white transition">
-            Assets
-          </button>
+  </div>
 
-          <button className="py-4 text-slate-400 hover:text-white transition">
-            Preview
-          </button>
-
-          <button className="py-4 text-slate-400 hover:text-white transition">
-            Export
-          </button>
-
-          <button className="py-4 text-slate-400 hover:text-white transition">
-            Settings
-          </button>
-
-        </div>
-
-      </div>
+</div>
 
       {/* Stats */}
 

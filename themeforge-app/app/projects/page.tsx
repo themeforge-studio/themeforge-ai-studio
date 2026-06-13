@@ -11,10 +11,14 @@ import ThemeGenerator from "../../components/dashboard/ThemeGenerator";
 import AssetStudio from "../../components/dashboard/AssetStudio";
 import MobilePreview from "../../components/dashboard/MobilePreview";
 import ThemeOverview from "../../components/dashboard/ThemeOverview";
+import ExportPanel from "../../components/dashboard/ExportPanel";
 
 export default function ProjectsPage() {
   const [generatedTheme, setGeneratedTheme] =
     useState<any>(null);
+
+    const [activeTab, setActiveTab] =
+  useState("overview");
 
   return (
     <div className="p-8 text-white">
@@ -47,17 +51,32 @@ export default function ProjectsPage() {
 
         <div className="col-span-8 space-y-6">
 
-         <ThemeOverview />
+ <ThemeOverview
+  activeTab={activeTab}
+  setActiveTab={setActiveTab}
+/>
 
-          <ThemeGenerator
-            onGenerate={setGeneratedTheme}
-          />
+{activeTab === "overview" && (
+  <ThemeGenerator
+    onGenerate={setGeneratedTheme}
+  />
+)}
 
-          <AssetStudio
-            generatedTheme={generatedTheme}
-          />
+{activeTab === "assets" && (
+  <AssetStudio
+    generatedTheme={generatedTheme}
+  />
+)}
 
-          <AIAssistant />
+{activeTab === "preview" && (
+  <AIAssistant />
+)}
+
+{activeTab === "export" && (
+  <ExportPanel
+    generatedTheme={generatedTheme}
+  />
+)}
 
         </div>
 

@@ -8,13 +8,12 @@ type AssetStudioProps = {
 export default function AssetStudio({
   generatedTheme,
 }: AssetStudioProps) {
-  const themeType =
-    generatedTheme?.style || "fantasy";
-
-  const assets =
-    assetLibrary[
-      themeType as keyof typeof assetLibrary
-    ];
+const assets = generatedTheme || {
+  wallpaper: "Mystic Forest",
+  iconPack: "Fantasy Gold",
+  character: "Forest Elf",
+  widget: "Magic Clock",
+};
 
   return (
     <div className="rounded-xl border border-slate-800 bg-slate-900 p-6">
@@ -24,25 +23,25 @@ export default function AssetStudio({
 
       <div className="grid md:grid-cols-2 gap-6">
 
-        <PreviewCard
-          title="Wallpaper"
-          name={assets.wallpaper}
-        />
+       <PreviewCard
+  title="Wallpaper"
+  name={assets.wallpaper}
+/>
 
-        <PreviewCard
-          title="Icon Pack"
-          name={assets.iconPack}
-        />
+<PreviewCard
+  title="Icon Pack"
+  name={assets.iconPack}
+/>
 
-        <PreviewCard
-          title="Character"
-          name={assets.character}
-        />
+<PreviewCard
+  title="Character"
+  name={assets.character}
+/>
 
-        <PreviewCard
-          title="Widget"
-          name={assets.widget}
-        />
+<PreviewCard
+  title="Widget"
+  name={assets.widget}
+/>
 
       </div>
     </div>
