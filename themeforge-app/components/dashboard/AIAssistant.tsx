@@ -1,29 +1,9 @@
+import { themeSuggestions } from "./aiData";
+
 export default function AIAssistant() {
-  const suggestions = {
-    wallpapers: [
-      "Neon Tokyo Rain",
-      "Cyber Temple",
-      "Red Samurai Skyline",
-    ],
+  const projectType = "cyberpunk";
 
-    icons: [
-      "Cyber Glass",
-      "Neon Edge",
-      "Samurai Red",
-    ],
-
-    characters: [
-      "Female Cyber Ninja",
-      "Samurai Robot",
-      "AI Companion Pet",
-    ],
-
-    widgets: [
-      "Cyber Clock",
-      "Battery Widget",
-      "Weather Widget",
-    ],
-  };
+  const suggestions = themeSuggestions[projectType];
 
   return (
     <div className="rounded-xl border border-slate-800 bg-slate-900 p-6">
@@ -31,13 +11,19 @@ export default function AIAssistant() {
         AI Creative Assistant
       </h2>
 
+      <p className="text-slate-400 mb-6">
+        Suggestions for:{" "}
+        <span className="text-white font-semibold">
+          {projectType}
+        </span>
+      </p>
+
       <div className="grid md:grid-cols-2 gap-6">
+        {/* Wallpapers */}
         <div>
-          <h3 className="font-bold mb-2">
-            Wallpapers
-          </h3>
+          <h3 className="font-bold mb-2">Wallpapers</h3>
 
-          {suggestions.wallpapers.map((item) => (
+          {suggestions.wallpapers.map((item: string) => (
             <div
               key={item}
               className="bg-slate-800 rounded-lg p-3 mb-2"
@@ -47,12 +33,11 @@ export default function AIAssistant() {
           ))}
         </div>
 
+        {/* Icon Packs */}
         <div>
-          <h3 className="font-bold mb-2">
-            Icon Packs
-          </h3>
+          <h3 className="font-bold mb-2">Icon Packs</h3>
 
-          {suggestions.icons.map((item) => (
+          {suggestions.iconPacks.map((item: string) => (
             <div
               key={item}
               className="bg-slate-800 rounded-lg p-3 mb-2"
@@ -62,12 +47,11 @@ export default function AIAssistant() {
           ))}
         </div>
 
+        {/* Characters */}
         <div>
-          <h3 className="font-bold mb-2">
-            Characters
-          </h3>
+          <h3 className="font-bold mb-2">Characters</h3>
 
-          {suggestions.characters.map((item) => (
+          {suggestions.characters.map((item: string) => (
             <div
               key={item}
               className="bg-slate-800 rounded-lg p-3 mb-2"
@@ -77,12 +61,11 @@ export default function AIAssistant() {
           ))}
         </div>
 
+        {/* Widgets */}
         <div>
-          <h3 className="font-bold mb-2">
-            Widgets
-          </h3>
+          <h3 className="font-bold mb-2">Widgets</h3>
 
-          {suggestions.widgets.map((item) => (
+          {suggestions.widgets.map((item: string) => (
             <div
               key={item}
               className="bg-slate-800 rounded-lg p-3 mb-2"
