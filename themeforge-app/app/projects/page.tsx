@@ -1,3 +1,5 @@
+import ProjectsManager from "../../components/dashboard/ProjectsManager";
+
 export default function ProjectsPage() {
   return (
     <div className="p-8 text-white">
@@ -8,6 +10,8 @@ export default function ProjectsPage() {
       <p className="mt-4 text-slate-400">
         Manage all ThemeForge projects.
       </p>
+
+      <ProjectsManager />
     </div>
   );
 }
