@@ -7,10 +7,55 @@ export default function ThemeGenerator() {
   const [themeName, setThemeName] = useState("");
   const [generatedTheme, setGeneratedTheme] = useState<any>(null);
 
+  const detectStyle = (name: string) => {
+    const text = name.toLowerCase();
+
+    if (
+      text.includes("dragon") ||
+      text.includes("magic") ||
+      text.includes("fantasy") ||
+      text.includes("kingdom")
+    ) {
+      return "fantasy";
+    }
+
+    if (
+      text.includes("anime") ||
+      text.includes("otaku") ||
+      text.includes("kawaii")
+    ) {
+      return "anime";
+    }
+
+    if (
+      text.includes("game") ||
+      text.includes("gaming") ||
+      text.includes("esports")
+    ) {
+      return "gaming";
+    }
+
+    if (
+      text.includes("amoled") ||
+      text.includes("dark") ||
+      text.includes("black")
+    ) {
+      return "amoled";
+    }
+
+    return "cyberpunk";
+  };
+
   const generateTheme = () => {
-    const data = themeSuggestions.cyberpunk;
+    const style = detectStyle(themeName);
+
+    const data =
+      themeSuggestions[
+        style as keyof typeof themeSuggestions
+      ];
 
     setGeneratedTheme({
+      style,
       name: themeName || "Cyber Samurai Theme",
       wallpaper: data.wallpapers[0],
       iconPack: data.iconPacks[0],
@@ -27,7 +72,7 @@ export default function ThemeGenerator() {
 
       <input
         type="text"
-        placeholder="Cyber Samurai Theme"
+        placeholder="Type a theme idea..."
         value={themeName}
         onChange={(e) => setThemeName(e.target.value)}
         className="w-full bg-slate-800 rounded-lg p-3 mb-4"
@@ -47,6 +92,11 @@ export default function ThemeGenerator() {
           </h3>
 
           <div className="space-y-3">
+
+            <div>
+              <span className="font-bold">Style:</span>{" "}
+              {generatedTheme.style}
+            </div>
 
             <div>
               <span className="font-bold">Theme:</span>{" "}
