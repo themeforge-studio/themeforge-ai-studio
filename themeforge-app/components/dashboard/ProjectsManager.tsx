@@ -1,34 +1,64 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function ProjectsManager() {
-  const [projects, setProjects] = useState([
-    {
-      id: 1,
-      name: "Neon Future",
-      type: "Wallpaper Pack",
-      status: "Published",
-    },
-    {
-      id: 2,
-      name: "Cyber Icons",
-      type: "Icon Pack",
-      status: "Draft",
-    },
-    {
-      id: 3,
-      name: "Dark AMOLED",
-      type: "Theme",
-      status: "Published",
-    },
-  ]);
+  const [projects, setProjects] = useState<any[]>([]);
+
+  const [projectName, setProjectName] =
+    useState("");
+
+  const [projectType, setProjectType] =
+    useState("Theme");
+
+  useEffect(() => {
+    const savedProjects =
+      localStorage.getItem(
+        "themeforge-projects"
+      );
+
+    if (savedProjects) {
+      setProjects(
+        JSON.parse(savedProjects)
+      );
+    } else {
+      setProjects([
+        {
+          id: 1,
+          name: "Neon Future",
+          type: "Wallpaper Pack",
+          status: "Published",
+        },
+        {
+          id: 2,
+          name: "Cyber Icons",
+          type: "Icon Pack",
+          status: "Draft",
+        },
+        {
+          id: 3,
+          name: "Dark AMOLED",
+          type: "Theme",
+          status: "Published",
+        },
+      ]);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(
+      "themeforge-projects",
+      JSON.stringify(projects)
+    );
+  }, [projects]);
 
   const createProject = () => {
+    if (!projectName.trim()) return;
+
     const newProject = {
       id: Date.now(),
-      name: `Project ${projects.length + 1}`,
-      type: "Theme",
+      name: projectName,
+      type: projectType,
       status: "Draft",
     };
 
@@ -36,24 +66,58 @@ export default function ProjectsManager() {
       newProject,
       ...projects,
     ]);
+
+    setProjectName("");
+    setProjectType("Theme");
   };
 
   return (
     <div className="mt-8">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold">
+
+      <div className="mb-6">
+
+        <h2 className="text-2xl font-bold mb-4">
           Projects
         </h2>
 
-        <button
-          onClick={createProject}
-          className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg transition"
-        >
-          + New Project
-        </button>
+        <div className="flex gap-3">
+
+          <input
+            type="text"
+            placeholder="Project name..."
+            value={projectName}
+            onChange={(e) =>
+              setProjectName(e.target.value)
+            }
+            className="flex-1 rounded-lg bg-slate-800 p-3"
+          />
+
+          <select
+            value={projectType}
+            onChange={(e) =>
+              setProjectType(e.target.value)
+            }
+            className="rounded-lg bg-slate-800 p-3"
+          >
+            <option>Theme</option>
+            <option>Wallpaper Pack</option>
+            <option>Icon Pack</option>
+            <option>Character Pack</option>
+          </select>
+
+          <button
+            onClick={createProject}
+            className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg transition"
+          >
+            Create
+          </button>
+
+        </div>
+
       </div>
 
       <div className="grid gap-4">
+
         {projects.map((project) => (
           <div
             key={project.id}
@@ -72,7 +136,9 @@ export default function ProjectsManager() {
             </p>
           </div>
         ))}
+
       </div>
+
     </div>
   );
 }
