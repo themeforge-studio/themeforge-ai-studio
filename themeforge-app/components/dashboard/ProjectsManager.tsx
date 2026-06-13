@@ -4,23 +4,15 @@ import { useEffect, useState } from "react";
 
 export default function ProjectsManager() {
   const [projects, setProjects] = useState<any[]>([]);
-
-  const [projectName, setProjectName] =
-    useState("");
-
-  const [projectType, setProjectType] =
-    useState("Theme");
+  const [projectName, setProjectName] = useState("");
+  const [projectType, setProjectType] = useState("Theme");
 
   useEffect(() => {
     const savedProjects =
-      localStorage.getItem(
-        "themeforge-projects"
-      );
+      localStorage.getItem("themeforge-projects");
 
     if (savedProjects) {
-      setProjects(
-        JSON.parse(savedProjects)
-      );
+      setProjects(JSON.parse(savedProjects));
     } else {
       setProjects([
         {
@@ -71,17 +63,22 @@ export default function ProjectsManager() {
     setProjectType("Theme");
   };
 
+  const deleteProject = (id: number) => {
+    setProjects(
+      projects.filter(
+        (project) => project.id !== id
+      )
+    );
+  };
+
   return (
     <div className="mt-8">
-
       <div className="mb-6">
-
         <h2 className="text-2xl font-bold mb-4">
           Projects
         </h2>
 
         <div className="flex gap-3">
-
           <input
             type="text"
             placeholder="Project name..."
@@ -111,34 +108,42 @@ export default function ProjectsManager() {
           >
             Create
           </button>
-
         </div>
-
       </div>
 
       <div className="grid gap-4">
-
         {projects.map((project) => (
           <div
             key={project.id}
             className="rounded-xl border border-slate-800 bg-slate-900 p-5"
           >
-            <h3 className="text-xl font-semibold">
-              {project.name}
-            </h3>
+            <div className="flex justify-between items-start">
+              <div>
+                <h3 className="text-xl font-semibold">
+                  {project.name}
+                </h3>
 
-            <p className="text-slate-400 mt-1">
-              {project.type}
-            </p>
+                <p className="text-slate-400 mt-1">
+                  {project.type}
+                </p>
 
-            <p className="mt-3 text-sm">
-              {project.status}
-            </p>
+                <p className="mt-3 text-sm">
+                  {project.status}
+                </p>
+              </div>
+
+              <button
+                onClick={() =>
+                  deleteProject(project.id)
+                }
+                className="rounded-lg bg-red-600 px-3 py-2 hover:bg-red-700 transition"
+              >
+                🗑️
+              </button>
+            </div>
           </div>
         ))}
-
       </div>
-
     </div>
   );
 }
