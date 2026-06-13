@@ -6,6 +6,8 @@ export default function ProjectsManager() {
   const [projects, setProjects] = useState<any[]>([]);
   const [projectName, setProjectName] = useState("");
   const [projectType, setProjectType] = useState("Theme");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortBy, setSortBy] = useState("recent");
 
   const [editingId, setEditingId] =
     useState<number | null>(null);
@@ -87,6 +89,22 @@ export default function ProjectsManager() {
     );
   };
 
+  const duplicateProject = (
+    project: any
+  ) => {
+    const duplicatedProject = {
+      ...project,
+      id: Date.now(),
+      name:
+        project.name + " Copy",
+    };
+
+    setProjects([
+      duplicatedProject,
+      ...projects,
+    ]);
+  };
+
   const startEdit = (
     project: any
   ) => {
@@ -111,6 +129,35 @@ export default function ProjectsManager() {
     setEditingId(null);
   };
 
+  const filteredProjects =
+  projects
+    .filter((project) =>
+      project.name
+        .toLowerCase()
+        .includes(
+          searchTerm.toLowerCase()
+        )
+    )
+    .sort((a, b) => {
+      switch (sortBy) {
+        case "az":
+          return a.name.localeCompare(
+            b.name
+          );
+
+        case "za":
+          return b.name.localeCompare(
+            a.name
+          );
+
+        case "oldest":
+          return a.id - b.id;
+
+        default:
+          return b.id - a.id;
+      }
+    });
+
   return (
     <div className="mt-8">
       <div className="mb-6">
@@ -118,15 +165,47 @@ export default function ProjectsManager() {
           Projects
         </h2>
 
+  <input
+  type="text"
+  placeholder="Search projects..."
+  value={searchTerm}
+  onChange={(e) =>
+    setSearchTerm(e.target.value)
+  }
+  className="w-full rounded-lg bg-slate-800 p-3 mb-4"
+/>
+
+<select
+  value={sortBy}
+  onChange={(e) =>
+    setSortBy(e.target.value)
+  }
+  className="w-full rounded-lg bg-slate-800 p-3 mb-4"
+>
+  <option value="recent">
+    Most Recent
+  </option>
+
+  <option value="oldest">
+    Oldest
+  </option>
+
+  <option value="az">
+    Name A-Z
+  </option>
+
+  <option value="za">
+    Name Z-A
+  </option>
+</select>
         <div className="flex gap-3">
+          
           <input
             type="text"
             placeholder="Project name..."
             value={projectName}
             onChange={(e) =>
-              setProjectName(
-                e.target.value
-              )
+              setProjectName(e.target.value)
             }
             className="flex-1 rounded-lg bg-slate-800 p-3"
           />
@@ -162,7 +241,7 @@ export default function ProjectsManager() {
       </div>
 
       <div className="grid gap-4">
-        {projects.map((project) => (
+        {filteredProjects.map((project) => (
           <div
             key={project.id}
             className="rounded-xl border border-slate-800 bg-slate-900 p-5"
@@ -240,6 +319,17 @@ export default function ProjectsManager() {
                 </div>
 
                 <div className="flex gap-2">
+                  <button
+                    onClick={() =>
+                      duplicateProject(
+                        project
+                      )
+                    }
+                    className="rounded-lg bg-blue-600 px-3 py-2 hover:bg-blue-700 transition"
+                  >
+                    📋
+                  </button>
+
                   <button
                     onClick={() =>
                       startEdit(
