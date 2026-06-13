@@ -17,6 +17,9 @@ export default function ProjectsManager() {
 
   const [editType, setEditType] =
     useState("Theme");
+    
+  const [editStatus, setEditStatus] =
+  useState("Draft");
 
   useEffect(() => {
     const savedProjects =
@@ -106,28 +109,30 @@ export default function ProjectsManager() {
   };
 
   const startEdit = (
-    project: any
-  ) => {
-    setEditingId(project.id);
-    setEditName(project.name);
-    setEditType(project.type);
-  };
+  project: any
+) => {
+  setEditingId(project.id);
+  setEditName(project.name);
+  setEditType(project.type);
+  setEditStatus(project.status);
+};
 
   const saveEdit = () => {
-    setProjects(
-      projects.map((project) =>
-        project.id === editingId
-          ? {
-              ...project,
-              name: editName,
-              type: editType,
-            }
-          : project
-      )
-    );
+  setProjects(
+    projects.map((project) =>
+      project.id === editingId
+        ? {
+            ...project,
+            name: editName,
+            type: editType,
+            status: editStatus,
+          }
+        : project
+    )
+  );
 
-    setEditingId(null);
-  };
+  setEditingId(null);
+};
 
   const totalProjects =
   projects.length;
@@ -326,27 +331,33 @@ const totalCharacters =
                 />
 
                 <select
-                  value={editType}
-                  onChange={(e) =>
-                    setEditType(
-                      e.target.value
-                    )
-                  }
-                  className="w-full rounded-lg bg-slate-800 p-3"
-                >
-                  <option>
-                    Theme
-                  </option>
-                  <option>
-                    Wallpaper Pack
-                  </option>
-                  <option>
-                    Icon Pack
-                  </option>
-                  <option>
-                    Character Pack
-                  </option>
-                </select>
+  value={editType}
+  onChange={(e) =>
+    setEditType(
+      e.target.value
+    )
+  }
+  className="w-full rounded-lg bg-slate-800 p-3"
+>
+  <option>Theme</option>
+  <option>Wallpaper Pack</option>
+  <option>Icon Pack</option>
+  <option>Character Pack</option>
+</select>
+
+<select
+  value={editStatus}
+  onChange={(e) =>
+    setEditStatus(
+      e.target.value
+    )
+  }
+  className="w-full rounded-lg bg-slate-800 p-3"
+>
+  <option>Draft</option>
+  <option>Published</option>
+  <option>Archived</option>
+</select>
 
                 <div className="flex gap-2">
                   <button
