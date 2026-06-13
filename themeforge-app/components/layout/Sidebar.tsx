@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   LayoutDashboard,
   FolderKanban,
@@ -9,12 +10,36 @@ import {
 
 export default function Sidebar() {
   const menuItems = [
-    { icon: LayoutDashboard, label: "Dashboard" },
-    { icon: FolderKanban, label: "Projects" },
-    { icon: Image, label: "Wallpapers" },
-    { icon: Palette, label: "Icon Packs" },
-    { icon: TrendingUp, label: "Trends" },
-    { icon: Download, label: "Export" },
+    {
+      icon: LayoutDashboard,
+      label: "Dashboard",
+      href: "/",
+    },
+    {
+      icon: FolderKanban,
+      label: "Projects",
+      href: "/projects",
+    },
+    {
+      icon: Image,
+      label: "Wallpapers",
+      href: "/",
+    },
+    {
+      icon: Palette,
+      label: "Icon Packs",
+      href: "/",
+    },
+    {
+      icon: TrendingUp,
+      label: "Trends",
+      href: "/",
+    },
+    {
+      icon: Download,
+      label: "Export",
+      href: "/",
+    },
   ];
 
   return (
@@ -28,13 +53,14 @@ export default function Sidebar() {
           const Icon = item.icon;
 
           return (
-            <button
+            <Link
               key={item.label}
+              href={item.href}
               className="flex items-center gap-3 w-full rounded-lg px-4 py-3 hover:bg-slate-800 transition"
             >
               <Icon size={18} />
               <span>{item.label}</span>
-            </button>
+            </Link>
           );
         })}
       </nav>
