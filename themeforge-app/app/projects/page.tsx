@@ -1,6 +1,7 @@
 import ProjectsManager from "../../components/dashboard/ProjectsManager";
 import ProjectForm from "../../components/dashboard/ProjectForm";
 import AIAssistant from "../../components/dashboard/AIAssistant";
+import ThemeGenerator from "../../components/dashboard/ThemeGenerator";
 
 export default function ProjectsPage() {
   return (
@@ -17,10 +18,16 @@ export default function ProjectsPage() {
         <ProjectForm />
       </div>
 
-      <ProjectsManager />
+      <div className="mt-8">
+        <ProjectsManager />
+      </div>
 
       <div className="mt-8">
         <AIAssistant />
+      </div>
+
+      <div className="mt-8">
+        <ThemeGenerator />
       </div>
     </div>
   );
