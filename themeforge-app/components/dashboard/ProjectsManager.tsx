@@ -129,6 +129,29 @@ export default function ProjectsManager() {
     setEditingId(null);
   };
 
+  const totalProjects =
+  projects.length;
+
+const totalThemes =
+  projects.filter(
+    (project) =>
+      project.type === "Theme"
+  ).length;
+
+const totalIcons =
+  projects.filter(
+    (project) =>
+      project.type ===
+      "Icon Pack"
+  ).length;
+
+const totalCharacters =
+  projects.filter(
+    (project) =>
+      project.type ===
+      "Character Pack"
+  ).length;
+
   const filteredProjects =
   projects
     .filter((project) =>
@@ -198,6 +221,49 @@ export default function ProjectsManager() {
     Name Z-A
   </option>
 </select>
+<div className="grid grid-cols-4 gap-4 mb-6">
+
+  <div className="rounded-xl bg-slate-800 p-4">
+    <p className="text-slate-400 text-sm">
+      Projects
+    </p>
+
+    <h3 className="text-2xl font-bold">
+      {totalProjects}
+    </h3>
+  </div>
+
+  <div className="rounded-xl bg-slate-800 p-4">
+    <p className="text-slate-400 text-sm">
+      Themes
+    </p>
+
+    <h3 className="text-2xl font-bold">
+      {totalThemes}
+    </h3>
+  </div>
+
+  <div className="rounded-xl bg-slate-800 p-4">
+    <p className="text-slate-400 text-sm">
+      Icon Packs
+    </p>
+
+    <h3 className="text-2xl font-bold">
+      {totalIcons}
+    </h3>
+  </div>
+
+  <div className="rounded-xl bg-slate-800 p-4">
+    <p className="text-slate-400 text-sm">
+      Characters
+    </p>
+
+    <h3 className="text-2xl font-bold">
+      {totalCharacters}
+    </h3>
+  </div>
+
+</div>
         <div className="flex gap-3">
           
           <input
