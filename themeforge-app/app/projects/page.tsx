@@ -101,6 +101,7 @@ export default function ProjectsPage() {
 
             <MobilePreview
               generatedTheme={generatedTheme}
+               selectedProject={selectedProject}
             />
 
           </div>

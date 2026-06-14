@@ -1,16 +1,23 @@
+type MobilePreviewProps = {
+  generatedTheme?: any;
+  selectedProject?: any;
+};
+
 export default function MobilePreview({
   generatedTheme,
-}: {
-  generatedTheme: any;
-}) {
+  selectedProject,
+}: MobilePreviewProps) {
+
   const theme =
-    generatedTheme || {
-      name: "Cyber Samurai",
-      style: "cyberpunk",
-      wallpaper: "Neo Tokyo Rain",
-      widget: "Cyber Clock",
-      character: "Female Cyber Ninja",
-    };
+  selectedProject ||
+  generatedTheme || {
+    name: "Cyber Samurai",
+    style: "cyberpunk",
+    wallpaper: "Neo Tokyo Rain",
+    widget: "Cyber Clock",
+    character: "Female Cyber Ninja",
+  };
+  
   const getThemeColors = () => {
     switch (theme.style) {
       case "anime":
