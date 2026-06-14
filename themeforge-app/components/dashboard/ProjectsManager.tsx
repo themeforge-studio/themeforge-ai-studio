@@ -2,7 +2,13 @@
 
 import { useEffect, useState } from "react";
 
-export default function ProjectsManager() {
+type ProjectsManagerProps = {
+  generatedTheme?: any;
+};
+
+export default function ProjectsManager({
+  generatedTheme,
+}: ProjectsManagerProps) {
   const [projects, setProjects] = useState<any[]>([]);
   const [projectName, setProjectName] = useState("");
   const [projectType, setProjectType] = useState("Theme");
@@ -66,11 +72,34 @@ export default function ProjectsManager() {
     if (!projectName.trim()) return;
 
     const newProject = {
-      id: Date.now(),
-      name: projectName,
-      type: projectType,
-      status: "Draft",
-    };
+  id: Date.now(),
+
+  name: projectName,
+
+  type: projectType,
+
+  status: "Draft",
+
+  style:
+    generatedTheme?.style ||
+    null,
+
+  wallpaper:
+    generatedTheme?.wallpaper ||
+    null,
+
+  iconPack:
+    generatedTheme?.iconPack ||
+    null,
+
+  character:
+    generatedTheme?.character ||
+    null,
+
+  widget:
+    generatedTheme?.widget ||
+    null,
+};
 
     setProjects([
       newProject,

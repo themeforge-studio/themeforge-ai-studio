@@ -62,7 +62,9 @@ export default function ProjectsPage() {
       onGenerate={setGeneratedTheme}
     />
 
-    <ProjectsManager />
+    <ProjectsManager
+  generatedTheme={generatedTheme}
+/>
   </>
 )}
 
