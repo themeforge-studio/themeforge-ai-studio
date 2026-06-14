@@ -77,6 +77,7 @@ export default function ProjectsPage() {
 {activeTab === "assets" && (
   <AssetStudio
     generatedTheme={generatedTheme}
+    selectedProject={selectedProject}
   />
 )}
 

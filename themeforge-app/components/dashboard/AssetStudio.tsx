@@ -3,17 +3,22 @@ import PreviewCard from "./PreviewCard";
 
 type AssetStudioProps = {
   generatedTheme?: any;
+  selectedProject?: any;
 };
 
 export default function AssetStudio({
   generatedTheme,
+  selectedProject,
 }: AssetStudioProps) {
-const assets = generatedTheme || {
-  wallpaper: "Mystic Forest",
-  iconPack: "Fantasy Gold",
-  character: "Forest Elf",
-  widget: "Magic Clock",
-};
+
+const assets =
+  selectedProject ||
+  generatedTheme || {
+    wallpaper: "Mystic Forest",
+    iconPack: "Fantasy Gold",
+    character: "Forest Elf",
+    widget: "Magic Clock",
+  };
 
   return (
     <div className="rounded-xl border border-slate-800 bg-slate-900 p-6">

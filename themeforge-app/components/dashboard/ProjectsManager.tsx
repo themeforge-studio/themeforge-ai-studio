@@ -75,6 +75,8 @@ export default function ProjectsManager({
 }, [projects]);
 
   const createProject = () => {
+    console.log("generatedTheme:", generatedTheme);
+    
     if (!projectName.trim()) return;
 
     const newProject = {
@@ -350,10 +352,10 @@ const totalCharacters =
       <div className="grid gap-4">
         {filteredProjects.map((project) => (
          <div
-  key={project.id}
-  onClick={() =>
-    setSelectedProject?.(project)
-  }
+            key={project.id}
+            onClick={() =>
+              setSelectedProject?.(project)
+        }
   className={`rounded-xl border p-5 cursor-pointer transition ${
     selectedProject?.id === project.id
       ? "border-violet-500 bg-slate-900"
