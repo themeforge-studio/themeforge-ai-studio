@@ -434,6 +434,39 @@ const totalCharacters =
   </span>
 
 </div>
+<div className="mt-4 space-y-1 text-sm text-slate-300">
+
+  {project.style && (
+    <div>
+      🎨 Style: {project.style}
+    </div>
+  )}
+
+  {project.wallpaper && (
+    <div>
+      🖼 Wallpaper: {project.wallpaper}
+    </div>
+  )}
+
+  {project.iconPack && (
+    <div>
+      📦 Icon Pack: {project.iconPack}
+    </div>
+  )}
+
+  {project.character && (
+    <div>
+      👤 Character: {project.character}
+    </div>
+  )}
+
+  {project.widget && (
+    <div>
+      ⏰ Widget: {project.widget}
+    </div>
+  )}
+
+</div>
                 </div>
 
                 <div className="flex gap-2">
