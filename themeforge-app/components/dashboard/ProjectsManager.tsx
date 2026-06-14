@@ -9,7 +9,7 @@ type ProjectsManagerProps = {
 export default function ProjectsManager({
   generatedTheme,
 }: ProjectsManagerProps) {
-  const [projects, setProjects] = useState<any[]>([]);
+  const [projects, setProjects] = useState<any[] | null>(null);
   const [projectName, setProjectName] = useState("");
   const [projectType, setProjectType] = useState("Theme");
   const [searchTerm, setSearchTerm] = useState("");
@@ -61,12 +61,14 @@ export default function ProjectsManager({
     }
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem(
-      "themeforge-projects",
-      JSON.stringify(projects)
-    );
-  }, [projects]);
+ useEffect(() => {
+  if (projects === null) return;
+
+  localStorage.setItem(
+    "themeforge-projects",
+    JSON.stringify(projects)
+  );
+}, [projects]);
 
   const createProject = () => {
     if (!projectName.trim()) return;
@@ -102,9 +104,9 @@ export default function ProjectsManager({
 };
 
     setProjects([
-      newProject,
-      ...projects,
-    ]);
+  newProject,
+  ...(projects || []),
+]);
 
     setProjectName("");
     setProjectType("Theme");
@@ -114,7 +116,7 @@ export default function ProjectsManager({
     id: number
   ) => {
     setProjects(
-      projects.filter(
+      (projects || []).filter(
         (project) =>
           project.id !== id
       )
@@ -132,9 +134,9 @@ export default function ProjectsManager({
     };
 
     setProjects([
-      duplicatedProject,
-      ...projects,
-    ]);
+  duplicatedProject,
+  ...(projects || []),
+]);
   };
 
   const startEdit = (
@@ -148,7 +150,7 @@ export default function ProjectsManager({
 
   const saveEdit = () => {
   setProjects(
-    projects.map((project) =>
+  (projects || []).map((project) =>
       project.id === editingId
         ? {
             ...project,
@@ -164,30 +166,31 @@ export default function ProjectsManager({
 };
 
   const totalProjects =
-  projects.length;
+  projects?.length || 0;
 
 const totalThemes =
-  projects.filter(
+  (projects || []).filter(
     (project) =>
       project.type === "Theme"
   ).length;
 
 const totalIcons =
-  projects.filter(
+  (projects || []).filter(
     (project) =>
       project.type ===
       "Icon Pack"
   ).length;
 
 const totalCharacters =
-  projects.filter(
+  (projects || []).filter(
     (project) =>
       project.type ===
       "Character Pack"
   ).length;
 
   const filteredProjects =
-  projects
+  (projects || [])
+
     .filter((project) =>
       project.name
         .toLowerCase()
@@ -466,7 +469,7 @@ const totalCharacters =
     </div>
   )}
 
-</div>
+</div>git status
                 </div>
 
                 <div className="flex gap-2">
