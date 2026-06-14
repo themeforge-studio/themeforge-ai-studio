@@ -16,9 +16,13 @@ import ExportPanel from "../../components/dashboard/ExportPanel";
 export default function ProjectsPage() {
   const [generatedTheme, setGeneratedTheme] =
     useState<any>(null);
+    
+  const [selectedProject, setSelectedProject] =
+    useState<any>(null);
+    console.log("Proyecto seleccionado:", selectedProject);
 
-    const [activeTab, setActiveTab] =
-  useState("overview");
+  const [activeTab, setActiveTab] =
+    useState("overview");
 
   return (
     <div className="p-8 text-white">
@@ -63,8 +67,10 @@ export default function ProjectsPage() {
     />
 
     <ProjectsManager
-  generatedTheme={generatedTheme}
-/>
+      generatedTheme={generatedTheme}
+      selectedProject={selectedProject}
+      setSelectedProject={setSelectedProject}
+    />
   </>
 )}
 

@@ -4,11 +4,15 @@ import { useEffect, useState } from "react";
 
 type ProjectsManagerProps = {
   generatedTheme?: any;
+  selectedProject?: any;
+  setSelectedProject?: any;
 };
 
 export default function ProjectsManager({
   generatedTheme,
-}: ProjectsManagerProps) {
+  selectedProject,
+  setSelectedProject,
+}: ProjectsManagerProps) { 
   const [projects, setProjects] = useState<any[] | null>(null);
   const [projectName, setProjectName] = useState("");
   const [projectType, setProjectType] = useState("Theme");
@@ -345,10 +349,17 @@ const totalCharacters =
 
       <div className="grid gap-4">
         {filteredProjects.map((project) => (
-          <div
-            key={project.id}
-            className="rounded-xl border border-slate-800 bg-slate-900 p-5"
-          >
+         <div
+  key={project.id}
+  onClick={() =>
+    setSelectedProject?.(project)
+  }
+  className={`rounded-xl border p-5 cursor-pointer transition ${
+    selectedProject?.id === project.id
+      ? "border-violet-500 bg-slate-900"
+      : "border-slate-800 bg-slate-900"
+  }`}
+>
             {editingId ===
             project.id ? (
               <div className="space-y-3">
