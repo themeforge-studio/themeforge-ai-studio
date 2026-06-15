@@ -24,6 +24,13 @@ export default function ProjectsPage() {
   const [activeTab, setActiveTab] =
     useState("overview");
 
+    const currentProject =
+  selectedProject || {
+    name: "Cyber Samurai Theme",
+    style: "cyberpunk",
+    status: "Active",
+  };
+
   return (
     <div className="p-8 text-white">
 
@@ -34,17 +41,17 @@ export default function ProjectsPage() {
   <div className="flex items-center gap-3">
 
     <h1 className="text-4xl font-bold">
-      Projects / Cyber Samurai Theme
+      Projects / {currentProject.name}
     </h1>
 
     <span className="rounded-lg bg-violet-600/20 border border-violet-500/30 px-3 py-1 text-sm text-violet-300">
-      Active
+      {currentProject.status}
     </span>
 
   </div>
 
   <p className="mt-2 text-slate-400">
-    AI-generated cyberpunk theme project.
+    AI-generated {currentProject.style} theme project.
   </p>
 
 </div>
