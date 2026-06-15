@@ -109,9 +109,9 @@ export default function ThemeOverview({
         </div>
 
         <div>
-          <p className="text-slate-500 text-sm">
-            Assets
-          </p>
+            <p className="text-slate-500 text-sm">
+              Assets
+            </p>
 
           <p className="font-semibold">
              {assetsCount} Generated
