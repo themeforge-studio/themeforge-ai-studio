@@ -64,6 +64,9 @@ export default function MobilePreview({
 
   const colors = getThemeColors();
 
+  const projectType =
+  theme.type || "Theme";
+
   return (
     <div className="rounded-xl border border-slate-800 bg-slate-900 p-6 mt-8">
       <h2 className="text-2xl font-bold mb-6">
@@ -107,7 +110,7 @@ export default function MobilePreview({
               </h3>
 
               <p className="text-xs opacity-70">
-                {theme.style}
+                {theme.style} • {projectType}
               </p>
             </div>
 
