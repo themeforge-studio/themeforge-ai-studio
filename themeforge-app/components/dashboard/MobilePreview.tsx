@@ -145,61 +145,86 @@ export default function MobilePreview({
 
             {/* Widget */}
 
-            <div
-              className={`rounded-xl p-3 text-center mb-4 ${colors.widget}`}
-            >
-              <div className="text-sm">
-                {theme.widget}
-              </div>
+            {/* Widget */}
 
-              <div className="text-xl font-bold">
-                12:45
-              </div>
-            </div>
+{projectType === "Theme" && (
+  <div
+    className={`rounded-xl p-3 text-center mb-4 ${colors.widget}`}
+  >
+    <div className="text-sm">
+      {theme.widget}
+    </div>
+
+    <div className="text-xl font-bold">
+      12:45
+    </div>
+  </div>
+)}
 
             {/* Icons */}
 
             {/* Icons */}
 
-<div className="grid grid-cols-4 gap-3 mb-4">
-  {Array.from({ length: 12 }).map(
-    (_, index) => (
-      <div
-        key={index}
-        className={`h-12 rounded-xl flex items-center justify-center text-lg font-bold ${colors.icon}`}
-      >
+{/* Icons */}
+
+{(
+  projectType === "Theme" ||
+  projectType === "Icon Pack"
+) && (
+  <div className="grid grid-cols-4 gap-3 mb-4">
+    {Array.from({ length: 12 }).map(
+      (_, index) => (
+        <div
+          key={index}
+          className={`h-12 rounded-xl flex items-center justify-center text-lg font-bold ${colors.icon}`}
+        >
+          {theme.style === "anime"
+            ? "♥"
+            : theme.style === "fantasy"
+            ? "✦"
+            : theme.style === "gaming"
+            ? "🎮"
+            : theme.style === "amoled"
+            ? "⬢"
+            : "◉"}
+        </div>
+      )
+    )}
+  </div>
+)}
+
+            {/* Character */}
+
+            {/* Character */}
+
+{/* Character */}
+
+{(
+  projectType === "Theme" ||
+  projectType === "Character Pack"
+) && (
+  <div className="mt-auto mb-4">
+    <div className="rounded-xl bg-black/20 p-3 text-center">
+
+      <div className="text-4xl mb-2">
         {theme.style === "anime"
-          ? "♥"
+          ? "👧"
           : theme.style === "fantasy"
-          ? "✦"
+          ? "🧙"
           : theme.style === "gaming"
           ? "🎮"
           : theme.style === "amoled"
-          ? "⬢"
-          : "◉"}
+          ? "🕶️"
+          : "🥷"}
       </div>
-    )
-  )}
-</div>
 
-            {/* Character */}
+      <div className="text-sm">
+        {theme.character}
+      </div>
 
-            {/* Character */}
-
-<div className="mt-auto mb-4">
-  <div className="rounded-xl bg-black/20 p-3 text-center">
-
-    <div className="text-4xl mb-2">
-      {theme.style === "anime"
-        ? "👧"
-        : theme.style === "fantasy"
-        ? "🧙"
-        : theme.style === "gaming"
-        ? "🎮"
-        : theme.style === "amoled"
-        ? "🕶️"
-        : "🥷"}
     </div>
+  </div>
+)}
 
     <div className="text-sm">
       {theme.character}
@@ -234,7 +259,6 @@ export default function MobilePreview({
 </div>
 </div>
         </div>
-      </div>
-    </div>
+      
   );
 }
