@@ -11,15 +11,38 @@ export default function AssetStudio({
   selectedProject,
 }: AssetStudioProps) {
 
-const assets =
-  selectedProject ||
-  generatedTheme || {
-    wallpaper: "Mystic Forest",
-    iconPack: "Fantasy Gold",
-    character: "Forest Elf",
-    widget: "Magic Clock",
-  };
+  console.log("Proyecto:", selectedProject);
 
+const fallbackAssets =
+  assetLibrary[
+    (
+      selectedProject?.style ||
+      generatedTheme?.style ||
+      "fantasy"
+    ) as keyof typeof assetLibrary
+  ];
+
+const assets = {
+  wallpaper:
+    selectedProject?.wallpaper ||
+    generatedTheme?.wallpaper ||
+    fallbackAssets.wallpaper,
+
+  iconPack:
+    selectedProject?.iconPack ||
+    generatedTheme?.iconPack ||
+    fallbackAssets.iconPack,
+
+  character:
+    selectedProject?.character ||
+    generatedTheme?.character ||
+    fallbackAssets.character,
+
+  widget:
+    selectedProject?.widget ||
+    generatedTheme?.widget ||
+    fallbackAssets.widget,
+};
   return (
     <div className="rounded-xl border border-slate-800 bg-slate-900 p-6">
       <h2 className="text-2xl font-bold mb-6">
