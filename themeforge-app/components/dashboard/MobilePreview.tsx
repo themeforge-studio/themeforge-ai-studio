@@ -118,6 +118,13 @@ export default function MobilePreview({
 
             {/* Wallpaper */}
 
+{/* Wallpaper */}
+
+{(
+  projectType === "Theme" ||
+  projectType === "Wallpaper Pack"
+) && (
+
 <div
   className={`h-40 rounded-xl flex items-center justify-center mb-4 text-center font-bold text-lg
   ${
@@ -142,6 +149,7 @@ export default function MobilePreview({
     </div>
   </div>
 </div>
+)}
 
             {/* Widget */}
 
