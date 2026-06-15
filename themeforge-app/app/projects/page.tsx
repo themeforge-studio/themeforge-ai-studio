@@ -58,6 +58,7 @@ export default function ProjectsPage() {
  <ThemeOverview
   activeTab={activeTab}
   setActiveTab={setActiveTab}
+  selectedProject={selectedProject}
 />
 
 {activeTab === "overview" && (

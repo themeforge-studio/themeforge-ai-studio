@@ -1,12 +1,22 @@
 type ThemeOverviewProps = {
   activeTab: string;
   setActiveTab: (tab: string) => void;
+  selectedProject?: any;
 };
 
 export default function ThemeOverview({
   activeTab,
   setActiveTab,
+  selectedProject,
 }: ThemeOverviewProps) {
+
+  const project =
+  selectedProject || {
+    name: "Cyber Samurai Theme",
+    style: "Cyberpunk",
+    status: "Active",
+  };
+
   return (
     <div className="rounded-2xl border border-slate-800 bg-slate-900 overflow-hidden">
 
@@ -18,11 +28,11 @@ export default function ThemeOverview({
 
           <div>
             <h2 className="text-2xl font-bold">
-              Cyber Samurai Theme
+              {project.name}  
             </h2>
 
             <p className="text-slate-400 mt-1">
-              AI-generated cyberpunk theme with neon samurai aesthetics.
+              Selected project overview and assets.
             </p>
           </div>
 
@@ -74,8 +84,9 @@ export default function ThemeOverview({
           </p>
 
           <p className="font-semibold">
-            Cyberpunk
+            {project.style}
           </p>
+
         </div>
 
         <div>
@@ -84,7 +95,7 @@ export default function ThemeOverview({
           </p>
 
           <p className="font-semibold text-green-400">
-            Active
+            {project.status}
           </p>
         </div>
 
