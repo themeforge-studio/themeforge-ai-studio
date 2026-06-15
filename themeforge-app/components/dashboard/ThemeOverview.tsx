@@ -17,6 +17,15 @@ export default function ThemeOverview({
     status: "Active",
   };
 
+  const assetsCount =
+  project.type === "Wallpaper Pack"
+    ? 1
+    : project.type === "Icon Pack"
+    ? 1
+    : project.type === "Character Pack"
+    ? 1
+    : 4;
+
   return (
     <div className="rounded-2xl border border-slate-800 bg-slate-900 overflow-hidden">
 
@@ -105,7 +114,7 @@ export default function ThemeOverview({
           </p>
 
           <p className="font-semibold">
-            4 Generated
+             {assetsCount} Generated
           </p>
         </div>
 

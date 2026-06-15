@@ -51,25 +51,54 @@ const assets = {
 
       <div className="grid md:grid-cols-2 gap-6">
 
-       <PreviewCard
-  title="Wallpaper"
-  name={assets.wallpaper}
-/>
+       {(!selectedProject ||
+  selectedProject.type === "Theme") && (
+  <>
+    <PreviewCard
+      title="Wallpaper"
+      name={assets.wallpaper}
+    />
 
-<PreviewCard
-  title="Icon Pack"
-  name={assets.iconPack}
-/>
+    <PreviewCard
+      title="Icon Pack"
+      name={assets.iconPack}
+    />
 
-<PreviewCard
-  title="Character"
-  name={assets.character}
-/>
+    <PreviewCard
+      title="Character"
+      name={assets.character}
+    />
 
-<PreviewCard
-  title="Widget"
-  name={assets.widget}
-/>
+    <PreviewCard
+      title="Widget"
+      name={assets.widget}
+    />
+  </>
+)}
+
+{selectedProject?.type ===
+  "Wallpaper Pack" && (
+  <PreviewCard
+    title="Wallpaper"
+    name={assets.wallpaper}
+  />
+)}
+
+{selectedProject?.type ===
+  "Icon Pack" && (
+  <PreviewCard
+    title="Icon Pack"
+    name={assets.iconPack}
+  />
+)}
+
+{selectedProject?.type ===
+  "Character Pack" && (
+  <PreviewCard
+    title="Character"
+    name={assets.character}
+  />
+)}
 
       </div>
     </div>
