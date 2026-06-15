@@ -226,39 +226,37 @@ export default function MobilePreview({
   </div>
 )}
 
-    <div className="text-sm">
-      {theme.character}
-    </div>
+    
+{/* Dock */}
+
+{projectType === "Theme" && (
+  <div className="grid grid-cols-4 gap-2">
+
+    {(
+      theme.style === "anime"
+        ? ["💖", "🎀", "🌸", "⭐"]
+        : theme.style === "fantasy"
+        ? ["⚔️", "🛡️", "🏹", "🔮"]
+        : theme.style === "gaming"
+        ? ["🎮", "🕹️", "🏆", "⚡"]
+        : theme.style === "amoled"
+        ? ["⬛", "🌑", "🕶️", "⚫"]
+        : ["🤖", "⚙️", "💾", "🌐"]
+    ).map((icon, index) => (
+      <div
+        key={index}
+        className="rounded-xl bg-white/10 p-2 text-center"
+      >
+        {icon}
+      </div>
+    ))}
 
   </div>
-</div>
+)}
 
- {/* Dock */}
-
-<div className="grid grid-cols-4 gap-2">
-
-  {(
-    theme.style === "anime"
-      ? ["💖", "🎀", "🌸", "⭐"]
-      : theme.style === "fantasy"
-      ? ["⚔️", "🛡️", "🏹", "🔮"]
-      : theme.style === "gaming"
-      ? ["🎮", "🕹️", "🏆", "⚡"]
-      : theme.style === "amoled"
-      ? ["⬛", "🌑", "🕶️", "⚫"]
-      : ["🤖", "⚙️", "💾", "🌐"]
-  ).map((icon, index) => (
-    <div
-      key={index}
-      className="rounded-xl bg-white/10 p-2 text-center"
-    >
-      {icon}
-    </div>
-  ))}
-
-</div>
-</div>
+          </div>
         </div>
-      
+      </div>
+    </div>
   );
 }
