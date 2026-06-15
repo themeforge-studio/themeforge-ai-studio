@@ -96,6 +96,7 @@ export default function ProjectsPage() {
 {activeTab === "export" && (
   <ExportPanel
     generatedTheme={generatedTheme}
+    selectedProject={selectedProject}
   />
 )}
 

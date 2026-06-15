@@ -1,35 +1,38 @@
 type ExportPanelProps = {
   generatedTheme?: any;
+  selectedProject?: any;
 };
 
 export default function ExportPanel({
   generatedTheme,
+  selectedProject,
 }: ExportPanelProps) {
+
+  const theme =
+  selectedProject ||
+  generatedTheme || {
+    name: "Cyber Samurai",
+    style: "cyberpunk",
+    wallpaper: "Neo Tokyo Rain",
+    iconPack: "Cyber Glass",
+    character: "Female Cyber Ninja",
+    widget: "Cyber Clock",
+  };
+
   const handleExport = (type: string) => {
- const data = {
-  theme:
-    generatedTheme?.name ||
-    "Cyber Samurai",
+ 
+    const data = {
+  theme: theme.name,
 
-  style:
-    generatedTheme?.style ||
-    "cyberpunk",
+  style: theme.style,
 
-  wallpaper:
-    generatedTheme?.wallpaper ||
-    "Neo Tokyo Rain",
+  wallpaper: theme.wallpaper,
 
-  iconPack:
-    generatedTheme?.iconPack ||
-    "Cyber Glass",
+  iconPack: theme.iconPack,
 
-  character:
-    generatedTheme?.character ||
-    "Female Cyber Ninja",
+  character: theme.character,
 
-  widget:
-    generatedTheme?.widget ||
-    "Cyber Clock",
+  widget: theme.widget,
 
   exportType: type,
 
