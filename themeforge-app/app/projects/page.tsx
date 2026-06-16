@@ -64,7 +64,7 @@ export default function ProjectsPage() {
       },
     ]);
   }
-  
+
   const savedSelectedProject =
   localStorage.getItem(
     "themeforge-selected-project"
@@ -134,6 +134,8 @@ const [activeTab, setActiveTab] =
   setActiveTab={setActiveTab}
   selectedProject={selectedProject}
   setSelectedProject={setSelectedProject}
+  projects={projects}
+  setProjects={setProjects}
 />
 
 {activeTab === "overview" && (

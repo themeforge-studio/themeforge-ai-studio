@@ -4,8 +4,9 @@ type ThemeOverviewProps = {
   selectedProject?: any;
   setSelectedProject?: (project: any) => void;
 
+  projects?: any[] | null;
   setProjects?: any;
-  projects?: any[];
+   
 
 };
 
@@ -64,13 +65,26 @@ reader.onload = (e) => {
 
 setSelectedProject?.(data);
 
-const exists =
-  (projects || []).some(
+console.log(
+  "LISTA ACTUAL DE PROYECTOS:",
+  projects
+);
+
+const existingProject =
+  (projects || []).find(
     (project) =>
       project.id === data.id
   );
 
-if (!exists) {
+if (existingProject) {
+  alert(
+    "⚠ Project already exists.\nLoading existing project..."
+  );
+
+  setSelectedProject?.(
+    existingProject
+  );
+} else {
   setProjects?.([
     data,
     ...(projects || []),
