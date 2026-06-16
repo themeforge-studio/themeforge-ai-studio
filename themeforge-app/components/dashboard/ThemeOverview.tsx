@@ -62,12 +62,20 @@ reader.onload = (e) => {
     data
   );
 
-  setSelectedProject?.(data);
+setSelectedProject?.(data);
 
+const exists =
+  (projects || []).some(
+    (project) =>
+      project.id === data.id
+  );
+
+if (!exists) {
   setProjects?.([
     data,
     ...(projects || []),
   ]);
+}
 };
 
     reader.readAsText(file);
