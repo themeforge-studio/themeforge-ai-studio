@@ -2,12 +2,18 @@ type ThemeOverviewProps = {
   activeTab: string;
   setActiveTab: (tab: string) => void;
   selectedProject?: any;
+  setSelectedProject?: (project: any) => void;
+
+  setProjects?: any;
+  projects?: any[];
+
 };
 
 export default function ThemeOverview({
   activeTab,
   setActiveTab,
   selectedProject,
+  setSelectedProject,
 }: ThemeOverviewProps) {
 
   const project =
@@ -26,7 +32,46 @@ export default function ThemeOverview({
     ? 1
     : 4;
 
+    const importTheme = () => {
+  const input =
+    document.createElement("input");
+
+  input.type = "file";
+  input.accept = ".json";
+
+  input.onchange = (event: any) => {
+    const file =
+      event.target.files?.[0];
+
+    if (!file) return;
+
+    const reader =
+      new FileReader();
+
+    reader.onload = (e) => {
+      const text =
+        e.target?.result as string;
+
+      const data =
+        JSON.parse(text);
+
+      console.log(
+        "ARCHIVO IMPORTADO:",
+        data
+      );
+
+      setSelectedProject?.(data);
+
+    };
+
+    reader.readAsText(file);
+  };
+
+  input.click();
+};
+
     const exportTheme = () => {
+
   const dataStr = JSON.stringify(
     project,
     null,
@@ -75,12 +120,23 @@ export default function ThemeOverview({
             </p>
           </div>
 
-          <button
-            onClick={exportTheme}
-            className="rounded-xl bg-violet-600 px-4 py-2 hover:bg-violet-500 transition"
+          <div className="flex gap-2">
+
+           <button
+              onClick={importTheme}
+              className="rounded-xl bg-slate-700 px-4 py-2 hover:bg-slate-600 transition"
           >
-            Export Theme
+              Import Theme
+            </button>
+
+        <button
+           onClick={exportTheme}
+          className="rounded-xl bg-violet-600 px-4 py-2 hover:bg-violet-500 transition"
+        >
+          Export Theme
         </button>
+
+      </div>
 
         </div>
 

@@ -65,6 +65,7 @@ export default function ProjectsPage() {
   activeTab={activeTab}
   setActiveTab={setActiveTab}
   selectedProject={selectedProject}
+  setSelectedProject={setSelectedProject}
 />
 
 {activeTab === "overview" && (
