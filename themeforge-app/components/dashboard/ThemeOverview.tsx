@@ -14,6 +14,8 @@ export default function ThemeOverview({
   setActiveTab,
   selectedProject,
   setSelectedProject,
+  projects,
+  setProjects,
 }: ThemeOverviewProps) {
 
   const project =
@@ -48,21 +50,25 @@ export default function ThemeOverview({
     const reader =
       new FileReader();
 
-    reader.onload = (e) => {
-      const text =
-        e.target?.result as string;
+reader.onload = (e) => {
+  const text =
+    e.target?.result as string;
 
-      const data =
-        JSON.parse(text);
+  const data =
+    JSON.parse(text);
 
-      console.log(
-        "ARCHIVO IMPORTADO:",
-        data
-      );
+  console.log(
+    "ARCHIVO IMPORTADO:",
+    data
+  );
 
-      setSelectedProject?.(data);
+  setSelectedProject?.(data);
 
-    };
+  setProjects?.([
+    data,
+    ...(projects || []),
+  ]);
+};
 
     reader.readAsText(file);
   };
