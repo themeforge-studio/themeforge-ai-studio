@@ -20,6 +20,15 @@ export default function ProjectsPage() {
   const [selectedProject, setSelectedProject] =
     useState<any>(null);
 
+    useEffect(() => {
+  if (!selectedProject) return;
+
+  localStorage.setItem(
+    "themeforge-selected-project",
+    JSON.stringify(selectedProject)
+  );
+}, [selectedProject]);
+
   const [projects, setProjects] =
       useState<any[] | null>(null);
   
@@ -55,6 +64,19 @@ export default function ProjectsPage() {
       },
     ]);
   }
+  
+  const savedSelectedProject =
+  localStorage.getItem(
+    "themeforge-selected-project"
+  );
+
+if (savedSelectedProject) {
+  setSelectedProject(
+    JSON.parse(
+      savedSelectedProject
+    )
+  );
+}
 }, []);
 
 useEffect(() => {
