@@ -26,6 +26,36 @@ export default function ThemeOverview({
     ? 1
     : 4;
 
+    const exportTheme = () => {
+  const dataStr = JSON.stringify(
+    project,
+    null,
+    2
+  );
+
+  const blob = new Blob(
+    [dataStr],
+    {
+      type: "application/json",
+    }
+  );
+
+  const url =
+    URL.createObjectURL(blob);
+
+  const link =
+    document.createElement("a");
+
+  link.href = url;
+
+  link.download =
+    `${project.name}.json`;
+
+  link.click();
+
+  URL.revokeObjectURL(url);
+};
+
   return (
     <div className="rounded-2xl border border-slate-800 bg-slate-900 overflow-hidden">
 
@@ -45,9 +75,12 @@ export default function ThemeOverview({
             </p>
           </div>
 
-          <button className="rounded-xl bg-violet-600 px-4 py-2 hover:bg-violet-500 transition">
+          <button
+            onClick={exportTheme}
+            className="rounded-xl bg-violet-600 px-4 py-2 hover:bg-violet-500 transition"
+          >
             Export Theme
-          </button>
+        </button>
 
         </div>
 

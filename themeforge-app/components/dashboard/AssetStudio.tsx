@@ -11,8 +11,6 @@ export default function AssetStudio({
   selectedProject,
 }: AssetStudioProps) {
 
-  console.log("Proyecto:", selectedProject);
-
 const fallbackAssets =
   assetLibrary[
     (

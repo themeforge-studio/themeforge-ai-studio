@@ -19,7 +19,10 @@ export default function ThemeGenerator({
       text.includes("dragon") ||
       text.includes("magic") ||
       text.includes("fantasy") ||
-      text.includes("kingdom")
+      text.includes("kingdom") ||
+      text.includes("elf") ||
+      text.includes("wizard") ||
+      text.includes("rpg")
     ) {
       return "fantasy";
     }
@@ -27,7 +30,14 @@ export default function ThemeGenerator({
     if (
       text.includes("anime") ||
       text.includes("otaku") ||
-      text.includes("kawaii")
+      text.includes("kawaii") ||
+      text.includes("naruto")||
+      text.includes("goku") ||
+      text.includes("dragon ball") ||
+      text.includes("one piece") ||
+      text.includes("luffy") ||
+      text.includes("bleach") ||
+      text.includes("attack on titan")
     ) {
       return "anime";
     }
@@ -35,7 +45,12 @@ export default function ThemeGenerator({
     if (
       text.includes("game") ||
       text.includes("gaming") ||
-      text.includes("esports")
+      text.includes("esports") ||
+      text.includes("minecraft") ||
+      text.includes("fortnite") ||
+      text.includes("valorant") ||
+      text.includes("league of legends") ||
+      text.includes("call of duty")
     ) {
       return "gaming";
     }
@@ -43,7 +58,9 @@ export default function ThemeGenerator({
     if (
       text.includes("amoled") ||
       text.includes("dark") ||
-      text.includes("black")
+      text.includes("black") ||
+      text.includes("night") ||
+      text.includes("shadow")
     ) {
       return "amoled";
     }
@@ -54,7 +71,7 @@ export default function ThemeGenerator({
   const generateTheme = () => {
     const style = detectStyle(themeName);
 
-    const data =
+     const data =
       themeSuggestions[
         style as keyof typeof themeSuggestions
       ];

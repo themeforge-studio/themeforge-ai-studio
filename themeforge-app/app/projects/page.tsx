@@ -19,7 +19,6 @@ export default function ProjectsPage() {
     
   const [selectedProject, setSelectedProject] =
     useState<any>(null);
-    console.log("Proyecto seleccionado:", selectedProject);
 
   const [activeTab, setActiveTab] =
     useState("overview");

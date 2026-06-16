@@ -9,17 +9,39 @@ export default function MobilePreview({
 }: MobilePreviewProps) {
 
   const theme =
-  selectedProject ||
-  generatedTheme || {
+    selectedProject ||
+    generatedTheme || {
     name: "Cyber Samurai",
     style: "cyberpunk",
     wallpaper: "Neo Tokyo Rain",
     widget: "Cyber Clock",
     character: "Female Cyber Ninja",
   };
+
+      const detectedStyle =
+theme.type === "Theme"
+  ? theme.style
+    : (
+        theme.wallpaper?.includes("Forest") ||
+        theme.iconPack?.includes("Fantasy") ||
+        theme.character?.includes("Elf")
+      )
+    ? "fantasy"
+    : (
+        theme.wallpaper?.includes("Cherry") ||
+        theme.iconPack?.includes("Anime") ||
+        theme.character?.includes("Hero")
+      )
+    ? "anime"
+    : (
+        theme.wallpaper?.includes("Dark") ||
+        theme.iconPack?.includes("AMOLED")
+      )
+    ? "amoled"
+    : "cyberpunk";
   
   const getThemeColors = () => {
-    switch (theme.style) {
+    switch (detectedStyle) {
       case "anime":
         return {
           background:
@@ -61,6 +83,8 @@ export default function MobilePreview({
         };
     }
   };
+
+
 
   const colors = getThemeColors();
 
@@ -128,13 +152,13 @@ export default function MobilePreview({
 <div
   className={`h-40 rounded-xl flex items-center justify-center mb-4 text-center font-bold text-lg
   ${
-    theme.style === "anime"
+    detectedStyle === "anime"
       ? "bg-gradient-to-br from-pink-400 to-purple-600"
-      : theme.style === "fantasy"
+      : detectedStyle === "fantasy"
       ? "bg-gradient-to-br from-green-500 to-yellow-700"
-      : theme.style === "gaming"
+      : detectedStyle === "gaming"
       ? "bg-gradient-to-br from-green-500 to-black"
-      : theme.style === "amoled"
+      : detectedStyle === "amoled"
       ? "bg-gradient-to-br from-black to-slate-800"
       : "bg-gradient-to-br from-cyan-500 to-blue-800"
   }`}
@@ -186,13 +210,13 @@ export default function MobilePreview({
           key={index}
           className={`h-12 rounded-xl flex items-center justify-center text-lg font-bold ${colors.icon}`}
         >
-          {theme.style === "anime"
+          {detectedStyle === "anime"
             ? "♥"
-            : theme.style === "fantasy"
+            : detectedStyle === "fantasy"
             ? "✦"
-            : theme.style === "gaming"
+            : detectedStyle === "gaming"
             ? "🎮"
-            : theme.style === "amoled"
+            : detectedStyle === "amoled"
             ? "⬢"
             : "◉"}
         </div>
@@ -215,13 +239,13 @@ export default function MobilePreview({
     <div className="rounded-xl bg-black/20 p-3 text-center">
 
       <div className="text-4xl mb-2">
-        {theme.style === "anime"
+        {detectedStyle === "anime"
           ? "👧"
-          : theme.style === "fantasy"
+          : detectedStyle === "fantasy"
           ? "🧙"
-          : theme.style === "gaming"
+          : detectedStyle === "gaming"
           ? "🎮"
-          : theme.style === "amoled"
+          : detectedStyle === "amoled"
           ? "🕶️"
           : "🥷"}
       </div>
@@ -241,13 +265,13 @@ export default function MobilePreview({
   <div className="grid grid-cols-4 gap-2">
 
     {(
-      theme.style === "anime"
+      detectedStyle === "anime"
         ? ["💖", "🎀", "🌸", "⭐"]
-        : theme.style === "fantasy"
+        : detectedStyle === "fantasy"
         ? ["⚔️", "🛡️", "🏹", "🔮"]
-        : theme.style === "gaming"
+        : detectedStyle === "gaming"
         ? ["🎮", "🕹️", "🏆", "⚡"]
-        : theme.style === "amoled"
+        : detectedStyle === "amoled"
         ? ["⬛", "🌑", "🕶️", "⚫"]
         : ["🤖", "⚙️", "💾", "🌐"]
     ).map((icon, index) => (

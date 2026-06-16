@@ -75,38 +75,20 @@ export default function ProjectsManager({
 }, [projects]);
 
   const createProject = () => {
-    console.log("generatedTheme:", generatedTheme);
-    
-    if (!projectName.trim()) return;
 
-    const newProject = {
+  if (!projectName.trim()) return;
+
+  const newProject = {
   id: Date.now(),
-
   name: projectName,
-
   type: projectType,
-
   status: "Draft",
 
-  style:
-    generatedTheme?.style ||
-    null,
-
-  wallpaper:
-    generatedTheme?.wallpaper ||
-    null,
-
-  iconPack:
-    generatedTheme?.iconPack ||
-    null,
-
-  character:
-    generatedTheme?.character ||
-    null,
-
-  widget:
-    generatedTheme?.widget ||
-    null,
+  style: generatedTheme?.style || null,
+  wallpaper: generatedTheme?.wallpaper || null,
+  iconPack: generatedTheme?.iconPack || null,
+  character: generatedTheme?.character || null,
+  widget: generatedTheme?.widget || null,
 };
 
     setProjects([
@@ -482,7 +464,7 @@ const totalCharacters =
     </div>
   )}
 
-</div>git status
+</div>
                 </div>
 
                 <div className="flex gap-2">
