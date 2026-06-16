@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import TopBar from "../../components/layout/TopBar";
 
@@ -20,8 +20,54 @@ export default function ProjectsPage() {
   const [selectedProject, setSelectedProject] =
     useState<any>(null);
 
-  const [activeTab, setActiveTab] =
-    useState("overview");
+  const [projects, setProjects] =
+      useState<any[] | null>(null);
+  
+  useEffect(() => {
+    const savedProjects =
+      localStorage.getItem(
+        "themeforge-projects"
+    );
+
+  if (savedProjects) {
+    setProjects(
+      JSON.parse(savedProjects)
+    );
+  } else {
+    setProjects([
+      {
+        id: 1,
+        name: "Neon Future",
+        type: "Wallpaper Pack",
+        status: "Published",
+      },
+      {
+        id: 2,
+        name: "Cyber Icons",
+        type: "Icon Pack",
+        status: "Draft",
+      },
+      {
+        id: 3,
+        name: "Dark AMOLED",
+        type: "Theme",
+        status: "Published",
+      },
+    ]);
+  }
+}, []);
+
+useEffect(() => {
+  if (projects === null) return;
+
+  localStorage.setItem(
+    "themeforge-projects",
+    JSON.stringify(projects)
+  );
+}, [projects]);
+
+const [activeTab, setActiveTab] =
+  useState("overview");
 
     const currentProject =
   selectedProject || {
@@ -78,6 +124,8 @@ export default function ProjectsPage() {
       generatedTheme={generatedTheme}
       selectedProject={selectedProject}
       setSelectedProject={setSelectedProject}
+      projects={projects}
+      setProjects={setProjects}
     />
   </>
 )}

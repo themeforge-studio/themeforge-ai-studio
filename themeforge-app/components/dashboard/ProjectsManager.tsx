@@ -6,14 +6,19 @@ type ProjectsManagerProps = {
   generatedTheme?: any;
   selectedProject?: any;
   setSelectedProject?: any;
+
+  projects?: any[] | null;
+  setProjects?: any;
 };
 
 export default function ProjectsManager({
   generatedTheme,
   selectedProject,
   setSelectedProject,
+  projects,
+  setProjects,
 }: ProjectsManagerProps) { 
-  const [projects, setProjects] = useState<any[] | null>(null);
+  
   const [projectName, setProjectName] = useState("");
   const [projectType, setProjectType] = useState("Theme");
   const [searchTerm, setSearchTerm] = useState("");
@@ -31,39 +36,7 @@ export default function ProjectsManager({
   const [editStatus, setEditStatus] =
   useState("Draft");
 
-  useEffect(() => {
-    const savedProjects =
-      localStorage.getItem(
-        "themeforge-projects"
-      );
 
-    if (savedProjects) {
-      setProjects(
-        JSON.parse(savedProjects)
-      );
-    } else {
-      setProjects([
-        {
-          id: 1,
-          name: "Neon Future",
-          type: "Wallpaper Pack",
-          status: "Published",
-        },
-        {
-          id: 2,
-          name: "Cyber Icons",
-          type: "Icon Pack",
-          status: "Draft",
-        },
-        {
-          id: 3,
-          name: "Dark AMOLED",
-          type: "Theme",
-          status: "Published",
-        },
-      ]);
-    }
-  }, []);
 
  useEffect(() => {
   if (projects === null) return;
