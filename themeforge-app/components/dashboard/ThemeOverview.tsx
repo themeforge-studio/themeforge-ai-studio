@@ -189,6 +189,49 @@ const exportAllProjects = () => {
   );
 };
 
+const importBackup = () => {
+  const input =
+    document.createElement("input");
+
+  input.type = "file";
+  input.accept = ".json";
+
+  input.onchange = (event: any) => {
+    const file =
+      event.target.files?.[0];
+
+    if (!file) return;
+
+    const reader =
+      new FileReader();
+
+    reader.onload = (e) => {
+      const text =
+        e.target?.result as string;
+
+      const data =
+        JSON.parse(text);
+
+      console.log(
+        "BACKUP IMPORTADO:",
+        data
+      );
+
+        setProjects?.(data);
+
+        showToast(
+        "✅ Backup restored"
+      
+    );
+    
+    };
+
+    reader.readAsText(file);
+  };
+
+  input.click();
+};
+
   return (
   <>
     {toast && (
@@ -251,6 +294,13 @@ const exportAllProjects = () => {
           className="rounded-xl bg-green-600 px-4 py-2 hover:bg-green-500 transition"
       >
           Export All
+      </button>
+
+      <button
+        onClick={importBackup}
+        className="rounded-xl bg-blue-600 px-4 py-2 hover:bg-blue-500 transition"
+>
+        Import Backup
       </button>
 
       </div>
