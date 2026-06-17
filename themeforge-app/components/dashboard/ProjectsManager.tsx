@@ -73,16 +73,25 @@ export default function ProjectsManager({
     setProjectType("Theme");
   };
 
-  const deleteProject = (
-    id: number
-  ) => {
-    setProjects(
-      (projects || []).filter(
-        (project) =>
-          project.id !== id
-      )
+const deleteProject = (
+  id: number
+) => {
+
+  const confirmed =
+    window.confirm(
+      "🗑️ Delete this project?"
     );
-  };
+
+  if (!confirmed) return;
+
+  setProjects(
+    (projects || []).filter(
+      (project) =>
+        project.id !== id
+    )
+  );
+
+};
 
   const duplicateProject = (
     project: any
