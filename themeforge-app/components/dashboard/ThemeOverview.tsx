@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 type ThemeOverviewProps = {
   activeTab: string;
   setActiveTab: (tab: string) => void;
@@ -18,6 +20,19 @@ export default function ThemeOverview({
   projects,
   setProjects,
 }: ThemeOverviewProps) {
+
+const [toast, setToast] =
+  useState<string | null>(null);
+
+  const showToast = (
+  message: string
+) => {
+  setToast(message);
+
+  setTimeout(() => {
+    setToast(null);
+  }, 3000);
+};
 
   const project =
   selectedProject || {
@@ -77,13 +92,14 @@ const existingProject =
   );
 
 if (existingProject) {
-  alert(
-    "⚠ Project already exists.\nLoading existing project..."
+  showToast(
+    "⚠ Project already exists"
   );
 
   setSelectedProject?.(
     existingProject
   );
+
 } else {
   setProjects?.([
     data,
@@ -130,6 +146,27 @@ if (existingProject) {
 };
 
   return (
+  <>
+    {toast && (
+      <div
+        className="
+          fixed
+          top-5
+          right-5
+          z-50
+          bg-slate-800
+          text-white
+          px-4
+          py-3
+          rounded-xl
+          shadow-xl
+          border
+          border-slate-600
+        "
+      >
+        {toast}
+      </div>
+    )}
     <div className="rounded-2xl border border-slate-800 bg-slate-900 overflow-hidden">
 
       {/* Header */}
@@ -248,5 +285,6 @@ if (existingProject) {
       </div>
 
     </div>
+     </>
   );
 }
