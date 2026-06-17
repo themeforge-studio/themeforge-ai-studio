@@ -101,11 +101,18 @@ if (existingProject) {
   );
 
 } else {
+
   setProjects?.([
     data,
     ...(projects || []),
   ]);
+
+  showToast(
+    "✅ Project imported"
+  );
+
 }
+
 };
 
     reader.readAsText(file);
@@ -114,8 +121,7 @@ if (existingProject) {
   input.click();
 };
 
-    const exportTheme = () => {
-
+const exportTheme = () => {
   const dataStr = JSON.stringify(
     project,
     null,
@@ -143,6 +149,44 @@ if (existingProject) {
   link.click();
 
   URL.revokeObjectURL(url);
+
+  showToast(
+    "💾 Project exported"
+  );
+};
+
+const exportAllProjects = () => {
+  const blob = new Blob(
+    [
+      JSON.stringify(
+        projects || [],
+        null,
+        2
+      ),
+    ],
+    {
+      type: "application/json",
+    }
+  );
+
+  const url =
+    URL.createObjectURL(blob);
+
+  const link =
+    document.createElement("a");
+
+  link.href = url;
+
+  link.download =
+    "themeforge-backup.json";
+
+  link.click();
+
+  URL.revokeObjectURL(url);
+
+  showToast(
+    "💾 Backup exported"
+  );
 };
 
   return (
@@ -200,6 +244,14 @@ if (existingProject) {
         >
           Export Theme
         </button>
+
+
+        <button
+          onClick={exportAllProjects}
+          className="rounded-xl bg-green-600 px-4 py-2 hover:bg-green-500 transition"
+      >
+          Export All
+      </button>
 
       </div>
 
