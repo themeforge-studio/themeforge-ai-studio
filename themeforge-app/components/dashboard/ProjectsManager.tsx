@@ -481,10 +481,6 @@ const totalCharacters =
 </div>
                 </div>
 
-                <h1 className="text-red-500 text-4xl">
-                  PRUEBA FAVORITOS
-                </h1>
-
                 <div className="flex gap-2">
 
                   <button
