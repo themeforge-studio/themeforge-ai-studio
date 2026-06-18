@@ -57,6 +57,8 @@ export default function ProjectsManager({
   type: projectType,
   status: "Draft",
 
+  favorite: false,
+
   style: generatedTheme?.style || null,
   wallpaper: generatedTheme?.wallpaper || null,
   iconPack: generatedTheme?.iconPack || null,
@@ -108,6 +110,25 @@ const deleteProject = (
   ...(projects || []),
 ]);
   };
+
+const toggleFavorite = (
+  id: number
+) => {
+
+  setProjects(
+    (projects || []).map(
+      (project) =>
+        project.id === id
+          ? {
+              ...project,
+              favorite:
+                !project.favorite,
+            }
+          : project
+    )
+  );
+
+};
 
   const startEdit = (
   project: any
@@ -169,6 +190,16 @@ const totalCharacters =
         )
     )
     .sort((a, b) => {
+
+        if (
+          !!a.favorite !==
+          !!b.favorite
+        ) {
+          return a.favorite
+            ? -1
+            : 1;
+        }
+
       switch (sortBy) {
         case "az":
           return a.name.localeCompare(
@@ -369,6 +400,7 @@ const totalCharacters =
 </select>
 
                 <div className="flex gap-2">
+
                   <button
                     onClick={saveEdit}
                     className="rounded-lg bg-green-600 px-3 py-2 hover:bg-green-700"
@@ -449,7 +481,26 @@ const totalCharacters =
 </div>
                 </div>
 
+                <h1 className="text-red-500 text-4xl">
+                  PRUEBA FAVORITOS
+                </h1>
+
                 <div className="flex gap-2">
+
+                  <button
+                    onClick={(e) => {
+                    e.stopPropagation();
+                    toggleFavorite(
+                      project.id
+                    );
+                  }}
+                  className="rounded-lg bg-amber-600 px-3 py-2 hover:bg-amber-700 transition"
+                >
+                  {project.favorite
+                    ? "⭐"
+                    : "☆"}
+                </button>
+
                   <button
                     onClick={() =>
                       duplicateProject(
