@@ -37,8 +37,8 @@ export default function Sidebar() {
     },
     {
       icon: Image,
-      label: "Asset Studio",
-      href: "/projects",
+      label: "Assets",
+      href: "/assets",
     },
     {
       icon: Smartphone,
