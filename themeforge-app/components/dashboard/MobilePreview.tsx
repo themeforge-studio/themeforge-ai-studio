@@ -192,17 +192,31 @@ theme.type === "Theme"
             {/* Widget */}
 
 {projectType === "Theme" && (
-  <div
-    className={`rounded-xl p-3 text-center mb-4 ${colors.widget}`}
-  >
-    <div className="text-sm">
-      {theme.widget}
+
+  theme.widgetImage ? (
+
+    <img
+      src={theme.widgetImage}
+      alt={theme.widget}
+      className="w-full rounded-xl mb-4 border border-slate-700"
+    />
+
+  ) : (
+
+    <div
+      className={`rounded-xl p-3 text-center mb-4 ${colors.widget}`}
+    >
+      <div className="text-sm">
+        {theme.widget}
+      </div>
+
+      <div className="text-xl font-bold">
+        12:45
+      </div>
     </div>
 
-    <div className="text-xl font-bold">
-      12:45
-    </div>
-  </div>
+  )
+
 )}
 
             {/* Icons */}

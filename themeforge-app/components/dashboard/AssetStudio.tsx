@@ -248,6 +248,23 @@ const assets = {
 
     )}
 
+    <div className="mt-2 text-xs text-cyan-400">
+  Total Widgets:
+  {widgets.length}
+</div>
+
+<div className="mt-2 text-xs text-green-400">
+  Primer Widget:
+  {widgets[0]?.name}
+</div>
+
+<div className="mt-2 text-xs text-yellow-400">
+  Widget tiene imagen:
+  {widgets[0]?.image
+    ? " SI"
+    : " NO"}
+</div>
+
         <div className="mb-6">
 
           <label className="block mb-2 font-semibold">

@@ -104,17 +104,25 @@ export default function IconPacksPage() {
 
                 if (!file) return;
 
-                const imageUrl =
-                URL.createObjectURL(file);
+                const reader = new FileReader();
 
-                setIconPacks((current) => [
-                {
-                    id: Date.now(),
-                    name: file.name,
-                    image: imageUrl,
-                },
-                ...current,
-                ]);
+                reader.onload = () => {
+
+                  const base64Image =
+                    reader.result as string;
+
+                  setIconPacks((current) => [
+                    {
+                      id: Date.now(),
+                      name: file.name,
+                      image: base64Image,
+                    },
+                    ...current,
+                  ]);
+
+                };
+
+                reader.readAsDataURL(file);
 
             }}
             />
