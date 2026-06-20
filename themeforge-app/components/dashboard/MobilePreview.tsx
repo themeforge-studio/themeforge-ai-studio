@@ -163,15 +163,27 @@ theme.type === "Theme"
       : "bg-gradient-to-br from-cyan-500 to-blue-800"
   }`}
 >
-  <div>
-    <div className="text-xl">
-      {theme.wallpaper}
+  {theme.wallpaperImage ? (
+
+    <img
+      src={theme.wallpaperImage}
+      alt={theme.wallpaper}
+      className="w-full h-full object-cover rounded-xl"
+    />
+
+  ) : (
+
+    <div>
+      <div className="text-xl">
+        {theme.wallpaper}
+      </div>
+
+      <div className="text-xs opacity-80 mt-2">
+        AI Wallpaper Preview
+      </div>
     </div>
 
-    <div className="text-xs opacity-80 mt-2">
-      AI Wallpaper Preview
-    </div>
-  </div>
+  )}
 </div>
 )}
 

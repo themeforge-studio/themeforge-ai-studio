@@ -157,9 +157,10 @@ const [activeTab, setActiveTab] =
 
 {activeTab === "assets" && (
   <AssetStudio
-    generatedTheme={generatedTheme}
-    selectedProject={selectedProject}
-  />
+  generatedTheme={generatedTheme}
+  selectedProject={selectedProject}
+  setSelectedProject={setSelectedProject}
+/>
 )}
 
 {activeTab === "preview" && (
