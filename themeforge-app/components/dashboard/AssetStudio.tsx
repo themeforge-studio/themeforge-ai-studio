@@ -30,6 +30,15 @@ const [widgets, setWidgets] =
 const [selectedWallpaper, setSelectedWallpaper] =
   useState<any>(null);
 
+  const [selectedIconPack, setSelectedIconPack] =
+  useState<any>(null);
+
+  const [selectedCharacter, setSelectedCharacter] =
+  useState<any>(null);
+
+  const [selectedWidget, setSelectedWidget] =
+  useState<any>(null);
+
   useEffect(() => {
 
   const savedWallpapers =
@@ -77,6 +86,70 @@ const [selectedWallpaper, setSelectedWallpaper] =
   }
 
 }, []);
+
+useEffect(() => {
+
+  if (!selectedProject) return;
+
+  const wallpaper =
+    wallpapers.find(
+      (item) =>
+        item.name ===
+        selectedProject.wallpaper
+    );
+
+  if (wallpaper) {
+    setSelectedWallpaper(
+      wallpaper
+    );
+  }
+
+  const iconPack =
+    iconPacks.find(
+      (item) =>
+        item.name ===
+        selectedProject.iconPack
+    );
+
+  if (iconPack) {
+    setSelectedIconPack(
+      iconPack
+    );
+  }
+
+  const character =
+    characters.find(
+      (item) =>
+        item.name ===
+        selectedProject.character
+    );
+
+  if (character) {
+    setSelectedCharacter(
+      character
+    );
+  }
+
+  const widget =
+  widgets.find(
+    (item) =>
+      item.name ===
+      selectedProject.widget
+  );
+
+if (widget) {
+  setSelectedWidget(
+    widget
+  );
+}
+
+}, [
+  selectedProject,
+  wallpapers,
+  iconPacks,
+  characters,
+  widgets,
+]);
 
 const fallbackAssets =
   assetLibrary[
@@ -175,88 +248,342 @@ const assets = {
 
     )}
 
-      <div className="mb-6">
+        <div className="mb-6">
 
-        <label className="block mb-2 font-semibold">
-          Seleccionar Wallpaper
-        </label>
+          <label className="block mb-2 font-semibold">
+            Seleccionar Wallpaper
+          </label>
 
-        <select
-          value={selectedWallpaper}
-          onChange={(e) => {
+          <select
+            value={selectedWallpaper}
+            onChange={(e) => {
 
-            const wallpaper =
-              wallpapers.find(
-                (item) =>
-                  item.id ===
-                  Number(e.target.value)
+              const wallpaper =
+                wallpapers.find(
+                  (item) =>
+                    item.id ===
+                    Number(e.target.value)
+                );
+
+              setSelectedWallpaper(
+                wallpaper || null
               );
 
-            setSelectedWallpaper(
-              wallpaper || null
-            );
+              if (
+                wallpaper &&
+                selectedProject &&
+                setSelectedProject
+              ) {
 
-            if (
-              wallpaper &&
-              selectedProject &&
-              setSelectedProject
-            ) {
+                setSelectedProject({
+                  ...selectedProject,
+                  wallpaper: wallpaper.name,
+                  wallpaperImage:
+                    wallpaper.image,
+                });
 
-              setSelectedProject({
-                ...selectedProject,
-                wallpaper: wallpaper.name,
-                wallpaperImage:
-                  wallpaper.image,
-              });
+              }
 
-            }
+            }}
+            className="w-full rounded-xl bg-slate-800 p-3"
+          >
 
-          }}
-          className="w-full rounded-xl bg-slate-800 p-3"
-        >
-
-          <option value="">
-            Elegir wallpaper...
-          </option>
-
-          {wallpapers.map((wallpaper) => (
-
-            <option
-              key={wallpaper.id}
-              value={wallpaper.id}
-            >
-              {wallpaper.name}
+            <option value="">
+              Elegir wallpaper...
             </option>
 
-          ))}
+            {wallpapers.map((wallpaper) => (
 
-        </select>
+              <option
+                key={wallpaper.id}
+                value={wallpaper.id}
+              >
+                {wallpaper.name}
+              </option>
 
-        {selectedWallpaper && (
+            ))}
 
-          <div className="mt-4 rounded-xl bg-slate-800 p-4">
+          </select>
 
-            <div className="font-semibold mb-3">
-              Wallpaper seleccionado:
-              {" "}
-              {selectedWallpaper.name}
+          {selectedWallpaper && (
+
+            <div className="mt-4 rounded-xl bg-slate-800 p-4">
+
+              <div className="font-semibold mb-3">
+                Wallpaper seleccionado:
+                {" "}
+                {selectedWallpaper.name}
+              </div>
+
+              {selectedWallpaper.image && (
+
+                <img
+                  src={selectedWallpaper.image}
+                  alt={selectedWallpaper.name}
+                  className="w-64 rounded-xl border border-slate-700"
+                />
+
+              )}
+
             </div>
-
-            {selectedWallpaper.image && (
-
-              <img
-                src={selectedWallpaper.image}
-                alt={selectedWallpaper.name}
-                className="w-64 rounded-xl border border-slate-700"
-              />
-
-            )}
-
-          </div>
 
         )}
 
       </div>
+
+      {/* ICON PACK */}
+
+<div className="mb-6">
+
+  <label className="block mb-2 font-semibold">
+    Seleccionar Icon Pack
+  </label>
+
+  <select
+    value={selectedIconPack?.id || ""}
+    onChange={(e) => {
+
+      const iconPack =
+        iconPacks.find(
+          (item) =>
+            item.id ===
+            Number(e.target.value)
+        );
+
+      setSelectedIconPack(
+        iconPack || null
+      );
+
+      if (
+        iconPack &&
+        selectedProject &&
+        setSelectedProject
+      ) {
+
+        setSelectedProject({
+          ...selectedProject,
+          iconPack: iconPack.name,
+          iconPackImage:
+            iconPack.image,
+        });
+
+      }
+
+    }}
+    className="w-full rounded-xl bg-slate-800 p-3"
+  >
+
+    <option value="">
+      Elegir icon pack...
+    </option>
+
+    {iconPacks.map((iconPack) => (
+
+      <option
+        key={iconPack.id}
+        value={iconPack.id}
+      >
+        {iconPack.name}
+      </option>
+
+    ))}
+
+  </select>
+
+  {selectedIconPack && (
+
+    <div className="mt-4 rounded-xl bg-slate-800 p-4">
+
+      <div className="font-semibold mb-3">
+        Icon Pack seleccionado:
+        {" "}
+        {selectedIconPack.name}
+      </div>
+
+      {selectedIconPack.image && (
+
+        <img
+          src={selectedIconPack.image}
+          alt={selectedIconPack.name}
+          className="w-64 rounded-xl border border-slate-700"
+        />
+
+      )}
+
+    </div>
+
+  )}
+
+</div>
+
+{/* CHARACTER */}
+
+<div className="mb-6">
+
+  <label className="block mb-2 font-semibold">
+    Seleccionar Character
+  </label>
+
+  <select
+    value={selectedCharacter?.id || ""}
+    onChange={(e) => {
+
+      const character =
+        characters.find(
+          (item) =>
+            item.id ===
+            Number(e.target.value)
+        );
+
+      setSelectedCharacter(
+        character || null
+      );
+
+      if (
+        character &&
+        selectedProject &&
+        setSelectedProject
+      ) {
+
+        setSelectedProject({
+          ...selectedProject,
+          character: character.name,
+          characterImage:
+            character.image,
+        });
+
+      }
+
+    }}
+    className="w-full rounded-xl bg-slate-800 p-3"
+  >
+
+    <option value="">
+      Elegir character...
+    </option>
+
+    {characters.map((character) => (
+
+      <option
+        key={character.id}
+        value={character.id}
+      >
+        {character.name}
+      </option>
+
+    ))}
+
+  </select>
+
+  {selectedCharacter && (
+
+    <div className="mt-4 rounded-xl bg-slate-800 p-4">
+
+      <div className="font-semibold mb-3">
+        Character seleccionado:
+        {" "}
+        {selectedCharacter.name}
+      </div>
+
+      {selectedCharacter.image && (
+
+        <img
+          src={selectedCharacter.image}
+          alt={selectedCharacter.name}
+          className="w-64 rounded-xl border border-slate-700"
+        />
+
+      )}
+
+    </div>
+
+  )}
+
+</div>
+
+<div className="mb-6">
+
+  <label className="block mb-2 font-semibold">
+    Seleccionar Widget
+  </label>
+
+  <select
+    value={selectedWidget?.id || ""}
+    onChange={(e) => {
+
+      const widget =
+        widgets.find(
+          (item) =>
+            item.id ===
+            Number(e.target.value)
+        );
+
+      setSelectedWidget(
+        widget || null
+      );
+
+      if (
+        widget &&
+        selectedProject &&
+        setSelectedProject
+      ) {
+
+        setSelectedProject({
+          ...selectedProject,
+          widget: widget.name,
+          widgetImage:
+            widget.image,
+        });
+
+      }
+
+    }}
+    className="w-full rounded-xl bg-slate-800 p-3"
+  >
+
+    <option value="">
+      Elegir widget...
+    </option>
+
+    {widgets.map((widget) => (
+
+      <option
+        key={widget.id}
+        value={widget.id}
+      >
+        {widget.name}
+      </option>
+
+    ))}
+
+  </select>
+
+  {selectedWidget && (
+
+    <div className="mt-4 rounded-xl bg-slate-800 p-4">
+
+      <div className="font-semibold mb-3">
+        Widget seleccionado:
+        {" "}
+        {selectedWidget.name}
+      </div>
+
+      {selectedWidget.image && (
+
+        <img
+          src={selectedWidget.image}
+          alt={selectedWidget.name}
+          className="w-64 rounded-xl border border-slate-700"
+        />
+
+      )}
+
+    </div>
+
+  )}
+
+</div>
+
 
       <div className="grid md:grid-cols-2 gap-6">
 
