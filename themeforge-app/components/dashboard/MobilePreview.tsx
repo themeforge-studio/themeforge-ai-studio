@@ -229,26 +229,48 @@ theme.type === "Theme"
   projectType === "Theme" ||
   projectType === "Icon Pack"
 ) && (
+
   <div className="grid grid-cols-4 gap-3 mb-4">
+
     {Array.from({ length: 12 }).map(
       (_, index) => (
+
         <div
           key={index}
-          className={`h-12 rounded-xl flex items-center justify-center text-lg font-bold ${colors.icon}`}
+          className={`h-12 rounded-xl overflow-hidden flex items-center justify-center ${colors.icon}`}
         >
-          {detectedStyle === "anime"
-            ? "♥"
-            : detectedStyle === "fantasy"
-            ? "✦"
-            : detectedStyle === "gaming"
-            ? "🎮"
-            : detectedStyle === "amoled"
-            ? "⬢"
-            : "◉"}
+
+          {theme.iconPackImage ? (
+
+            <img
+              src={theme.iconPackImage}
+              alt="Icon Pack"
+              className="w-full h-full object-cover"
+            />
+
+          ) : (
+
+            <span className="text-lg font-bold">
+              {detectedStyle === "anime"
+                ? "♥"
+                : detectedStyle === "fantasy"
+                ? "✦"
+                : detectedStyle === "gaming"
+                ? "🎮"
+                : detectedStyle === "amoled"
+                ? "⬢"
+                : "◉"}
+            </span>
+
+          )}
+
         </div>
+
       )
     )}
+
   </div>
+
 )}
 
             {/* Character */}
