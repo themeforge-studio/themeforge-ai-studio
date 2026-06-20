@@ -36,7 +36,11 @@ export default function AssetsPage() {
           </p>
         </Link>
 
-        <div className="bg-slate-800 p-6 rounded-xl">
+        <Link
+          href="/assets/characters"
+          className="bg-slate-800 p-6 rounded-xl block hover:bg-slate-700 transition"
+        >
+
           <h2 className="text-xl font-bold">
             Characters
           </h2>
@@ -44,9 +48,14 @@ export default function AssetsPage() {
           <p className="text-slate-400 mt-2">
             Manage characters
           </p>
-        </div>
 
-        <div className="bg-slate-800 p-6 rounded-xl">
+        </Link>
+
+        <Link
+          href="/assets/widgets"
+          className="bg-slate-800 p-6 rounded-xl block hover:bg-slate-700 transition"
+        >
+
           <h2 className="text-xl font-bold">
             Widgets
           </h2>
@@ -54,7 +63,8 @@ export default function AssetsPage() {
           <p className="text-slate-400 mt-2">
             Manage widgets
           </p>
-        </div>
+
+        </Link>
 
       </div>
 
