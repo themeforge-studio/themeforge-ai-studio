@@ -98,11 +98,11 @@ const [activeTab, setActiveTab] =
   useState("overview");
 
     const currentProject =
-  selectedProject || {
-    name: "Cyber Samurai Theme",
-    style: "cyberpunk",
-    status: "Active",
-  };
+      selectedProject || {
+        name: "Sin proyecto seleccionado",
+        style: "",
+        status: "—",
+      };
 
   return (
     <div className="p-8 text-white">
