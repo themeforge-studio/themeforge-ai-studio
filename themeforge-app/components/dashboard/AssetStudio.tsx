@@ -7,13 +7,22 @@ type AssetStudioProps = {
   generatedTheme?: any;
   selectedProject?: any;
   setSelectedProject?: any;
+
+  projects?: any[] | null;
+  setProjects?: any;
 };
 
 export default function AssetStudio({
   generatedTheme,
   selectedProject,
   setSelectedProject,
+
+  projects,
+  setProjects,
 }: AssetStudioProps) {
+
+  console.log("selectedProject:", selectedProject);
+  console.log("projects:", projects);
 
   const [wallpapers, setWallpapers] =
   useState<any[]>([]);
@@ -26,6 +35,14 @@ const [characters, setCharacters] =
 
 const [widgets, setWidgets] =
   useState<any[]>([]);
+
+console.log(
+  "wallpapers completos:",
+  JSON.stringify(wallpapers, null, 2)
+);
+console.log("iconPacks:", iconPacks);
+console.log("characters:", characters);
+console.log("widgets:", widgets);
 
 const [selectedWallpaper, setSelectedWallpaper] =
   useState<any>(null);
@@ -46,9 +63,19 @@ const [selectedWallpaper, setSelectedWallpaper] =
       "themeforge-wallpapers"
     );
 
+    console.log(
+  "savedWallpapers RAW:",
+  savedWallpapers
+);
+
   const savedIconPacks =
     localStorage.getItem(
       "themeforge-icon-packs"
+    );
+
+    console.log(
+      "savedIconPacks RAW:",
+      savedIconPacks
     );
 
   const savedCharacters =
@@ -65,7 +92,28 @@ const [selectedWallpaper, setSelectedWallpaper] =
     setWallpapers(
       JSON.parse(savedWallpapers)
     );
+
+    console.log(
+  "WALLPAPERS DESDE LOCALSTORAGE:",
+  JSON.parse(savedWallpapers)
+);
+
   }
+
+  if (savedWallpapers) {
+  const parsedWallpapers =
+    JSON.parse(savedWallpapers);
+
+  console.log(
+    "PARSED WALLPAPERS:",
+    parsedWallpapers
+  );
+
+  setWallpapers(
+    parsedWallpapers
+  );
+}
+
 
   if (savedIconPacks) {
     setIconPacks(
@@ -84,25 +132,66 @@ const [selectedWallpaper, setSelectedWallpaper] =
       JSON.parse(savedWidgets)
     );
   }
+  }, []);
 
-}, []);
 
 useEffect(() => {
 
   if (!selectedProject) return;
 
-  const wallpaper =
-    wallpapers.find(
-      (item) =>
-        item.name ===
-        selectedProject.wallpaper
+    console.log(
+      "selectedProject wallpaper:",
+      selectedProject.wallpaper
     );
 
-  if (wallpaper) {
-    setSelectedWallpaper(
-      wallpaper
+    console.log(
+      "wallpapers cargados:",
+      wallpapers
     );
-  }
+
+    const wallpaper =
+  wallpapers.find(
+    (item) => {
+      console.log(
+        "comparando:",
+        item.name,
+        "===",
+        selectedProject.wallpaper,
+        item.name === selectedProject.wallpaper
+      );
+
+      return (
+        item.name ===
+        selectedProject.wallpaper
+      );
+    }
+  );
+
+  console.log(
+    "selectedProject wallpaper:",
+    selectedProject.wallpaper
+  );
+
+  console.log(
+    "wallpapers cargados:",
+    wallpapers
+  );
+
+  if (wallpaper) {
+  console.log(
+    "WALLPAPER ENCONTRADO:",
+    wallpaper
+  );
+
+  console.log(
+  "RESULTADO FIND WALLPAPER:",
+  wallpaper
+);
+
+  setSelectedWallpaper(
+    wallpaper
+  );
+}
 
   const iconPack =
     iconPacks.find(
@@ -181,6 +270,46 @@ const assets = {
     generatedTheme?.widget ||
     fallbackAssets.widget,
 };
+
+console.log("ASSET STUDIO CARGADO");
+console.log("selectedProject:", selectedProject);
+console.log("wallpaper proyecto:", selectedProject?.wallpaper);
+
+console.log(
+  "TIPO wallpaper proyecto:",
+  typeof selectedProject?.wallpaper
+);
+
+console.log(
+  "VALOR wallpaper proyecto:",
+  JSON.stringify(selectedProject?.wallpaper)
+);
+
+wallpapers.forEach((w) => {
+  console.log(
+    "Wallpaper array:",
+    JSON.stringify(w.name)
+  );
+});
+
+const wallpaperEncontrado =
+  wallpapers.find(
+    (w) =>
+      String(w.name).trim() ===
+      String(selectedProject?.wallpaper).trim()
+  );
+
+console.log(
+  "RESULTADO FIND WALLPAPER:",
+  wallpaperEncontrado
+);
+
+console.log("iconPack proyecto:", selectedProject?.iconPack);
+console.log("wallpapers completos:", wallpapers);
+console.log("iconPacks completos:", iconPacks);
+console.log("character proyecto:", selectedProject?.character);
+console.log("widget proyecto:", selectedProject?.widget);
+
   return (
     <div className="rounded-xl border border-slate-800 bg-slate-900 p-6">
       <h2 className="text-2xl font-bold mb-6">
@@ -271,15 +400,20 @@ const assets = {
             Seleccionar Wallpaper
           </label>
 
+          <p className="text-red-500">
+            Wallpaper actual:
+            {selectedProject?.wallpaper}
+          </p>
+
           <select
-            value={selectedWallpaper}
+            value={selectedProject?.wallpaper || ""}
             onChange={(e) => {
 
               const wallpaper =
                 wallpapers.find(
                   (item) =>
-                    item.id ===
-                    Number(e.target.value)
+                    item.name ===
+                    e.target.value
                 );
 
               setSelectedWallpaper(
@@ -295,8 +429,6 @@ const assets = {
                 setSelectedProject({
                   ...selectedProject,
                   wallpaper: wallpaper.name,
-                  wallpaperImage:
-                    wallpaper.image,
                 });
 
               }
@@ -313,7 +445,7 @@ const assets = {
 
               <option
                 key={wallpaper.id}
-                value={wallpaper.id}
+                value={wallpaper.name}
               >
                 {wallpaper.name}
               </option>
@@ -380,9 +512,7 @@ const assets = {
         setSelectedProject({
           ...selectedProject,
           iconPack: iconPack.name,
-          iconPackImage:
-            iconPack.image,
-        });
+          });
 
       }
 
@@ -465,8 +595,7 @@ const assets = {
         setSelectedProject({
           ...selectedProject,
           character: character.name,
-          characterImage:
-            character.image,
+          
         });
 
       }
@@ -548,8 +677,7 @@ const assets = {
         setSelectedProject({
           ...selectedProject,
           widget: widget.name,
-          widgetImage:
-            widget.image,
+          
         });
 
       }

@@ -62,6 +62,11 @@ export default function ProjectsPage() {
         name: "Neon Future",
         type: "Wallpaper Pack",
         status: "Published",
+
+        wallpaper: "Neo Tokyo",
+        iconPack: "Fantasy Gold",
+        character: "Dark Knight",
+        widget: "Clock Widget",
       },
       {
         id: 2,
@@ -155,11 +160,15 @@ const [activeTab, setActiveTab] =
   </>
 )}
 
+console.log("PAGE PROJECTS:", projects);
+
 {activeTab === "assets" && (
   <AssetStudio
   generatedTheme={generatedTheme}
   selectedProject={selectedProject}
   setSelectedProject={setSelectedProject}
+  projects={projects}
+  setProjects={setProjects}
 />
 )}
 

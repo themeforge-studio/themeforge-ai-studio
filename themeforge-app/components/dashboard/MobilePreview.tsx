@@ -15,8 +15,12 @@ export default function MobilePreview({
     style: "cyberpunk",
     wallpaper: "Neo Tokyo Rain",
     widget: "Cyber Clock",
-    character: "Female Cyber Ninja",
+    character: "DARK KNIGHT",
   };
+
+  console.log("selectedProject:", selectedProject);
+console.log("generatedTheme:", generatedTheme);
+console.log("theme:", theme);
 
       const detectedStyle =
 theme.type === "Theme"
@@ -206,9 +210,48 @@ theme.type === "Theme"
     <div
       className={`rounded-xl p-3 text-center mb-4 ${colors.widget}`}
     >
-      <div className="text-sm">
-        {theme.widget}
+      {(
+  projectType === "Theme" ||
+  projectType === "Character Pack"
+) && (
+
+<div className="mt-auto mb-4">
+
+  <div className="rounded-xl bg-black/20 p-3 text-center">
+
+    {theme.characterImage ? (
+
+      <img
+        src={theme.characterImage}
+        alt={theme.character}
+        className="w-20 h-20 mx-auto rounded-full object-cover mb-2"
+      />
+
+    ) : (
+
+      <div className="text-4xl mb-2">
+        {detectedStyle === "anime"
+          ? "👩"
+          : detectedStyle === "fantasy"
+          ? "🧙"
+          : detectedStyle === "gaming"
+          ? "🎮"
+          : detectedStyle === "amoled"
+          ? "🕶️"
+          : "🤖"}
       </div>
+
+    )}
+
+    <div className="text-sm">
+      {theme.character}
+    </div>
+
+  </div>
+
+</div>
+
+)}
 
       <div className="text-xl font-bold">
         12:45
