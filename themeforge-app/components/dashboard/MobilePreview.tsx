@@ -10,6 +10,7 @@ type MobilePreviewProps = {
 const STYLE_CONFIG: Record<string, {
   background: string;
   wallpaper: string;
+  wallpaperImage: string;
   widget: string;
   icon: string;
   iconSymbol: string;
@@ -19,6 +20,7 @@ const STYLE_CONFIG: Record<string, {
   anime: {
     background: "bg-gradient-to-b from-pink-900 to-purple-900",
     wallpaper: "bg-gradient-to-br from-pink-400 to-purple-600",
+    wallpaperImage: "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400&q=80",
     widget: "bg-pink-500/30",
     icon: "bg-pink-400/40",
     iconSymbol: "♥",
@@ -28,6 +30,7 @@ const STYLE_CONFIG: Record<string, {
   fantasy: {
     background: "bg-gradient-to-b from-green-900 to-yellow-900",
     wallpaper: "bg-gradient-to-br from-green-500 to-yellow-700",
+    wallpaperImage: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&q=80",
     widget: "bg-green-500/30",
     icon: "bg-yellow-500/30",
     iconSymbol: "✦",
@@ -37,6 +40,7 @@ const STYLE_CONFIG: Record<string, {
   gaming: {
     background: "bg-gradient-to-b from-green-900 to-black",
     wallpaper: "bg-gradient-to-br from-green-500 to-black",
+    wallpaperImage: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&q=80",
     widget: "bg-green-500/30",
     icon: "bg-green-400/40",
     iconSymbol: "🎮",
@@ -46,6 +50,7 @@ const STYLE_CONFIG: Record<string, {
   amoled: {
     background: "bg-gradient-to-b from-black to-slate-950",
     wallpaper: "bg-gradient-to-br from-black to-slate-800",
+    wallpaperImage: "https://images.unsplash.com/photo-1475274047050-1d0c0975de51?w=400&q=80",
     widget: "bg-slate-700/30",
     icon: "bg-slate-600/40",
     iconSymbol: "⬢",
@@ -55,56 +60,57 @@ const STYLE_CONFIG: Record<string, {
   cyberpunk: {
     background: "bg-gradient-to-b from-cyan-900 to-blue-950",
     wallpaper: "bg-gradient-to-br from-cyan-500 to-blue-800",
+    wallpaperImage: "https://images.unsplash.com/photo-1604076913837-52ab5629fde9?w=400&q=80",
     widget: "bg-cyan-500/30",
     icon: "bg-cyan-400/40",
     iconSymbol: "◉",
     dock: ["🤖", "⚙️", "💾", "🌐"],
     character: "🥷",
   },
-
   lofi: {
     background: "bg-gradient-to-b from-amber-900 to-orange-950",
     wallpaper: "bg-gradient-to-br from-amber-400 to-orange-600",
+    wallpaperImage: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&q=80",
     widget: "bg-amber-500/30",
     icon: "bg-amber-400/40",
     iconSymbol: "♪",
     dock: ["🎵", "📚", "☕", "🌧️"],
     character: "👧",
   },
-
   nature: {
     background: "bg-gradient-to-b from-green-900 to-emerald-950",
     wallpaper: "bg-gradient-to-br from-green-400 to-emerald-700",
+    wallpaperImage: "https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=400&q=80",
     widget: "bg-green-500/30",
     icon: "bg-emerald-400/40",
     iconSymbol: "🌿",
     dock: ["🌲", "🌊", "🌸", "🍃"],
     character: "🧚",
   },
-
   space: {
     background: "bg-gradient-to-b from-indigo-950 to-black",
     wallpaper: "bg-gradient-to-br from-indigo-600 to-purple-900",
+    wallpaperImage: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=400&q=80",
     widget: "bg-indigo-500/30",
     icon: "bg-indigo-400/40",
     iconSymbol: "★",
     dock: ["🚀", "🪐", "⭐", "🌌"],
     character: "👩‍🚀",
   },
-
   horror: {
     background: "bg-gradient-to-b from-red-950 to-black",
     wallpaper: "bg-gradient-to-br from-red-900 to-black",
+    wallpaperImage: "https://images.unsplash.com/photo-1509248961158-e54f6934749c?w=400&q=80",
     widget: "bg-red-900/30",
     icon: "bg-red-800/40",
     iconSymbol: "💀",
     dock: ["🕯️", "🩸", "💀", "🕷️"],
     character: "🧛",
   },
-
   minimal: {
     background: "bg-gradient-to-b from-slate-200 to-white",
     wallpaper: "bg-gradient-to-br from-slate-100 to-slate-300",
+    wallpaperImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80",
     widget: "bg-slate-300/50",
     icon: "bg-slate-200/80",
     iconSymbol: "○",
@@ -184,14 +190,18 @@ export default function MobilePreview({
 
             {/* Wallpaper */}
             {(projectType === "Theme" || projectType === "Wallpaper Pack") && (
-              <div className={`h-36 rounded-xl flex items-center justify-center mb-4 text-center ${config.wallpaper}`}>
-                <div>
-                  <div className="text-sm font-bold text-white">
-                    {theme.wallpaper}
-                  </div>
-                  <div className="text-xs opacity-70 text-white mt-1">
-                    AI Wallpaper Preview
-                  </div>
+              <div className="h-36 rounded-xl overflow-hidden mb-4 relative">
+                <img
+                  src={config.wallpaperImage}
+                  alt={theme.wallpaper}
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.currentTarget.style.display = "none";
+                  }}
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-black/40 p-2 text-center">
+                  <div className="text-xs font-bold text-white">{theme.wallpaper}</div>
+                  <div className="text-xs opacity-70 text-white">AI Wallpaper Preview</div>
                 </div>
               </div>
             )}
