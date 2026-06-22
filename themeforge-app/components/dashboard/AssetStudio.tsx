@@ -160,7 +160,7 @@ export default function AssetStudio({
       </div>
 
       {/* Asset Cards */}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-4 gap-4">
         {visibleCards.map((card) => {
           const label = ASSET_LABELS[card.key];
           return (

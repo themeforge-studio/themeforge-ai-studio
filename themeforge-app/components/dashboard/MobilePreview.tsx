@@ -172,7 +172,16 @@ export default function MobilePreview({
       {/* Phone frame */}
       <div className="flex justify-center">
         <div className={`${DEVICE_SIZE[device]} rounded-[40px] border-4 border-slate-700 bg-black p-3 transition-all duration-300`}>
-          <div className={`w-full h-full rounded-[32px] p-4 flex flex-col ${config.background}`}>
+          <div
+            className="w-full h-full rounded-[32px] p-4 flex flex-col relative overflow-hidden"
+            style={{
+              backgroundImage: `url(${config.wallpaperImage})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          >
+            <div className="absolute inset-0 rounded-[32px] bg-black/40" />
+            <div className="relative z-10 flex flex-col h-full">
 
             {/* Status Bar */}
             <div className="flex justify-between text-xs text-white mb-3">
@@ -217,12 +226,23 @@ export default function MobilePreview({
             {/* Icons */}
             {(projectType === "Theme" || projectType === "Icon Pack") && (
               <div className="grid grid-cols-4 gap-2 mb-4">
-                {Array.from({ length: 12 }).map((_, i) => (
-                  <div
-                    key={i}
-                    className={`h-11 rounded-xl flex items-center justify-center text-lg ${config.icon}`}
-                  >
-                    {config.iconSymbol}
+                {[
+                  { name: "Galería", symbol: config.iconSymbol },
+                  { name: "Cámara", symbol: config.iconSymbol },
+                  { name: "Música", symbol: config.iconSymbol },
+                  { name: "Temas", symbol: config.iconSymbol },
+                  { name: "Ajustes", symbol: config.iconSymbol },
+                  { name: "Calendario", symbol: config.iconSymbol },
+                  { name: "Archivos", symbol: config.iconSymbol },
+                  { name: "Herramientas", symbol: config.iconSymbol },
+                ].map((icon, i) => (
+                  <div key={i} className="flex flex-col items-center gap-1">
+                    <div className={`w-11 h-11 rounded-xl flex items-center justify-center text-lg ${config.icon}`}>
+                      {icon.symbol}
+                    </div>
+                    <span className="text-white text-[8px] opacity-70 text-center leading-tight">
+                      {icon.name}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -255,6 +275,11 @@ export default function MobilePreview({
           </div>
         </div>
       </div>
+      </div>
+      {/* Botón Lanzar Vista Completa */}
+      <button className="w-full mt-4 bg-violet-600 hover:bg-violet-700 transition py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2">
+        🚀 Lanzar Vista Completa
+      </button>
     </div>
   );
 }
