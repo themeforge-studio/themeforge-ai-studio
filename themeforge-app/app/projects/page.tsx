@@ -107,7 +107,10 @@ const [activeTab, setActiveTab] =
   return (
     <div className="p-8 text-white">
 
-      <TopBar />
+      <TopBar
+        selectedProject={selectedProject}
+        generatedTheme={generatedTheme}
+      />
 
 <div className="mb-8">
 
