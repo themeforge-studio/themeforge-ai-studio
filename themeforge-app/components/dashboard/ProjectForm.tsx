@@ -62,35 +62,45 @@ export default function ProjectForm({
 };
 
   const handleCreate = () => {
-    if (!name.trim()) return;
+  if (!name.trim()) return;
 
-    const style = detectStyle(name + " " + description);
-    const data = themeSuggestions[style as keyof typeof themeSuggestions];
+  const style = detectStyle(name + " " + description);
+  const data = themeSuggestions[style as keyof typeof themeSuggestions];
 
-    const newProject = {
-      id: Date.now(),
-      name,
-      type,
-      style,
-      status: "Draft",
-      description,
-      wallpaper: data.wallpapers[0],
-      iconPack: data.iconPacks[0],
-      character: data.characters[0],
-      widget: data.widgets[0],
-    };
+  // ✅ Evita duplicados por nombre
+  const alreadyExists = (projects || []).some(
+    (p: any) => p.name.toLowerCase() === name.trim().toLowerCase()
+  );
 
-    const updated = [...(projects || []), newProject];
-    setProjects?.(updated);
-    setSelectedProject?.(newProject);
-    setCreated(true);
+  if (alreadyExists) {
+    alert(`Ya existe un proyecto llamado "${name}". Usa otro nombre.`);
+    return;
+  }
 
-    setTimeout(() => {
-      setName("");
-      setDescription("");
-      setCreated(false);
-    }, 2000);
+  const newProject = {
+    id: Date.now(),
+    name: name.trim(),
+    type,
+    style,
+    status: "Draft",
+    description,
+    wallpaper: data.wallpapers[0],
+    iconPack: data.iconPacks[0],
+    character: data.characters[0],
+    widget: data.widgets[0],
   };
+
+  const updated = [...(projects || []), newProject];
+  setProjects?.(updated);
+  setSelectedProject?.(newProject);
+  setCreated(true);
+
+  setTimeout(() => {
+    setName("");
+    setDescription("");
+    setCreated(false);
+  }, 2000);
+};
 
   return (
     <div className="rounded-xl border border-slate-800 bg-slate-900 p-6">
