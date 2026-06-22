@@ -152,6 +152,11 @@ const [activeTab, setActiveTab] =
 
 {activeTab === "overview" && (
   <>
+     <AssetStudio
+      generatedTheme={generatedTheme}
+      selectedProject={selectedProject}
+    />
+    
     <ProjectForm
       projects={projects ?? []}
       setProjects={setProjects}

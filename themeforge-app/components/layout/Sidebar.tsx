@@ -22,13 +22,13 @@ export default function Sidebar() {
   const mainItems = [
     { icon: LayoutDashboard, label: "Dashboard", href: "/" },
     { icon: FolderKanban, label: "Proyectos", href: "/projects" },
-    { icon: Bot, label: "Asistente IA", href: "/projects" },
+    { icon: Bot, label: "Asistente IA", href: "/assistant" },
   ];
 
   const toolItems = [
-    { icon: Wand2, label: "Generador de Temas", href: "/projects" },
-    { icon: Image, label: "Estudio de Assets", href: "/projects" },
-    { icon: Smartphone, label: "Vista Previa", href: "/projects", badge: "NEW" },
+    { icon: Wand2, label: "Generador de Temas", href: "/generator" },
+    { icon: Image, label: "Estudio de Assets", href: "/assets" },
+    { icon: Smartphone, label: "Vista Previa", href: "/preview", badge: "NUEVO" },
   ];
 
   const manageItems = [
