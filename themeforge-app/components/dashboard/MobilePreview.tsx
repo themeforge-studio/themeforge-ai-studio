@@ -149,7 +149,7 @@ export default function MobilePreview({
   return (
     <div className="rounded-xl border border-slate-800 bg-slate-900 p-6">
       <h2 className="text-2xl font-bold mb-4">
-        Device Preview
+        Vista Previa del Dispositivo
       </h2>
 
       {/* Device selector */}
@@ -201,7 +201,7 @@ export default function MobilePreview({
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-black/40 p-2 text-center">
                   <div className="text-xs font-bold text-white">{theme.wallpaper}</div>
-                  <div className="text-xs opacity-70 text-white">AI Wallpaper Preview</div>
+                  <div className="text-xs opacity-70 text-white">Vista Previa IA</div>
                 </div>
               </div>
             )}

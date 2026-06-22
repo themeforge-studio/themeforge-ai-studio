@@ -177,7 +177,10 @@ const [activeTab, setActiveTab] =
 )}
 
 {activeTab === "preview" && (
-  <AIAssistant />
+  <AIAssistant
+  selectedProject={selectedProject}
+  generatedTheme={generatedTheme}
+/>
 )}
 
 {activeTab === "export" && (

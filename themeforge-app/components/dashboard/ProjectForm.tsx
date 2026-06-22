@@ -105,13 +105,13 @@ export default function ProjectForm({
   return (
     <div className="rounded-xl border border-slate-800 bg-slate-900 p-6">
       <h2 className="text-2xl font-bold mb-6">
-        Create New Project
+        Crear Nuevo Proyecto
       </h2>
 
       <div className="space-y-4">
         <input
           type="text"
-          placeholder="Project Name (e.g. Dark Samurai Theme)"
+          placeholder="Nombre del Proyecto (e.g. Tema del Samurái Oscuro)"
           value={name}
           onChange={(e) => setName(e.target.value)}
           className="w-full rounded-lg bg-slate-800 p-3 text-white placeholder-slate-500"
@@ -122,14 +122,14 @@ export default function ProjectForm({
           onChange={(e) => setType(e.target.value)}
           className="w-full rounded-lg bg-slate-800 p-3 text-white"
         >
-          <option value="Theme">Theme Pack</option>
-          <option value="Wallpaper Pack">Wallpaper Pack</option>
-          <option value="Icon Pack">Icon Pack</option>
-          <option value="Character Pack">Character Pack</option>
+          <option value="Theme">Pack de Temas</option>
+          <option value="Wallpaper Pack"> Pack de Wallpaper</option>
+          <option value="Icon Pack">Pack de Iconos</option>
+          <option value="Character Pack">Pack de Personajes</option>
         </select>
 
         <textarea
-          placeholder="Describe your idea... (e.g. dark cyberpunk city with neon lights)"
+          placeholder="Describe tu idea... (ej. ciudad cyberpunk oscura con luces de neón)"
           rows={4}
           value={description}
           onChange={(e) => setDescription(e.target.value)}
@@ -141,7 +141,7 @@ export default function ProjectForm({
           disabled={!name.trim()}
           className="w-full bg-violet-600 hover:bg-violet-700 disabled:opacity-40 disabled:cursor-not-allowed px-5 py-3 rounded-lg font-semibold transition"
         >
-          {created ? "✅ Project Created!" : "Create Project"}
+          {created ? "✅ Proyecto Creado!" : "Crear Proyecto"}
         </button>
       </div>
     </div>

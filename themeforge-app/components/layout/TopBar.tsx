@@ -41,7 +41,7 @@ export default function TopBar({
       <div className="flex-1 max-w-xl">
         <input
           type="text"
-          placeholder="Search projects..."
+          placeholder="Buscar proyectos..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="w-full rounded-xl bg-slate-900 border border-slate-800 px-4 py-3 text-sm outline-none focus:border-violet-500 transition text-white placeholder-slate-500"
@@ -56,7 +56,7 @@ export default function TopBar({
           onClick={handleExport}
           className="flex items-center gap-2 bg-violet-600 hover:bg-violet-700 transition px-4 py-3 rounded-xl text-sm font-semibold"
         >
-          {exported ? "✅ Exported!" : "⬇️ Export Theme"}
+          {exported ? "✅ Exportado!" : "⬇️ Exportar Tema"}
         </button>
 
         {/* More options */}

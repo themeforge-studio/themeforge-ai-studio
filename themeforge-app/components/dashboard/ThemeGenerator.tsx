@@ -95,12 +95,12 @@ export default function ThemeGenerator({
   return (
     <div className="rounded-xl border border-slate-800 bg-slate-900 p-6 mt-8">
       <h2 className="text-2xl font-bold mb-6">
-        Theme Generator
+        Generador de Temas
       </h2>
 
       <input
         type="text"
-        placeholder="Type a theme idea..."
+        placeholder="Escribe una idea de tema..."
         value={themeName}
         onChange={(e) =>
           setThemeName(e.target.value)
@@ -112,23 +112,23 @@ export default function ThemeGenerator({
         onClick={generateTheme}
         className="bg-purple-600 hover:bg-purple-700 px-5 py-3 rounded-lg"
       >
-        Generate Theme Concept
+        Generar Concepto de Tema
       </button>
 
       {generatedTheme && (
         <div className="mt-8 border-t border-slate-700 pt-6">
           <h3 className="text-xl font-bold mb-4">
-            Generated Theme
+            Tema Generado
           </h3>
 
           <div className="space-y-3 mb-8">
             <div>
-              <strong>Style:</strong>{" "}
+              <strong>Estilo:</strong>{" "}
               {generatedTheme.style}
             </div>
 
             <div>
-              <strong>Theme:</strong>{" "}
+              <strong>Tema:</strong>{" "}
               {generatedTheme.name}
             </div>
 
@@ -138,12 +138,12 @@ export default function ThemeGenerator({
             </div>
 
             <div>
-              <strong>Icon Pack:</strong>{" "}
+              <strong>Pack de Iconos:</strong>{" "}
               {generatedTheme.iconPack}
             </div>
 
             <div>
-              <strong>Character:</strong>{" "}
+              <strong>Personaje:</strong>{" "}
               {generatedTheme.character}
             </div>
 
@@ -155,13 +155,13 @@ export default function ThemeGenerator({
 
           <div className="border-t border-slate-700 pt-6">
             <h3 className="text-xl font-bold mb-6">
-              AI Generation Prompts
+              Prompts de Generación IA
             </h3>
 
             <div className="space-y-6">
               <div>
                 <div className="font-bold mb-2">
-                  Wallpaper Prompt
+                  Prompt de Wallpaper
                 </div>
 
                 <div className="bg-slate-800 p-4 rounded-lg text-slate-300">
@@ -171,7 +171,7 @@ export default function ThemeGenerator({
 
               <div>
                 <div className="font-bold mb-2">
-                  Icon Pack Prompt
+                  Prompt de Pack de Iconos
                 </div>
 
                 <div className="bg-slate-800 p-4 rounded-lg text-slate-300">
@@ -181,7 +181,7 @@ export default function ThemeGenerator({
 
               <div>
                 <div className="font-bold mb-2">
-                  Character Prompt
+                  Prompt de Personaje
                 </div>
 
                 <div className="bg-slate-800 p-4 rounded-lg text-slate-300">
@@ -191,7 +191,7 @@ export default function ThemeGenerator({
 
               <div>
                 <div className="font-bold mb-2">
-                  Widget Prompt
+                  Prompt de Widget
                 </div>
 
                 <div className="bg-slate-800 p-4 rounded-lg text-slate-300">

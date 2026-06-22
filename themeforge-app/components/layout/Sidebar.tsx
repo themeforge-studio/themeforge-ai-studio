@@ -21,21 +21,21 @@ export default function Sidebar() {
 
   const mainItems = [
     { icon: LayoutDashboard, label: "Dashboard", href: "/" },
-    { icon: FolderKanban, label: "Projects", href: "/projects" },
-    { icon: Bot, label: "AI Assistant", href: "/projects" },
+    { icon: FolderKanban, label: "Proyectos", href: "/projects" },
+    { icon: Bot, label: "Asistente IA", href: "/projects" },
   ];
 
   const toolItems = [
-    { icon: Wand2, label: "Theme Generator", href: "/projects" },
-    { icon: Image, label: "Asset Studio", href: "/projects" },
-    { icon: Smartphone, label: "Device Preview", href: "/projects", badge: "NEW" },
+    { icon: Wand2, label: "Generador de Temas", href: "/projects" },
+    { icon: Image, label: "Estudio de Assets", href: "/projects" },
+    { icon: Smartphone, label: "Vista Previa", href: "/projects", badge: "NEW" },
   ];
 
   const manageItems = [
-  { icon: Download, label: "Exports", href: "/projects" },
-  { icon: Package, label: "Templates", href: "/templates" },
+  { icon: Download, label: "Exportaciones", href: "/projects" },
+  { icon: Package, label: "Plantillas", href: "/templates" },
   { icon: ShoppingBag, label: "Marketplace", href: "/marketplace" },
-  { icon: Settings, label: "Settings", href: "/settings" },
+  { icon: Settings, label: "Configuración", href: "/settings" },
 ];
 
   const NavItem = ({
@@ -88,7 +88,7 @@ export default function Sidebar() {
 
       {/* MAIN */}
       <div className="p-4 space-y-1">
-        <p className="text-xs uppercase text-slate-500 px-4 mb-2 tracking-wider">Main</p>
+        <p className="text-xs uppercase text-slate-500 px-4 mb-2 tracking-wider">Principal</p>
         {mainItems.map((item) => (
           <NavItem key={item.label} {...item} />
         ))}
@@ -96,7 +96,7 @@ export default function Sidebar() {
 
       {/* AI TOOLS */}
       <div className="px-4 space-y-1">
-        <p className="text-xs uppercase text-slate-500 px-4 mb-2 tracking-wider">AI Tools</p>
+        <p className="text-xs uppercase text-slate-500 px-4 mb-2 tracking-wider">Herramientas</p>
         {toolItems.map((item) => (
           <NavItem key={item.label} {...item} />
         ))}
@@ -104,7 +104,7 @@ export default function Sidebar() {
 
       {/* MANAGE */}
       <div className="px-4 mt-4 space-y-1">
-        <p className="text-xs uppercase text-slate-500 px-4 mb-2 tracking-wider">Manage</p>
+        <p className="text-xs uppercase text-slate-500 px-4 mb-2 tracking-wider">Gestionar</p>
         {manageItems.map((item) => (
           <NavItem key={item.label} {...item} />
         ))}
@@ -115,13 +115,13 @@ export default function Sidebar() {
         <div className="rounded-2xl bg-gradient-to-br from-violet-900/50 to-slate-900 border border-violet-500/30 p-4">
           <div className="flex items-center gap-2 mb-2">
             <Sparkles size={16} className="text-violet-400" />
-            <h3 className="font-semibold text-white text-sm">Pro Plan</h3>
+            <h3 className="font-semibold text-white text-sm">Plan Pro</h3>
           </div>
           <p className="text-xs text-slate-400 mb-3">
-            Unlock all features and generate unlimited themes.
+            Desbloquea todas las funciones y genera temas ilimitados.
           </p>
           <button className="w-full bg-violet-600 hover:bg-violet-700 rounded-xl py-2 text-sm font-semibold transition">
-            Upgrade Now
+            Mejorar Ahora
           </button>
         </div>
 
