@@ -12,6 +12,7 @@ import AssetStudio from "../../components/dashboard/AssetStudio";
 import MobilePreview from "../../components/dashboard/MobilePreview";
 import ThemeOverview from "../../components/dashboard/ThemeOverview";
 import ExportPanel from "../../components/dashboard/ExportPanel";
+import Sidebar from "../../components/layout/Sidebar";
 
 export default function ProjectsPage() {
   const [generatedTheme, setGeneratedTheme] =
@@ -105,7 +106,9 @@ const [activeTab, setActiveTab] =
       };
 
   return (
-    <div className="p-8 text-white">
+    <div className="min-h-screen bg-slate-950 text-white flex">
+      <Sidebar />
+      <div className="flex-1 p-8 overflow-y-auto">
 
       <TopBar
         selectedProject={selectedProject}
@@ -127,7 +130,7 @@ const [activeTab, setActiveTab] =
   </div>
 
   <p className="mt-2 text-slate-400">
-    AI-generated {currentProject.style} theme project.
+    Proyecto de tema {currentProject.style} generado con IA.
   </p>
 
 </div>
@@ -143,7 +146,7 @@ const [activeTab, setActiveTab] =
   setActiveTab={setActiveTab}
   selectedProject={selectedProject}
   setSelectedProject={setSelectedProject}
-  projects={projects}
+  projects={projects ?? []}
   setProjects={setProjects}
 />
 
@@ -209,6 +212,7 @@ const [activeTab, setActiveTab] =
 
       </div>
 
+    </div>
     </div>
   );
 }
