@@ -19,14 +19,47 @@ export default function ProjectForm({
   const [description, setDescription] = useState("");
   const [created, setCreated] = useState(false);
 
-  const detectStyle = (text: string) => {
-    const t = text.toLowerCase();
-    if (t.includes("fantasy") || t.includes("dragon") || t.includes("magic")) return "fantasy";
-    if (t.includes("anime") || t.includes("kawaii") || t.includes("otaku")) return "anime";
-    if (t.includes("gaming") || t.includes("gamer") || t.includes("esports")) return "gaming";
-    if (t.includes("amoled") || t.includes("dark") || t.includes("black")) return "amoled";
-    return "cyberpunk";
-  };
+  const detectStyle = (name: string) => {
+  const text = name.toLowerCase();
+
+  if (text.includes("dragon") || text.includes("magic") || text.includes("fantasy") ||
+      text.includes("kingdom") || text.includes("elf") || text.includes("wizard") || text.includes("rpg"))
+    return "fantasy";
+
+  if (text.includes("anime") || text.includes("otaku") || text.includes("kawaii") ||
+      text.includes("naruto") || text.includes("goku") || text.includes("one piece"))
+    return "anime";
+
+  if (text.includes("game") || text.includes("gaming") || text.includes("esports") ||
+      text.includes("minecraft") || text.includes("fortnite") || text.includes("valorant"))
+    return "gaming";
+
+  if (text.includes("amoled") || text.includes("dark") || text.includes("black") ||
+      text.includes("night") || text.includes("shadow"))
+    return "amoled";
+
+  if (text.includes("lofi") || text.includes("cozy") || text.includes("chill") ||
+      text.includes("aesthetic") || text.includes("cafe") || text.includes("study"))
+    return "lofi";
+
+  if (text.includes("nature") || text.includes("forest") || text.includes("mountain") ||
+      text.includes("ocean") || text.includes("plant") || text.includes("earth"))
+    return "nature";
+
+  if (text.includes("space") || text.includes("galaxy") || text.includes("nebula") ||
+      text.includes("cosmos") || text.includes("astronaut") || text.includes("star"))
+    return "space";
+
+  if (text.includes("horror") || text.includes("dark") || text.includes("vampire") ||
+      text.includes("zombie") || text.includes("ghost") || text.includes("haunted"))
+    return "horror";
+
+  if (text.includes("minimal") || text.includes("clean") || text.includes("simple") ||
+      text.includes("white") || text.includes("mono"))
+    return "minimal";
+
+  return "cyberpunk";
+};
 
   const handleCreate = () => {
     if (!name.trim()) return;

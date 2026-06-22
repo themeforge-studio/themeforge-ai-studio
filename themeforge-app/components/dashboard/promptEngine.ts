@@ -72,9 +72,67 @@ export function generatePrompt(
       widget:
         "Ultra minimal AMOLED clock widget, pure black background, elegant thin white typography, hairline separator lines, subtle breathing animation, premium luxury UI design",
     },
+
+    lofi: {
+      wallpaper:
+        "Cozy lofi aesthetic room at night, warm desk lamp, rain on window, city lights blurred outside, books and vinyl records, warm orange tones, illustrated anime style, peaceful atmosphere, 4K wallpaper",
+      iconPack:
+        "Soft pastel lofi icon pack for Android, warm beige and dusty pink tones, hand-drawn vintage aesthetic, consistent 512x512px design system",
+      character:
+        "Lofi study girl, oversized hoodie, headphones, sitting at cozy desk with warm lamp light, anime illustration style, peaceful expression, full body",
+      widget:
+        "Cozy lofi clock widget, warm paper texture, hand-drawn typography, soft vintage aesthetic, radio frequency display",
+    },
+
+    nature: {
+      wallpaper:
+        "Majestic misty mountain range at golden sunrise, ancient pine forest in foreground, ethereal fog between peaks, photorealistic landscape photography style, 4K wallpaper",
+      iconPack:
+        "Organic nature icon pack for Android, leaf and wood textures, earthy green and brown tones, consistent 512x512px design system",
+      character:
+        "Forest nature spirit, flowing green robes made of leaves and vines, glowing amber eyes, ancient forest background, detailed fantasy illustration, full body",
+      widget:
+        "Nature weather widget, wooden frame texture, leaf decorations, organic typography, earthy color palette",
+    },
+
+    space: {
+      wallpaper:
+        "Breathtaking deep space nebula, swirling cosmic clouds in violet and gold, distant galaxies, a lone astronaut floating in foreground, cinematic composition, photorealistic, 4K AMOLED wallpaper",
+      iconPack:
+        "Space galaxy icon pack for Android, dark background with star cluster glow effects, planet and constellation motifs, consistent 512x512px design system",
+      character:
+        "Female space explorer astronaut, sleek white suit with holographic visor, floating in zero gravity, distant planet in background, detailed sci-fi concept art, full body",
+      widget:
+        "Galaxy clock widget, dark space background, star particle effects, orbital ring animation, astronaut mission timer aesthetic",
+    },
+
+    horror: {
+      wallpaper:
+        "Dark gothic haunted mansion on stormy night, lightning strike illuminating twisted bare trees, blood red moon, fog rolling across dead grass, cinematic horror atmosphere, ultra detailed, 4K wallpaper",
+      iconPack:
+        "Dark horror icon pack for Android, cracked black glass texture, blood red accent glow, skull and bone motifs, consistent 512x512px design system",
+      character:
+        "Vampire countess, elegant gothic black dress, pale skin, crimson eyes glowing, dark castle background, detailed horror fantasy illustration, full body",
+      widget:
+        "Cursed clock widget, cracked stone texture, dripping blood red accents, dark gothic typography, flickering candle light effect",
+    },
+
+    minimal: {
+      wallpaper:
+        "Ultra minimalist abstract wallpaper, clean geometric shapes, subtle warm sand gradient, pure elegant composition, Swiss design inspired, premium quality, 4K resolution",
+      iconPack:
+        "Ultra minimal icon pack for Android, hairline stroke icons, monochrome palette, generous negative space, consistent 512x512px design system, Swiss design aesthetic",
+      character:
+        "Abstract minimal geometric figure, clean lines and shapes, monochrome palette, modern art style, elegant composition, design poster aesthetic",
+      widget:
+        "Ultra minimal clock widget, clean white background, thin elegant typography, single accent color line, premium Swiss design aesthetic",
+    },
+
   };
 
   return prompts[
     style as keyof typeof prompts
+
   ];
+  
 }

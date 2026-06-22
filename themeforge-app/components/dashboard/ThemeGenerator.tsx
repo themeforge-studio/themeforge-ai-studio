@@ -13,60 +13,46 @@ export default function ThemeGenerator({
   const [generatedTheme, setGeneratedTheme] = useState<any>(null);
 
   const detectStyle = (name: string) => {
-    const text = name.toLowerCase();
+  const text = name.toLowerCase();
 
-    if (
-      text.includes("dragon") ||
-      text.includes("magic") ||
-      text.includes("fantasy") ||
-      text.includes("kingdom") ||
-      text.includes("elf") ||
-      text.includes("wizard") ||
-      text.includes("rpg")
-    ) {
-      return "fantasy";
-    }
+  if (text.includes("dragon") || text.includes("magic") || text.includes("fantasy") ||
+      text.includes("kingdom") || text.includes("elf") || text.includes("wizard") || text.includes("rpg"))
+    return "fantasy";
 
-    if (
-      text.includes("anime") ||
-      text.includes("otaku") ||
-      text.includes("kawaii") ||
-      text.includes("naruto")||
-      text.includes("goku") ||
-      text.includes("dragon ball") ||
-      text.includes("one piece") ||
-      text.includes("luffy") ||
-      text.includes("bleach") ||
-      text.includes("attack on titan")
-    ) {
-      return "anime";
-    }
+  if (text.includes("anime") || text.includes("otaku") || text.includes("kawaii") ||
+      text.includes("naruto") || text.includes("goku") || text.includes("one piece"))
+    return "anime";
 
-    if (
-      text.includes("game") ||
-      text.includes("gaming") ||
-      text.includes("esports") ||
-      text.includes("minecraft") ||
-      text.includes("fortnite") ||
-      text.includes("valorant") ||
-      text.includes("league of legends") ||
-      text.includes("call of duty")
-    ) {
-      return "gaming";
-    }
+  if (text.includes("game") || text.includes("gaming") || text.includes("esports") ||
+      text.includes("minecraft") || text.includes("fortnite") || text.includes("valorant"))
+    return "gaming";
 
-    if (
-      text.includes("amoled") ||
-      text.includes("dark") ||
-      text.includes("black") ||
-      text.includes("night") ||
-      text.includes("shadow")
-    ) {
-      return "amoled";
-    }
+  if (text.includes("amoled") || text.includes("dark") || text.includes("black") ||
+      text.includes("night") || text.includes("shadow"))
+    return "amoled";
 
-    return "cyberpunk";
-  };
+  if (text.includes("lofi") || text.includes("cozy") || text.includes("chill") ||
+      text.includes("aesthetic") || text.includes("cafe") || text.includes("study"))
+    return "lofi";
+
+  if (text.includes("nature") || text.includes("forest") || text.includes("mountain") ||
+      text.includes("ocean") || text.includes("plant") || text.includes("earth"))
+    return "nature";
+
+  if (text.includes("space") || text.includes("galaxy") || text.includes("nebula") ||
+      text.includes("cosmos") || text.includes("astronaut") || text.includes("star"))
+    return "space";
+
+  if (text.includes("horror") || text.includes("dark") || text.includes("vampire") ||
+      text.includes("zombie") || text.includes("ghost") || text.includes("haunted"))
+    return "horror";
+
+  if (text.includes("minimal") || text.includes("clean") || text.includes("simple") ||
+      text.includes("white") || text.includes("mono"))
+    return "minimal";
+
+  return "cyberpunk";
+};
 
   const generateTheme = () => {
     const style = detectStyle(themeName);
