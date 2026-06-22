@@ -146,6 +146,12 @@ const [activeTab, setActiveTab] =
 
 {activeTab === "overview" && (
   <>
+    <ProjectForm
+      projects={projects ?? []}
+      setProjects={setProjects}
+      setSelectedProject={setSelectedProject}
+    />
+
     <ThemeGenerator
       onGenerate={setGeneratedTheme}
     />
@@ -160,16 +166,11 @@ const [activeTab, setActiveTab] =
   </>
 )}
 
-console.log("PAGE PROJECTS:", projects);
-
 {activeTab === "assets" && (
   <AssetStudio
-  generatedTheme={generatedTheme}
-  selectedProject={selectedProject}
-  setSelectedProject={setSelectedProject}
-  projects={projects}
-  setProjects={setProjects}
-/>
+    generatedTheme={generatedTheme}
+    selectedProject={selectedProject}
+  />
 )}
 
 {activeTab === "preview" && (

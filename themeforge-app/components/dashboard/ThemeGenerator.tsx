@@ -81,14 +81,17 @@ export default function ThemeGenerator({
       "theme"
     );
 
+    const rand = (arr: string[]) =>
+      arr[Math.floor(Math.random() * arr.length)];
+
     const themeData = {
       style,
       name: themeName || "Cyber Samurai Theme",
 
-      wallpaper: data.wallpapers[0],
-      iconPack: data.iconPacks[0],
-      character: data.characters[0],
-      widget: data.widgets[0],
+      wallpaper: rand(data.wallpapers),
+      iconPack: rand(data.iconPacks),
+      character: rand(data.characters),
+      widget: rand(data.widgets),
 
       wallpaperPrompt: prompts.wallpaper,
       iconPrompt: prompts.iconPack,
