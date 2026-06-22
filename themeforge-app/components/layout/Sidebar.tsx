@@ -32,7 +32,7 @@ export default function Sidebar() {
   ];
 
   const manageItems = [
-  { icon: Download, label: "Exportaciones", href: "/projects" },
+  { icon: Download, label: "Exportaciones", href: "/exports" },
   { icon: Package, label: "Plantillas", href: "/templates" },
   { icon: ShoppingBag, label: "Marketplace", href: "/marketplace" },
   { icon: Settings, label: "Configuración", href: "/settings" },

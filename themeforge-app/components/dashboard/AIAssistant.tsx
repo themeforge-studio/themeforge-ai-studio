@@ -71,7 +71,7 @@ export default function AIAssistant({
           🤖
         </div>
         <div>
-          <h2 className="text-xl font-bold">AI Assistant</h2>
+          <h2 className="text-xl font-bold">Asistente IA</h2>
           <p className="text-slate-400 text-sm">Tu compañero creativo. Pide cambios o nuevas ideas.</p>
         </div>
       </div>
