@@ -1,135 +1,68 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import {
-  LayoutDashboard,
-  FolderKanban,
-  Wand2,
-  Image,
-  Smartphone,
-  Download,
-  Settings,
-  Sparkles,
-  Package,
-  ShoppingBag,
-  Bot,
-} from "lucide-react";
+import Sidebar from "../components/layout/Sidebar";
+import StatsCards from "../components/dashboard/StatsCards";
+import ProjectsTable from "../components/dashboard/ProjectsTable";
 
-export default function Sidebar() {
-  const pathname = usePathname();
-
-  const mainItems = [
-    { icon: LayoutDashboard, label: "Dashboard", href: "/" },
-    { icon: FolderKanban, label: "Projects", href: "/projects" },
-    { icon: Bot, label: "AI Assistant", href: "/projects" },
-  ];
-
-  const toolItems = [
-    { icon: Wand2, label: "Theme Generator", href: "/projects" },
-    { icon: Image, label: "Asset Studio", href: "/projects" },
-    { icon: Smartphone, label: "Device Preview", href: "/projects", badge: "NEW" },
-  ];
-
-  const manageItems = [
-    { icon: Download, label: "Exports", href: "/projects" },
-    { icon: Package, label: "Templates", href: "/" },
-    { icon: ShoppingBag, label: "Marketplace", href: "/" },
-    { icon: Settings, label: "Settings", href: "/" },
-  ];
-
-  const NavItem = ({
-    icon: Icon,
-    label,
-    href,
-    badge,
-  }: {
-    icon: any;
-    label: string;
-    href: string;
-    badge?: string;
-  }) => {
-    const isActive = pathname === href;
-    return (
-      <Link
-        href={href}
-        className={`flex items-center gap-3 rounded-xl px-4 py-3 transition group ${
-          isActive
-            ? "bg-violet-600/20 text-violet-400 border border-violet-500/30"
-            : "hover:bg-slate-800 text-slate-300 hover:text-white"
-        }`}
-      >
-        <Icon size={18} className={isActive ? "text-violet-400" : "text-slate-400 group-hover:text-white"} />
-        <span className="flex-1 text-sm font-medium">{label}</span>
-        {badge && (
-          <span className="text-xs bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 px-2 py-0.5 rounded-full">
-            {badge}
-          </span>
-        )}
-      </Link>
-    );
-  };
-
+export default function Home() {
   return (
-    <aside className="w-72 min-h-screen bg-slate-950 border-r border-slate-800 flex flex-col">
-
-      {/* Logo */}
-      <div className="p-6 border-b border-slate-800">
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-violet-600 flex items-center justify-center">
-            <Sparkles size={18} className="text-white" />
-          </div>
+    <main className="min-h-screen bg-slate-950 text-white flex">
+      <Sidebar />
+      <section className="flex-1 p-8 overflow-y-auto">
+        <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-lg font-bold text-white">ThemeForge</h1>
-            <p className="text-xs text-slate-400">AI Studio</p>
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">
+              ThemeForge AI Studio
+            </h1>
+            <p className="mt-2 text-slate-400">
+              Tu estudio creativo de temas con IA
+            </p>
           </div>
-        </div>
-      </div>
-
-      {/* MAIN */}
-      <div className="p-4 space-y-1">
-        <p className="text-xs uppercase text-slate-500 px-4 mb-2 tracking-wider">Main</p>
-        {mainItems.map((item) => (
-          <NavItem key={item.label} {...item} />
-        ))}
-      </div>
-
-      {/* AI TOOLS */}
-      <div className="px-4 space-y-1">
-        <p className="text-xs uppercase text-slate-500 px-4 mb-2 tracking-wider">AI Tools</p>
-        {toolItems.map((item) => (
-          <NavItem key={item.label} {...item} />
-        ))}
-      </div>
-
-      {/* MANAGE */}
-      <div className="px-4 mt-4 space-y-1">
-        <p className="text-xs uppercase text-slate-500 px-4 mb-2 tracking-wider">Manage</p>
-        {manageItems.map((item) => (
-          <NavItem key={item.label} {...item} />
-        ))}
-      </div>
-
-      {/* PRO PLAN */}
-      <div className="mt-auto p-4">
-        <div className="rounded-2xl bg-gradient-to-br from-violet-900/50 to-slate-900 border border-violet-500/30 p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <Sparkles size={16} className="text-violet-400" />
-            <h3 className="font-semibold text-white text-sm">Pro Plan</h3>
-          </div>
-          <p className="text-xs text-slate-400 mb-3">
-            Unlock all features and generate unlimited themes.
-          </p>
-          <button className="w-full bg-violet-600 hover:bg-violet-700 rounded-xl py-2 text-sm font-semibold transition">
-            Upgrade Now
+          <button
+            onClick={() => window.location.href = "/projects"}
+            className="bg-violet-600 hover:bg-violet-700 transition px-5 py-3 rounded-xl font-semibold text-sm"
+          >
+            + Nuevo Proyecto
           </button>
         </div>
-
-        <p className="text-center text-xs text-slate-600 mt-4">
-          © 2025 ThemeForge AI Studio
-        </p>
-      </div>
-
-    </aside>
+        <StatsCards />
+        <div className="mt-8 grid grid-cols-3 gap-4">
+          <button
+            onClick={() => window.location.href = "/projects"}
+            className="rounded-xl border border-slate-800 bg-slate-900 hover:border-violet-500/50 hover:bg-slate-800 transition p-5 text-left"
+          >
+            <div className="text-3xl mb-3">🎨</div>
+            <h3 className="font-bold mb-1">Crear Tema</h3>
+            <p className="text-sm text-slate-400">
+              Genera un tema completo con wallpaper, iconos y personaje
+            </p>
+          </button>
+          <button
+            onClick={() => window.location.href = "/projects"}
+            className="rounded-xl border border-slate-800 bg-slate-900 hover:border-cyan-500/50 hover:bg-slate-800 transition p-5 text-left"
+          >
+            <div className="text-3xl mb-3">🖼️</div>
+            <h3 className="font-bold mb-1">Wallpapers</h3>
+            <p className="text-sm text-slate-400">
+              Explora y gestiona tu colección de wallpapers
+            </p>
+          </button>
+          <button
+            onClick={() => window.location.href = "/projects"}
+            className="rounded-xl border border-slate-800 bg-slate-900 hover:border-pink-500/50 hover:bg-slate-800 transition p-5 text-left"
+          >
+            <div className="text-3xl mb-3">📦</div>
+            <h3 className="font-bold mb-1">Icon Packs</h3>
+            <p className="text-sm text-slate-400">
+              Diseña y exporta packs de iconos personalizados
+            </p>
+          </button>
+        </div>
+        <ProjectsTable />
+        <div className="mt-8 text-center text-slate-600 text-sm">
+          ThemeForge AI Studio — Fase 1 ✅
+        </div>
+      </section>
+    </main>
   );
 }
