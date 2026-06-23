@@ -116,6 +116,7 @@ export default function ProjectsPage() {
                   <AssetStudio
                     generatedTheme={generatedTheme}
                     selectedProject={selectedProject}
+                    setSelectedProject={setSelectedProject}
                   />
 
                   <AIAssistant
@@ -147,6 +148,7 @@ export default function ProjectsPage() {
                 <AssetStudio
                   generatedTheme={generatedTheme}
                   selectedProject={selectedProject}
+                  setSelectedProject={setSelectedProject}
                 />
               )}
 
