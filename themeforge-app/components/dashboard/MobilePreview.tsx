@@ -178,6 +178,9 @@ export default function MobilePreview({
 
   const style = (theme.style || "cyberpunk").toLowerCase();
   const config = STYLE_CONFIG[style] || STYLE_CONFIG.cyberpunk;
+
+  // Usa imagen subida por el usuario si existe
+  const wallpaperImageUrl = theme.wallpaperImage || config.wallpaperImage;
   const projectType = theme.type || "Theme";
 
   const icons = [
@@ -206,7 +209,7 @@ export default function MobilePreview({
               <div
                 className="w-full h-full rounded-[40px] p-5 flex flex-col relative overflow-hidden"
                 style={{
-                  backgroundImage: `url(${config.wallpaperImage})`,
+                  backgroundImage: `url(${wallpaperImageUrl})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                 }}
@@ -273,7 +276,7 @@ export default function MobilePreview({
           <div
             className="w-full h-full rounded-[32px] p-3 flex flex-col relative overflow-hidden"
             style={{
-              backgroundImage: `url(${config.wallpaperImage})`,
+              backgroundImage: `url(${wallpaperImageUrl})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
@@ -297,7 +300,7 @@ export default function MobilePreview({
               {(projectType === "Theme" || projectType === "Wallpaper Pack") && (
                 <div className="h-24 rounded-xl overflow-hidden mb-2 relative flex-shrink-0">
                   <img
-                    src={config.wallpaperImage}
+                    src={wallpaperImageUrl}
                     alt={theme.wallpaper}
                     className="w-full h-full object-cover"
                   />
@@ -367,7 +370,7 @@ export default function MobilePreview({
     <div
       className="relative w-[290px] h-[600px] rounded-[40px] border-4 border-slate-700 bg-black overflow-hidden"
       style={{
-        backgroundImage: `url(${config.wallpaperImage})`,
+        backgroundImage: `url(${wallpaperImageUrl})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -450,7 +453,7 @@ export default function MobilePreview({
           </p>
           <div className={`relative ${XIAOMI_BACK_SCREEN[device].width} ${XIAOMI_BACK_SCREEN[device].height} bg-slate-800 rounded-2xl border-4 border-slate-600 overflow-hidden flex items-center justify-center`}
       style={{
-        backgroundImage: `url(${config.wallpaperImage})`,
+        backgroundImage: `url(${wallpaperImageUrl})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
