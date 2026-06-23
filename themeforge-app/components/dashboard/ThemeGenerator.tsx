@@ -26,7 +26,7 @@ export default function ThemeGenerator({
     if (text.includes("game") || text.includes("gaming") || text.includes("esports") ||
         text.includes("minecraft") || text.includes("fortnite") || text.includes("valorant"))
       return "gaming";
-    if (text.includes("amoled") || text.includes("dark") || text.includes("black") ||
+    if (text.includes("amoled") || text.includes("black") ||
         text.includes("night") || text.includes("shadow"))
       return "amoled";
     if (text.includes("lofi") || text.includes("cozy") || text.includes("chill") ||

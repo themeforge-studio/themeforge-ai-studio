@@ -34,9 +34,9 @@ export default function ProjectForm({
       text.includes("minecraft") || text.includes("fortnite") || text.includes("valorant"))
     return "gaming";
 
-  if (text.includes("amoled") || text.includes("dark") || text.includes("black") ||
-      text.includes("night") || text.includes("shadow"))
-    return "amoled";
+  if (text.includes("amoled") || text.includes("black") ||
+    text.includes("night") || text.includes("shadow"))
+  return "amoled";
 
   if (text.includes("lofi") || text.includes("cozy") || text.includes("chill") ||
       text.includes("aesthetic") || text.includes("cafe") || text.includes("study"))
@@ -50,9 +50,9 @@ export default function ProjectForm({
       text.includes("cosmos") || text.includes("astronaut") || text.includes("star"))
     return "space";
 
-  if (text.includes("horror") || text.includes("dark") || text.includes("vampire") ||
-      text.includes("zombie") || text.includes("ghost") || text.includes("haunted"))
-    return "horror";
+  if (text.includes("horror") || text.includes("vampire") ||
+    text.includes("zombie") || text.includes("ghost") || text.includes("haunted"))
+  return "horror";
 
   if (text.includes("minimal") || text.includes("clean") || text.includes("simple") ||
       text.includes("white") || text.includes("mono"))
