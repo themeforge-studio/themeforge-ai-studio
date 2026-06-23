@@ -198,4 +198,85 @@ export const themeSuggestions = {
       "Dot Timer", "Line Battery", "Swiss Clock",
     ],
   },
+
+  comics: {
+    wallpapers: [
+      "Gotham City Night", "Marvel Universe", "Comic Panel City",
+      "Hero HQ", "Villain Lair", "Comic Book Splash",
+      "Super City Skyline", "Action Panel", "Epic Battle Scene",
+    ],
+    iconPacks: [
+      "Comic Bold Icons", "Hero Shield Pack", "Pop Art Icons",
+      "Halftone Pack", "Comic Outline Icons", "Action Icons",
+    ],
+    characters: [
+      "Dark Knight", "Spider Hero", "Comic Villain",
+      "Super Heroine", "Masked Vigilante", "Comic Sidekick",
+    ],
+    widgets: [
+      "Comic Clock", "Hero Signal Widget", "Action Timer",
+      "Power Level Monitor", "Mission Calendar", "Comic Battery",
+    ],
+  },
+
+  kpop: {
+    wallpapers: [
+      "Neon Seoul Stage", "K-pop Concert Lights", "Idol Aesthetic",
+      "Seoul City Night", "Stage Spotlight", "Fan Art City",
+      "Pastel K-pop", "Holographic Stage", "K-drama Rooftop",
+    ],
+    iconPacks: [
+      "K-pop Pastel Icons", "Idol Pack", "Seoul Minimal Icons",
+      "Holographic Icons", "Star Fan Icons", "Cute Korea Pack",
+    ],
+    characters: [
+      "K-pop Idol", "Seoul Dancer", "Stage Performer",
+      "Virtual K-pop Star", "Cute Mascot", "Neon Idol",
+    ],
+    widgets: [
+      "Seoul Clock", "Fandom Tracker", "Concert Timer",
+      "Idol Calendar", "K-pop Radio Widget", "Stage Battery",
+    ],
+  },
+
+  retro: {
+    wallpapers: [
+      "80s Synthwave Grid", "Retro Arcade", "VHS Glitch City",
+      "Neon 80s Palm", "Pixel Sunset", "Retro Computer",
+      "Cassette Aesthetic", "Vintage Poster", "Old School Arcade",
+    ],
+    iconPacks: [
+      "Pixel Retro Icons", "8-bit Pack", "VHS Icons",
+      "Arcade Icons", "Synthwave Pack", "Retro Neon Icons",
+    ],
+    characters: [
+      "Synthwave Rider", "Pixel Hero", "Arcade Champion",
+      "80s Robot", "Retro Gamer Girl", "VHS Ghost",
+    ],
+    widgets: [
+      "Retro Digital Clock", "VHS Timer", "Pixel Battery",
+      "Arcade Score Widget", "80s Calendar", "Synthwave Weather",
+    ],
+  },
+
+  streetwear: {
+    wallpapers: [
+      "Urban Graffiti Wall", "Street Art City", "Hip Hop Skyline",
+      "Skate Park Night", "Urban Fashion District", "Graffiti Tunnel",
+      "Street Culture", "Urban Jungle", "City Walls",
+    ],
+    iconPacks: [
+      "Street Art Icons", "Urban Bold Pack", "Graffiti Icons",
+      "Hip Hop Icons", "Skate Icons", "Street Culture Pack",
+    ],
+    characters: [
+      "Street Artist", "Urban Skater", "Hip Hop MC",
+      "Graffiti Writer", "Street Dancer", "Urban Explorer",
+    ],
+    widgets: [
+      "Street Clock", "Urban Beat Widget", "Skate Timer",
+      "Hip Hop Calendar", "City Weather", "Street Battery",
+    ],
+  },
+
 };

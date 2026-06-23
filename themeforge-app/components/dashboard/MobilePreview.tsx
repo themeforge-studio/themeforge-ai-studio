@@ -106,6 +106,42 @@ const STYLE_CONFIG: Record<string, {
     dock: ["◻️", "◼️", "▪️", "▫️"],
     character: "🤍",
   },
+  comics: {
+    background: "bg-gradient-to-b from-yellow-900 to-red-950",
+    wallpaperImage: "https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?w=400&q=80",
+    widget: "bg-yellow-500/30",
+    icon: "bg-yellow-400/40",
+    iconSymbol: "⚡",
+    dock: ["🦇", "🕷️", "🛡️", "⚡"],
+    character: "🦸",
+  },
+  kpop: {
+    background: "bg-gradient-to-b from-pink-800 to-purple-950",
+    wallpaperImage: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&q=80",
+    widget: "bg-pink-400/30",
+    icon: "bg-pink-300/40",
+    iconSymbol: "⭐",
+    dock: ["🎤", "💜", "⭐", "🎵"],
+    character: "🌟",
+  },
+  retro: {
+    background: "bg-gradient-to-b from-purple-900 to-pink-950",
+    wallpaperImage: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&q=80",
+    widget: "bg-purple-500/30",
+    icon: "bg-pink-400/40",
+    iconSymbol: "◈",
+    dock: ["🕹️", "📼", "💾", "🎮"],
+    character: "🤖",
+  },
+  streetwear: {
+    background: "bg-gradient-to-b from-gray-900 to-slate-950",
+    wallpaperImage: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=400&q=80",
+    widget: "bg-gray-500/30",
+    icon: "bg-gray-400/40",
+    iconSymbol: "✦",
+    dock: ["🎨", "🛹", "🎧", "✌️"],
+    character: "🎨",
+  },
 };
 
 type DeviceType = "Android" | "iPhone" | "Tablet" | "Xiaomi Pro" | "Xiaomi Pro Max" | "Samsung";

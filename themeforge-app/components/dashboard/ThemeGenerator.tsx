@@ -44,6 +44,25 @@ export default function ThemeGenerator({
     if (text.includes("minimal") || text.includes("clean") || text.includes("simple") ||
         text.includes("white") || text.includes("mono"))
       return "minimal";
+      if (text.includes("batman") || text.includes("comic") || text.includes("marvel") ||
+    text.includes("dc") || text.includes("superman") || text.includes("spider") ||
+    text.includes("superhero") || text.includes("superheroe") || text.includes("heroe"))
+  return "comics";
+
+if (text.includes("kpop") || text.includes("k-pop") || text.includes("bts") ||
+    text.includes("blackpink") || text.includes("idol") || text.includes("seoul") ||
+    text.includes("kdrama") || text.includes("korea"))
+  return "kpop";
+
+if (text.includes("retro") || text.includes("80s") || text.includes("synthwave") ||
+    text.includes("arcade") || text.includes("pixel") || text.includes("vhs") ||
+    text.includes("vintage") || text.includes("cassette"))
+  return "retro";
+
+if (text.includes("street") || text.includes("graffiti") || text.includes("urban") ||
+    text.includes("hiphop") || text.includes("hip hop") || text.includes("skate") ||
+    text.includes("streetwear"))
+  return "streetwear";
     return "cyberpunk";
   };
 

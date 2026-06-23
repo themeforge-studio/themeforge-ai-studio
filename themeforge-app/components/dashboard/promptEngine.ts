@@ -128,6 +128,50 @@ export function generatePrompt(
         "Ultra minimal clock widget, clean white background, thin elegant typography, single accent color line, premium Swiss design aesthetic",
     },
 
+    comics: {
+      wallpaper:
+        "Epic comic book city at night, dramatic shadows and bold colors, superhero silhouette on rooftop, halftone dot pattern overlay, dynamic action composition, vibrant primary colors, comic panel aesthetic, 4K wallpaper",
+      iconPack:
+        "Comic book icon pack for Android, bold black outlines, primary colors red blue yellow, halftone texture, consistent 512x512px design system, pop art aesthetic",
+      character:
+        "Superhero character in dynamic pose, bold comic book art style, dramatic lighting, cape flowing in wind, city background, detailed illustration, full body, vibrant colors",
+      widget:
+        "Comic book clock widget, bold typography with action lines, primary colors, halftone pattern background, hero signal aesthetic",
+    },
+
+    kpop: {
+      wallpaper:
+        "K-pop concert stage at night, massive LED screens, colorful spotlights, confetti falling, idol silhouette center stage, Seoul aesthetic, vibrant pastel and neon colors, 4K wallpaper",
+      iconPack:
+        "K-pop idol icon pack for Android, holographic pastel colors, star and heart motifs, cute rounded shapes, consistent 512x512px design system, Korean aesthetic",
+      character:
+        "K-pop idol character, stylish stage outfit with LED accents, perfect makeup, microphone pose, concert stage background, detailed illustration, full body, pastel colors",
+      widget:
+        "K-pop clock widget, holographic pastel design, star decorations, cute Korean typography, idol photo frame aesthetic",
+    },
+
+    retro: {
+      wallpaper:
+        "80s synthwave retrowave landscape, neon grid extending to horizon, purple and pink sunset, palm trees silhouette, retro sports car, VHS scanline effect, nostalgic aesthetic, 4K wallpaper",
+      iconPack:
+        "Retro 80s icon pack for Android, neon outlines on dark background, pixel art influence, synthwave color palette pink purple cyan, consistent 512x512px design system",
+      character:
+        "80s synthwave character, leather jacket with neon accents, retro sunglasses, cassette tape accessories, synthwave city background, retro illustration style, full body",
+      widget:
+        "Retro digital clock widget, VHS aesthetic with scanlines, neon digits on dark background, pixel font, 80s computer terminal aesthetic",
+    },
+
+    streetwear: {
+      wallpaper:
+        "Urban street art mural wall, vibrant graffiti tags and characters, city alley at night, warm streetlight glow, skate park elements, hip hop culture aesthetic, photorealistic, 4K wallpaper",
+      iconPack:
+        "Street art icon pack for Android, graffiti-inspired bold outlines, urban color palette, spray paint texture, consistent 512x512px design system, streetwear aesthetic",
+      character:
+        "Street artist character, oversized hoodie with custom graphics, snapback cap, spray can in hand, urban wall background, detailed urban illustration, full body",
+      widget:
+        "Urban street clock widget, graffiti typography, brick wall texture background, spray paint color drips, hip hop culture aesthetic",
+    },
+
   };
 
   return prompts[
