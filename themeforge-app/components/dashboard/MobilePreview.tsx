@@ -142,12 +142,127 @@ export default function MobilePreview({
     type: "Theme",
   };
 
+  const [showFullPreview, setShowFullPreview] = useState(false);
   const style = (theme.style || "cyberpunk").toLowerCase();
   const config = STYLE_CONFIG[style] || STYLE_CONFIG.cyberpunk;
   const projectType = theme.type || "Theme";
 
+  {showFullPreview && (
+  <div
+    className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center"
+    onClick={() => setShowFullPreview(false)}
+  >
+    <div className="text-center">
+      <p className="text-slate-400 text-sm mb-6">Presiona ESC o haz clic para cerrar</p>
+      <div className="w-[380px] h-[780px] rounded-[50px] border-4 border-slate-600 bg-black p-4 mx-auto">
+        <div
+          className="w-full h-full rounded-[40px] p-6 flex flex-col relative overflow-hidden"
+          style={{
+            backgroundImage: `url(${config.wallpaperImage})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          <div className="absolute inset-0 rounded-[40px] bg-black/40" />
+          <div className="relative z-10 flex flex-col h-full">
+            <div className="flex justify-between text-xs text-white mb-4">
+              <span>10:45</span>
+              <span>📶 WiFi 🔋 92%</span>
+            </div>
+            <div className="text-center mb-4">
+              <h3 className="font-bold text-white text-lg">{theme.name}</h3>
+              <p className="text-xs opacity-70 text-white">{theme.style} • {projectType}</p>
+            </div>
+            <div className="text-center text-white text-4xl font-bold mt-4">
+              12:45
+            </div>
+            <div className="text-center text-white text-sm opacity-70 mt-1">
+              {new Date().toLocaleDateString("es-ES", { weekday: "long", day: "numeric", month: "long" })}
+            </div>
+            <div className="grid grid-cols-4 gap-3 mt-8">
+              {[
+                { name: "Galería", symbol: config.iconSymbol },
+                { name: "Cámara", symbol: config.iconSymbol },
+                { name: "Música", symbol: config.iconSymbol },
+                { name: "Temas", symbol: config.iconSymbol },
+                { name: "Ajustes", symbol: config.iconSymbol },
+                { name: "Calendario", symbol: config.iconSymbol },
+                { name: "Archivos", symbol: config.iconSymbol },
+                { name: "Herramientas", symbol: config.iconSymbol },
+              ].map((icon, i) => (
+                <div key={i} className="flex flex-col items-center gap-1">
+                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-2xl ${config.icon}`}>
+                    {icon.symbol}
+                  </div>
+                  <span className="text-white text-[9px] opacity-70">{icon.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+
   return (
     <div className="rounded-xl border border-slate-800 bg-slate-900 p-6">
+
+      {showFullPreview && (
+        <div
+          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center"
+          onClick={() => setShowFullPreview(false)}
+        >
+          <div className="text-center">
+            <p className="text-slate-400 text-sm mb-6">Haz clic para cerrar</p>
+            <div className="w-[380px] h-[780px] rounded-[50px] border-4 border-slate-600 bg-black p-4 mx-auto">
+              <div
+                className="w-full h-full rounded-[40px] p-6 flex flex-col relative overflow-hidden"
+                style={{
+                  backgroundImage: `url(${config.wallpaperImage})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              >
+                <div className="absolute inset-0 rounded-[40px] bg-black/40" />
+                <div className="relative z-10 flex flex-col h-full">
+                  <div className="flex justify-between text-xs text-white mb-4">
+                    <span>10:45</span>
+                    <span>📶 WiFi 🔋 92%</span>
+                  </div>
+                  <div className="text-center mb-4">
+                    <h3 className="font-bold text-white text-lg">{theme.name}</h3>
+                    <p className="text-xs opacity-70 text-white">{theme.style} • {projectType}</p>
+                  </div>
+                  <div className="text-center text-white text-4xl font-bold mt-4">12:45</div>
+                  <div className="text-center text-white text-sm opacity-70 mt-1">
+                    {new Date().toLocaleDateString("es-ES", { weekday: "long", day: "numeric", month: "long" })}
+                  </div>
+                  <div className="grid grid-cols-4 gap-3 mt-8">
+                    {[
+                      { name: "Galería", symbol: config.iconSymbol },
+                      { name: "Cámara", symbol: config.iconSymbol },
+                      { name: "Música", symbol: config.iconSymbol },
+                      { name: "Temas", symbol: config.iconSymbol },
+                      { name: "Ajustes", symbol: config.iconSymbol },
+                      { name: "Calendario", symbol: config.iconSymbol },
+                      { name: "Archivos", symbol: config.iconSymbol },
+                      { name: "Herramientas", symbol: config.iconSymbol },
+                    ].map((icon, i) => (
+                      <div key={i} className="flex flex-col items-center gap-1">
+                        <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-2xl ${config.icon}`}>
+                          {icon.symbol}
+                        </div>
+                        <span className="text-white text-[9px] opacity-70">{icon.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       <h2 className="text-2xl font-bold mb-4">
         Vista Previa del Dispositivo
       </h2>
@@ -182,6 +297,7 @@ export default function MobilePreview({
           >
             <div className="absolute inset-0 rounded-[32px] bg-black/40" />
             <div className="relative z-10 flex flex-col h-full">
+            <div className={`mobile-preview-frame ${DEVICE_SIZE[device]} rounded-[40px] border-4 border-slate-700 bg-black p-3 transition-all duration-300`}></div>
 
             {/* Status Bar */}
             <div className="flex justify-between text-xs text-white mb-3">
@@ -277,7 +393,11 @@ export default function MobilePreview({
       </div>
       </div>
       {/* Botón Lanzar Vista Completa */}
-      <button className="w-full mt-4 bg-violet-600 hover:bg-violet-700 transition py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2">
+      <button
+        onClick={() => setShowFullPreview(true)}
+
+        className="w-full mt-4 bg-violet-600 hover:bg-violet-700 transition py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2"
+      >
         🚀 Lanzar Vista Completa
       </button>
     </div>

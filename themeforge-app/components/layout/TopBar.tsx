@@ -73,7 +73,11 @@ export default function TopBar({
         </button>
 
         {/* Dark mode */}
-        <button className="rounded-xl bg-slate-900 border border-slate-800 px-3 py-3 hover:bg-slate-800 transition">
+        <button
+          onClick={() => document.documentElement.classList.toggle("light")}
+          className="rounded-xl bg-slate-900 border border-slate-800 px-3 py-3 hover:bg-slate-800 transition"
+          title="Cambiar tema"
+        >
           🌙
         </button>
 
