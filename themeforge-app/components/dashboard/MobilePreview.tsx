@@ -108,13 +108,19 @@ const STYLE_CONFIG: Record<string, {
   },
 };
 
-type DeviceType = "Android" | "iPhone" | "Tablet" | "Xiaomi";
+type DeviceType = "Android" | "iPhone" | "Tablet" | "Xiaomi Pro" | "Xiaomi Pro Max";
 
 const DEVICE_SIZE: Record<DeviceType, string> = {
   Android: "w-[290px] h-[600px]",
   iPhone: "w-[270px] h-[580px]",
   Tablet: "w-[380px] h-[520px]",
-  Xiaomi: "w-[290px] h-[600px]",
+  "Xiaomi Pro": "w-[290px] h-[600px]",
+  "Xiaomi Pro Max": "w-[300px] h-[620px]",
+};
+
+const XIAOMI_BACK_SCREEN: Record<string, { width: string; height: string; label: string }> = {
+  "Xiaomi Pro": { width: "w-[280px]", height: "h-[150px]", label: "Pantalla Trasera 2.66\" — Xiaomi 17 Pro" },
+  "Xiaomi Pro Max": { width: "w-[280px]", height: "h-[165px]", label: "Pantalla Trasera 2.86\" — Xiaomi 17 Pro Max" },
 };
 
 export default function MobilePreview({
@@ -209,7 +215,7 @@ export default function MobilePreview({
 
       {/* Device selector */}
       <div className="flex gap-2 mb-6">
-        {(["Android", "iPhone", "Tablet", "Xiaomi"] as DeviceType[]).map((d) => (
+        {(["Android", "iPhone", "Tablet", "Xiaomi Pro", "Xiaomi Pro Max"] as DeviceType[]).map((d) => (
           <button
             key={d}
             onClick={() => setDevice(d)}
@@ -316,12 +322,12 @@ export default function MobilePreview({
       </div>
 
       {/* Xiaomi Preview especial */}
-{device === "Xiaomi" && (
-  <div className="mt-6 flex flex-col items-center">
-    <p className="text-slate-400 text-sm mb-4">
-      📱 Pantalla Trasera — Xiaomi 17 Pro
-    </p>
-    <div className="relative w-[290px] h-[290px] bg-slate-800 rounded-full border-4 border-slate-600 overflow-hidden flex items-center justify-center"
+      {(device === "Xiaomi Pro" || device === "Xiaomi Pro Max") && (
+        <div className="mt-6 flex flex-col items-center">
+          <p className="text-slate-400 text-sm mb-4">
+            📱 {XIAOMI_BACK_SCREEN[device].label}
+          </p>
+          <div className={`relative ${XIAOMI_BACK_SCREEN[device].width} ${XIAOMI_BACK_SCREEN[device].height} bg-slate-800 rounded-2xl border-4 border-slate-600 overflow-hidden flex items-center justify-center`}
       style={{
         backgroundImage: `url(${config.wallpaperImage})`,
         backgroundSize: "cover",
