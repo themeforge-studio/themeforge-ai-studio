@@ -10,33 +10,35 @@ export default function StatsCards() {
     characters: 0,
   });
 
-  useEffect(() => {
+  const loadStats = () => {
     const saved = localStorage.getItem("themeforge-projects");
     const projects = saved ? JSON.parse(saved) : [];
 
-    const wallpapers = projects.filter(
-      (p: any) => p.type === "Wallpaper Pack" || p.wallpaper
-    ).length;
-
-    const iconPacks = projects.filter(
-      (p: any) => p.type === "Icon Pack" || p.iconPack
-    ).length;
-
-    const characters = projects.filter(
-      (p: any) => p.type === "Character Pack" || p.character
-    ).length;
-
     setStats({
       projects: projects.length,
-      wallpapers,
-      iconPacks,
-      characters,
+      wallpapers: projects.filter(
+        (p: any) => p.type === "Wallpaper Pack" || p.wallpaper
+      ).length,
+      iconPacks: projects.filter(
+        (p: any) => p.type === "Icon Pack" || p.iconPack
+      ).length,
+      characters: projects.filter(
+        (p: any) => p.type === "Character Pack" || p.character
+      ).length,
     });
+  };
+
+  useEffect(() => {
+    loadStats();
+
+    // Actualiza cada vez que cambia el localStorage
+    const interval = setInterval(loadStats, 2000);
+    return () => clearInterval(interval);
   }, []);
 
   const cards = [
     {
-      title: "Total Projects",
+      title: "Total Proyectos",
       value: stats.projects,
       icon: "🗂️",
       color: "text-violet-400",
@@ -54,7 +56,7 @@ export default function StatsCards() {
       color: "text-pink-400",
     },
     {
-      title: "Characters",
+      title: "Personajes",
       value: stats.characters,
       icon: "🧙",
       color: "text-amber-400",

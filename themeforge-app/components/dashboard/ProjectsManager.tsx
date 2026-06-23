@@ -223,12 +223,12 @@ const totalCharacters =
     <div className="mt-8">
       <div className="mb-6">
         <h2 className="text-2xl font-bold mb-4">
-          Projects
+          Mis Proyectos
         </h2>
 
   <input
   type="text"
-  placeholder="Search projects..."
+  placeholder="Buscar proyectos..."
   value={searchTerm}
   onChange={(e) =>
     setSearchTerm(e.target.value)
@@ -243,27 +243,17 @@ const totalCharacters =
   }
   className="w-full rounded-lg bg-slate-800 p-3 mb-4"
 >
-  <option value="recent">
-    Most Recent
-  </option>
+  <option value="recent">Más Reciente</option>
+  <option value="oldest">Más Antiguo</option>
+  <option value="az">Nombre A-Z</option>
+  <option value="za">Nombre Z-A</option>
 
-  <option value="oldest">
-    Oldest
-  </option>
-
-  <option value="az">
-    Name A-Z
-  </option>
-
-  <option value="za">
-    Name Z-A
-  </option>
 </select>
 <div className="grid grid-cols-4 gap-4 mb-6">
 
   <div className="rounded-xl bg-slate-800 p-4">
     <p className="text-slate-400 text-sm">
-      Projects
+      Proyectos
     </p>
 
     <h3 className="text-2xl font-bold">
@@ -273,7 +263,7 @@ const totalCharacters =
 
   <div className="rounded-xl bg-slate-800 p-4">
     <p className="text-slate-400 text-sm">
-      Themes
+      Temas
     </p>
 
     <h3 className="text-2xl font-bold">
@@ -293,7 +283,7 @@ const totalCharacters =
 
   <div className="rounded-xl bg-slate-800 p-4">
     <p className="text-slate-400 text-sm">
-      Characters
+      Personajes
     </p>
 
     <h3 className="text-2xl font-bold">
@@ -306,7 +296,7 @@ const totalCharacters =
           
           <input
             type="text"
-            placeholder="Project name..."
+            placeholder="Nombre del proyecto..."
             value={projectName}
             onChange={(e) =>
               setProjectName(e.target.value)
@@ -339,7 +329,7 @@ const totalCharacters =
             onClick={createProject}
             className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg transition"
           >
-            Create
+            Crear
           </button>
         </div>
       </div>
@@ -405,7 +395,7 @@ const totalCharacters =
                     onClick={saveEdit}
                     className="rounded-lg bg-green-600 px-3 py-2 hover:bg-green-700"
                   >
-                    💾 Save
+                    💾 
                   </button>
 
                   <button
@@ -416,7 +406,7 @@ const totalCharacters =
                     }
                     className="rounded-lg bg-slate-700 px-3 py-2"
                   >
-                    Cancel
+                    Cancelar
                   </button>
                 </div>
               </div>
@@ -450,7 +440,7 @@ const totalCharacters =
 
   {project.style && (
     <div>
-      🎨 Style: {project.style}
+      🎨 Estilo: {project.style}
     </div>
   )}
 
@@ -462,13 +452,13 @@ const totalCharacters =
 
   {project.iconPack && (
     <div>
-      📦 Icon Pack: {project.iconPack}
+      📦 Pack de iconos: {project.iconPack}
     </div>
   )}
 
   {project.character && (
     <div>
-      👤 Character: {project.character}
+      👤 Personaje: {project.character}
     </div>
   )}
 
