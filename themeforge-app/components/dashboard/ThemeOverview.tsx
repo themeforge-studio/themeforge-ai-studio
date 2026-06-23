@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 const STYLE_IMAGES: Record<string, string> = {
   cyberpunk: "https://images.unsplash.com/photo-1604076913837-52ab5629fde9?w=800&q=80",
   anime: "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800&q=80",
@@ -29,6 +31,7 @@ export default function ThemeOverview({
   setSelectedProject,
 }: ThemeOverviewProps) {
 
+
   const project = selectedProject || {
     name: "Cyber Samurai Theme",
     style: "cyberpunk",
@@ -37,6 +40,11 @@ export default function ThemeOverview({
 
   const style = (project.style || "cyberpunk").toLowerCase();
   const wallpaperImage = STYLE_IMAGES[style] || STYLE_IMAGES.cyberpunk;
+  const [customWallpaper, setCustomWallpaper] = useState<string | null>(
+    project.wallpaperImage || null
+  );
+  
+  
 
   const assetsCount =
     project.type === "Wallpaper Pack" ? 1
@@ -176,9 +184,9 @@ export default function ThemeOverview({
             </div>
 
             {/* Right - Wallpaper Image */}
-            <div className="rounded-xl overflow-hidden h-64 relative">
+            <div className="rounded-xl overflow-hidden h-64 relative group">
               <img
-                src={wallpaperImage}
+                src={customWallpaper || wallpaperImage}
                 alt={project.name}
                 className="w-full h-full object-cover"
               />
@@ -187,6 +195,30 @@ export default function ThemeOverview({
                 <p className="text-white font-bold">{project.wallpaper || project.name}</p>
                 <p className="text-slate-300 text-xs mt-1">Vista previa del wallpaper principal</p>
               </div>
+              {/* Botón subir imagen */}
+              <label className="absolute top-3 right-3 bg-black/60 hover:bg-violet-600/80 transition cursor-pointer px-3 py-2 rounded-xl text-xs text-white flex items-center gap-2">
+                📁 Subir wallpaper
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (!file) return;
+                    const reader = new FileReader();
+                    reader.onload = (ev) => {
+                      const imageUrl = ev.target?.result as string;
+                      setCustomWallpaper(imageUrl);
+                      if (setSelectedProject) {
+                        const updated = { ...project, wallpaperImage: imageUrl };
+                        setSelectedProject(updated);
+                        localStorage.setItem("themeforge-selected-project", JSON.stringify(updated));
+                      }
+                    };
+                    reader.readAsDataURL(file);
+                  }}
+                />
+              </label>
             </div>
 
           </div>
