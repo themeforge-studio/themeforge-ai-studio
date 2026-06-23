@@ -33,7 +33,7 @@ export default function AIAssistant({
   const projectName = selectedProject?.name || generatedTheme?.name || "your theme";
   const projectStyle = selectedProject?.style || generatedTheme?.style || "cyberpunk";
 
-  const handleSend = async (text: string) => {
+const handleSend = async (text: string) => {
     if (!text.trim()) return;
 
     const userMessage = { role: "user", text };
@@ -41,25 +41,37 @@ export default function AIAssistant({
     setInput("");
     setLoading(true);
 
-    // Simulate AI response for now (Phase 2 will connect real AI)
-    setTimeout(() => {
-      const responses: Record<string, string> = {
-        dark: `Great idea! For "${projectName}" I suggest deepening the blacks and adding dark purple accents. The wallpaper could use more shadow depth and the icons could have a darker glass effect. 🌑`,
-        anime: `Switching to anime style! I'd recommend cherry blossom wallpapers, kawaii-style icons with pastel colors, and an anime character mascot. The widget could have cute rounded fonts. 🌸`,
-        red: `Adding red accents to "${projectName}"! Think crimson neon lights for the wallpaper, red-tinted glass icons, and a dramatic red gradient character backdrop. 🔴`,
-        minimal: `Minimalist version of "${projectName}"! Clean white backgrounds, ultra-thin icon strokes, simple sans-serif widgets, and a monochrome color palette. ○`,
-        cyberpunk: `More cyberpunk vibes! Neon cyan and purple glows, rain-slicked city wallpaper, holographic UI icons, and a cyber ninja character. ⚡`,
-        color: `Making it more colorful! Adding vibrant gradient overlays, rainbow icon pack, multicolor character design, and a dynamic color-shifting widget. 🌈`,
-      };
+    try {
+      const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${process.env.NEXT_PUBLIC_GROQ_API_KEY}`,
+        },
+        body: JSON.stringify({
+          model: "llama-3.1-8b-instant",
+          messages: [
+            {
+              role: "system",
+              content: `Eres un asistente creativo experto en diseño de temas para Android. El usuario trabaja en un proyecto llamado "${projectName}" con estilo "${projectStyle}". Ayuda a mejorar el tema con ideas creativas para wallpapers, iconos, personajes y widgets. Responde siempre en español, de forma concisa y creativa. Máximo 3 oraciones.`,
+            },
+            {
+              role: "user",
+              content: text,
+            },
+          ],
+          max_tokens: 200,
+        }),
+      });
 
-      const key = Object.keys(responses).find((k) => text.toLowerCase().includes(k));
-      const reply = key
-        ? responses[key]
-        : `I understand you want to modify "${projectName}" (${projectStyle} style). I'll apply that creative direction to your theme assets. In Phase 2, I'll be able to regenerate images based on your feedback! 🎨`;
-
+      const data = await response.json();
+      const reply = data.choices?.[0]?.message?.content || "No pude generar una respuesta. Intenta de nuevo.";
       setMessages((prev) => [...prev, { role: "assistant", text: reply }]);
-      setLoading(false);
-    }, 1000);
+    } catch (error) {
+      setMessages((prev) => [...prev, { role: "assistant", text: "Error al conectar con la IA. Verifica tu conexión." }]);
+    }
+
+    setLoading(false);
   };
 
   return (
