@@ -108,7 +108,7 @@ const STYLE_CONFIG: Record<string, {
   },
 };
 
-type DeviceType = "Android" | "iPhone" | "Tablet" | "Xiaomi Pro" | "Xiaomi Pro Max";
+type DeviceType = "Android" | "iPhone" | "Tablet" | "Xiaomi Pro" | "Xiaomi Pro Max" | "Samsung";
 
 const DEVICE_SIZE: Record<DeviceType, string> = {
   Android: "w-[290px] h-[600px]",
@@ -116,6 +116,7 @@ const DEVICE_SIZE: Record<DeviceType, string> = {
   Tablet: "w-[380px] h-[520px]",
   "Xiaomi Pro": "w-[290px] h-[600px]",
   "Xiaomi Pro Max": "w-[300px] h-[620px]",
+  Samsung: "w-[290px] h-[600px]",
 };
 
 const XIAOMI_BACK_SCREEN: Record<string, { width: string; height: string; label: string }> = {
@@ -214,8 +215,8 @@ export default function MobilePreview({
       <h2 className="text-2xl font-bold mb-4">Vista Previa del Dispositivo</h2>
 
       {/* Device selector */}
-      <div className="flex gap-2 mb-6">
-        {(["Android", "iPhone", "Tablet", "Xiaomi Pro", "Xiaomi Pro Max"] as DeviceType[]).map((d) => (
+      <div className="flex flex-wrap gap-2 mb-6">
+        {(["Android", "iPhone", "Tablet", "Samsung", "Xiaomi Pro", "Xiaomi Pro Max"] as DeviceType[]).map((d) => (
           <button
             key={d}
             onClick={() => setDevice(d)}
@@ -320,6 +321,90 @@ export default function MobilePreview({
           </div>
         </div>
       </div>
+
+      {/* Samsung One UI Preview */}
+{device === "Samsung" && (
+  <div className="mt-6 flex flex-col items-center">
+    <p className="text-slate-400 text-sm mb-4">
+      📱 Samsung One UI — Galaxy S25
+    </p>
+    <div
+      className="relative w-[290px] h-[600px] rounded-[40px] border-4 border-slate-700 bg-black overflow-hidden"
+      style={{
+        backgroundImage: `url(${config.wallpaperImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <div className="absolute inset-0 bg-black/20" />
+      <div className="relative z-10 flex flex-col h-full p-4">
+
+        {/* Status Bar Samsung */}
+        <div className="flex justify-between text-xs text-white mb-4">
+          <span className="font-medium">10:45</span>
+          <span>▲ 📶 WiFi 🔋</span>
+        </div>
+
+        {/* Fecha Samsung style */}
+        <div className="mb-4">
+          <div className="text-white text-4xl font-light">10:45</div>
+          <div className="text-white/70 text-sm mt-1">
+            {new Date().toLocaleDateString("es-ES", { weekday: "long", day: "numeric", month: "long" })}
+          </div>
+        </div>
+
+        {/* Widget Samsung */}
+        <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-4 mb-4">
+          <div className="text-white text-sm opacity-70 mb-1">{theme.widget}</div>
+          <div className="text-white text-2xl font-light">24° ☀️</div>
+          <div className="text-white/60 text-xs mt-1">Lima, Perú</div>
+        </div>
+
+        {/* Iconos Samsung One UI */}
+        <div className="grid grid-cols-4 gap-3 mb-4">
+          {[
+            { name: "Teléfono", color: "bg-green-500", symbol: "📞" },
+            { name: "Mensajes", color: "bg-blue-500", symbol: "💬" },
+            { name: "Cámara", color: "bg-gray-700", symbol: "📷" },
+            { name: "Internet", color: "bg-blue-600", symbol: "🌐" },
+            { name: "Galería", color: "bg-purple-500", symbol: "🖼️" },
+            { name: "Ajustes", color: "bg-gray-600", symbol: "⚙️" },
+            { name: "Play", color: "bg-white", symbol: "▶️" },
+            { name: "Temas", color: `${config.icon}`, symbol: config.iconSymbol },
+          ].map((icon, i) => (
+            <div key={i} className="flex flex-col items-center gap-1">
+              <div className={`w-12 h-12 rounded-2xl flex items-center justify-center text-xl ${icon.color}`}>
+                {icon.symbol}
+              </div>
+              <span className="text-white text-[8px] opacity-80">{icon.name}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* Character */}
+        <div className="mt-auto mb-2">
+          <div className="text-center">
+            <div className="text-3xl">{config.character}</div>
+            <div className="text-white text-xs opacity-60">{theme.character}</div>
+          </div>
+        </div>
+
+        {/* Dock Samsung */}
+        <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-3">
+          <div className="grid grid-cols-4 gap-2">
+            {["📞", "💬", "🌐", "📷"].map((icon, i) => (
+              <div key={i} className="w-10 h-10 rounded-2xl bg-white/20 flex items-center justify-center text-lg mx-auto">
+                {icon}
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <p className="text-slate-500 text-xs mt-3">Samsung Galaxy S25 — One UI 7</p>
+  </div>
+)}
 
       {/* Xiaomi Preview especial */}
       {(device === "Xiaomi Pro" || device === "Xiaomi Pro Max") && (
