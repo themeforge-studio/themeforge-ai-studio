@@ -14,8 +14,11 @@ export default function TopBar({
   const [search, setSearch] = useState("");
   const [exported, setExported] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [showResults, setShowResults] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const [notifications, setNotifications] = useState([
+    
   {
     id: 1,
     icon: "🎨",
@@ -66,14 +69,47 @@ export default function TopBar({
     <div className="flex items-center justify-between mb-8 gap-4">
 
       {/* Search */}
-      <div className="flex-1 max-w-xl">
+      <div className="flex-1 max-w-xl relative">
         <input
           type="text"
           placeholder="Buscar proyectos..."
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            // Busca en tiempo real
+            const projects = JSON.parse(localStorage.getItem("themeforge-projects") || "[]");
+            const filtered = projects.filter((p: any) =>
+              p.name.toLowerCase().includes(e.target.value.toLowerCase())
+            );
+            setSearchResults(filtered);
+            setShowResults(e.target.value.length > 0);
+          }}
+          onBlur={() => setTimeout(() => setShowResults(false), 200)}
           className="w-full rounded-xl bg-slate-900 border border-slate-800 px-4 py-3 text-sm outline-none focus:border-violet-500 transition text-white placeholder-slate-500"
         />
+
+        {showResults && searchResults.length > 0 && (
+          <div className="absolute top-14 left-0 right-0 bg-slate-900 border border-slate-700 rounded-xl shadow-xl z-50 overflow-hidden">
+            {searchResults.map((project: any) => (
+              <button
+                key={project.id}
+                onClick={() => {
+                  localStorage.setItem("themeforge-selected-project", JSON.stringify(project));
+                  window.location.href = "/projects";
+                  setShowResults(false);
+                  setSearch("");
+                }}
+                className="w-full text-left px-4 py-3 hover:bg-slate-800 transition flex items-center gap-3 border-b border-slate-800 last:border-0"
+              >
+                <span className="text-lg">🎨</span>
+                <div>
+                  <p className="text-sm font-medium text-white">{project.name}</p>
+                  <p className="text-xs text-slate-400">{project.type} • {project.style || "sin estilo"}</p>
+                </div>
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Actions */}
