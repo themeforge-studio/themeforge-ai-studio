@@ -9,7 +9,6 @@ type MobilePreviewProps = {
 
 const STYLE_CONFIG: Record<string, {
   background: string;
-  wallpaper: string;
   wallpaperImage: string;
   widget: string;
   icon: string;
@@ -19,7 +18,6 @@ const STYLE_CONFIG: Record<string, {
 }> = {
   anime: {
     background: "bg-gradient-to-b from-pink-900 to-purple-900",
-    wallpaper: "bg-gradient-to-br from-pink-400 to-purple-600",
     wallpaperImage: "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400&q=80",
     widget: "bg-pink-500/30",
     icon: "bg-pink-400/40",
@@ -29,7 +27,6 @@ const STYLE_CONFIG: Record<string, {
   },
   fantasy: {
     background: "bg-gradient-to-b from-green-900 to-yellow-900",
-    wallpaper: "bg-gradient-to-br from-green-500 to-yellow-700",
     wallpaperImage: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&q=80",
     widget: "bg-green-500/30",
     icon: "bg-yellow-500/30",
@@ -39,7 +36,6 @@ const STYLE_CONFIG: Record<string, {
   },
   gaming: {
     background: "bg-gradient-to-b from-green-900 to-black",
-    wallpaper: "bg-gradient-to-br from-green-500 to-black",
     wallpaperImage: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&q=80",
     widget: "bg-green-500/30",
     icon: "bg-green-400/40",
@@ -49,7 +45,6 @@ const STYLE_CONFIG: Record<string, {
   },
   amoled: {
     background: "bg-gradient-to-b from-black to-slate-950",
-    wallpaper: "bg-gradient-to-br from-black to-slate-800",
     wallpaperImage: "https://images.unsplash.com/photo-1475274047050-1d0c0975de51?w=400&q=80",
     widget: "bg-slate-700/30",
     icon: "bg-slate-600/40",
@@ -59,7 +54,6 @@ const STYLE_CONFIG: Record<string, {
   },
   cyberpunk: {
     background: "bg-gradient-to-b from-cyan-900 to-blue-950",
-    wallpaper: "bg-gradient-to-br from-cyan-500 to-blue-800",
     wallpaperImage: "https://images.unsplash.com/photo-1604076913837-52ab5629fde9?w=400&q=80",
     widget: "bg-cyan-500/30",
     icon: "bg-cyan-400/40",
@@ -69,7 +63,6 @@ const STYLE_CONFIG: Record<string, {
   },
   lofi: {
     background: "bg-gradient-to-b from-amber-900 to-orange-950",
-    wallpaper: "bg-gradient-to-br from-amber-400 to-orange-600",
     wallpaperImage: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&q=80",
     widget: "bg-amber-500/30",
     icon: "bg-amber-400/40",
@@ -79,7 +72,6 @@ const STYLE_CONFIG: Record<string, {
   },
   nature: {
     background: "bg-gradient-to-b from-green-900 to-emerald-950",
-    wallpaper: "bg-gradient-to-br from-green-400 to-emerald-700",
     wallpaperImage: "https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=400&q=80",
     widget: "bg-green-500/30",
     icon: "bg-emerald-400/40",
@@ -89,7 +81,6 @@ const STYLE_CONFIG: Record<string, {
   },
   space: {
     background: "bg-gradient-to-b from-indigo-950 to-black",
-    wallpaper: "bg-gradient-to-br from-indigo-600 to-purple-900",
     wallpaperImage: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=400&q=80",
     widget: "bg-indigo-500/30",
     icon: "bg-indigo-400/40",
@@ -99,7 +90,6 @@ const STYLE_CONFIG: Record<string, {
   },
   horror: {
     background: "bg-gradient-to-b from-red-950 to-black",
-    wallpaper: "bg-gradient-to-br from-red-900 to-black",
     wallpaperImage: "https://images.unsplash.com/photo-1509248961158-e54f6934749c?w=400&q=80",
     widget: "bg-red-900/30",
     icon: "bg-red-800/40",
@@ -109,7 +99,6 @@ const STYLE_CONFIG: Record<string, {
   },
   minimal: {
     background: "bg-gradient-to-b from-slate-200 to-white",
-    wallpaper: "bg-gradient-to-br from-slate-100 to-slate-300",
     wallpaperImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80",
     widget: "bg-slate-300/50",
     icon: "bg-slate-200/80",
@@ -132,6 +121,7 @@ export default function MobilePreview({
   selectedProject,
 }: MobilePreviewProps) {
   const [device, setDevice] = useState<DeviceType>("Android");
+  const [showFullPreview, setShowFullPreview] = useState(false);
 
   const theme = selectedProject || generatedTheme || {
     name: "Cyber Samurai",
@@ -142,82 +132,35 @@ export default function MobilePreview({
     type: "Theme",
   };
 
-  const [showFullPreview, setShowFullPreview] = useState(false);
   const style = (theme.style || "cyberpunk").toLowerCase();
   const config = STYLE_CONFIG[style] || STYLE_CONFIG.cyberpunk;
   const projectType = theme.type || "Theme";
 
-  {showFullPreview && (
-  <div
-    className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center"
-    onClick={() => setShowFullPreview(false)}
-  >
-    <div className="text-center">
-      <p className="text-slate-400 text-sm mb-6">Presiona ESC o haz clic para cerrar</p>
-      <div className="w-[380px] h-[780px] rounded-[50px] border-4 border-slate-600 bg-black p-4 mx-auto">
-        <div
-          className="w-full h-full rounded-[40px] p-6 flex flex-col relative overflow-hidden"
-          style={{
-            backgroundImage: `url(${config.wallpaperImage})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        >
-          <div className="absolute inset-0 rounded-[40px] bg-black/40" />
-          <div className="relative z-10 flex flex-col h-full">
-            <div className="flex justify-between text-xs text-white mb-4">
-              <span>10:45</span>
-              <span>📶 WiFi 🔋 92%</span>
-            </div>
-            <div className="text-center mb-4">
-              <h3 className="font-bold text-white text-lg">{theme.name}</h3>
-              <p className="text-xs opacity-70 text-white">{theme.style} • {projectType}</p>
-            </div>
-            <div className="text-center text-white text-4xl font-bold mt-4">
-              12:45
-            </div>
-            <div className="text-center text-white text-sm opacity-70 mt-1">
-              {new Date().toLocaleDateString("es-ES", { weekday: "long", day: "numeric", month: "long" })}
-            </div>
-            <div className="grid grid-cols-4 gap-3 mt-8">
-              {[
-                { name: "Galería", symbol: config.iconSymbol },
-                { name: "Cámara", symbol: config.iconSymbol },
-                { name: "Música", symbol: config.iconSymbol },
-                { name: "Temas", symbol: config.iconSymbol },
-                { name: "Ajustes", symbol: config.iconSymbol },
-                { name: "Calendario", symbol: config.iconSymbol },
-                { name: "Archivos", symbol: config.iconSymbol },
-                { name: "Herramientas", symbol: config.iconSymbol },
-              ].map((icon, i) => (
-                <div key={i} className="flex flex-col items-center gap-1">
-                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-2xl ${config.icon}`}>
-                    {icon.symbol}
-                  </div>
-                  <span className="text-white text-[9px] opacity-70">{icon.name}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-)}
+  const icons = [
+    { name: "Galería", symbol: config.iconSymbol },
+    { name: "Cámara", symbol: config.iconSymbol },
+    { name: "Música", symbol: config.iconSymbol },
+    { name: "Temas", symbol: config.iconSymbol },
+    { name: "Ajustes", symbol: config.iconSymbol },
+    { name: "Calendario", symbol: config.iconSymbol },
+    { name: "Archivos", symbol: config.iconSymbol },
+    { name: "Herramientas", symbol: config.iconSymbol },
+  ];
 
   return (
     <div className="rounded-xl border border-slate-800 bg-slate-900 p-6">
 
+      {/* Modal Vista Completa */}
       {showFullPreview && (
         <div
           className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center"
           onClick={() => setShowFullPreview(false)}
         >
           <div className="text-center">
-            <p className="text-slate-400 text-sm mb-6">Haz clic para cerrar</p>
-            <div className="w-[380px] h-[780px] rounded-[50px] border-4 border-slate-600 bg-black p-4 mx-auto">
+            <p className="text-slate-400 text-sm mb-4">Haz clic para cerrar</p>
+            <div className="w-[380px] h-[780px] rounded-[50px] border-4 border-slate-600 bg-black p-4 mx-auto overflow-hidden">
               <div
-                className="w-full h-full rounded-[40px] p-6 flex flex-col relative overflow-hidden"
+                className="w-full h-full rounded-[40px] p-5 flex flex-col relative overflow-hidden"
                 style={{
                   backgroundImage: `url(${config.wallpaperImage})`,
                   backgroundSize: "cover",
@@ -226,29 +169,20 @@ export default function MobilePreview({
               >
                 <div className="absolute inset-0 rounded-[40px] bg-black/40" />
                 <div className="relative z-10 flex flex-col h-full">
-                  <div className="flex justify-between text-xs text-white mb-4">
+                  <div className="flex justify-between text-xs text-white mb-3">
                     <span>10:45</span>
                     <span>📶 WiFi 🔋 92%</span>
                   </div>
-                  <div className="text-center mb-4">
+                  <div className="text-center mb-3">
                     <h3 className="font-bold text-white text-lg">{theme.name}</h3>
                     <p className="text-xs opacity-70 text-white">{theme.style} • {projectType}</p>
                   </div>
-                  <div className="text-center text-white text-4xl font-bold mt-4">12:45</div>
-                  <div className="text-center text-white text-sm opacity-70 mt-1">
+                  <div className="text-center text-white text-4xl font-bold">12:45</div>
+                  <div className="text-center text-white text-sm opacity-70 mt-1 mb-4">
                     {new Date().toLocaleDateString("es-ES", { weekday: "long", day: "numeric", month: "long" })}
                   </div>
-                  <div className="grid grid-cols-4 gap-3 mt-8">
-                    {[
-                      { name: "Galería", symbol: config.iconSymbol },
-                      { name: "Cámara", symbol: config.iconSymbol },
-                      { name: "Música", symbol: config.iconSymbol },
-                      { name: "Temas", symbol: config.iconSymbol },
-                      { name: "Ajustes", symbol: config.iconSymbol },
-                      { name: "Calendario", symbol: config.iconSymbol },
-                      { name: "Archivos", symbol: config.iconSymbol },
-                      { name: "Herramientas", symbol: config.iconSymbol },
-                    ].map((icon, i) => (
+                  <div className="grid grid-cols-4 gap-3">
+                    {icons.map((icon, i) => (
                       <div key={i} className="flex flex-col items-center gap-1">
                         <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-2xl ${config.icon}`}>
                           {icon.symbol}
@@ -257,15 +191,20 @@ export default function MobilePreview({
                       </div>
                     ))}
                   </div>
+                  <div className="mt-auto">
+                    <div className="rounded-xl bg-black/20 p-2 text-center">
+                      <div className="text-2xl">{config.character}</div>
+                      <div className="text-xs text-white">{theme.character}</div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       )}
-      <h2 className="text-2xl font-bold mb-4">
-        Vista Previa del Dispositivo
-      </h2>
+
+      <h2 className="text-2xl font-bold mb-4">Vista Previa del Dispositivo</h2>
 
       {/* Device selector */}
       <div className="flex gap-2 mb-6">
@@ -286,9 +225,9 @@ export default function MobilePreview({
 
       {/* Phone frame */}
       <div className="flex justify-center">
-        <div className={`${DEVICE_SIZE[device]} rounded-[40px] border-4 border-slate-700 bg-black p-3 transition-all duration-300`}>
+        <div className={`${DEVICE_SIZE[device]} rounded-[40px] border-4 border-slate-700 bg-black p-3 transition-all duration-300 overflow-hidden`}>
           <div
-            className="w-full h-full rounded-[32px] p-4 flex flex-col relative overflow-hidden"
+            className="w-full h-full rounded-[32px] p-3 flex flex-col relative overflow-hidden"
             style={{
               backgroundImage: `url(${config.wallpaperImage})`,
               backgroundSize: "cover",
@@ -296,106 +235,88 @@ export default function MobilePreview({
             }}
           >
             <div className="absolute inset-0 rounded-[32px] bg-black/20" />
-            <div className="relative z-10 flex flex-col h-full">
-            <div className={`mobile-preview-frame ${DEVICE_SIZE[device]} rounded-[40px] border-4 border-slate-700 bg-black p-3 transition-all duration-300`}></div>
+            <div className="relative z-10 flex flex-col h-full overflow-hidden">
 
-            {/* Status Bar */}
-            <div className="flex justify-between text-xs text-white mb-3">
-              <span>10:45</span>
-              <span>📶 WiFi 🔋 92%</span>
-            </div>
+              {/* Status Bar */}
+              <div className="flex justify-between text-xs text-white mb-2">
+                <span>10:45</span>
+                <span>📶 WiFi 🔋 92%</span>
+              </div>
 
-            {/* Theme Name */}
-            <div className="text-center mb-3">
-              <h3 className="font-bold text-white">{theme.name}</h3>
-              <p className="text-xs opacity-70 text-white">
-                {theme.style} • {projectType}
-              </p>
-            </div>
+              {/* Theme Name */}
+              <div className="text-center mb-2">
+                <h3 className="font-bold text-white text-sm">{theme.name}</h3>
+                <p className="text-xs opacity-70 text-white">{theme.style} • {projectType}</p>
+              </div>
 
-            {/* Wallpaper */}
-            {(projectType === "Theme" || projectType === "Wallpaper Pack") && (
-              <div className="h-36 rounded-xl overflow-hidden mb-4 relative">
-                <img
-                  src={config.wallpaperImage}
-                  alt={theme.wallpaper}
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    e.currentTarget.style.display = "none";
-                  }}
-                />
-                <div className="absolute bottom-0 left-0 right-0 bg-black/40 p-2 text-center">
-                  <div className="text-xs font-bold text-white">{theme.wallpaper}</div>
-                  <div className="text-xs opacity-70 text-white">Vista Previa IA</div>
+              {/* Wallpaper preview */}
+              {(projectType === "Theme" || projectType === "Wallpaper Pack") && (
+                <div className="h-24 rounded-xl overflow-hidden mb-2 relative flex-shrink-0">
+                  <img
+                    src={config.wallpaperImage}
+                    alt={theme.wallpaper}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-black/40 p-1 text-center">
+                    <div className="text-xs font-bold text-white truncate">{theme.wallpaper}</div>
+                    <div className="text-xs opacity-70 text-white">Vista Previa IA</div>
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
 
-            {/* Widget */}
-            {projectType === "Theme" && (
-              <div className={`rounded-xl p-2 text-center mb-2 ${config.widget}`}>
-                <div className="text-xs text-white opacity-70">{theme.widget}</div>
-                <div className="text-lg font-bold text-white">12:45</div>
-              </div>
-            )}
+              {/* Widget */}
+              {projectType === "Theme" && (
+                <div className={`rounded-xl p-1.5 text-center mb-2 flex-shrink-0 ${config.widget}`}>
+                  <div className="text-xs text-white opacity-70 truncate">{theme.widget}</div>
+                  <div className="text-base font-bold text-white">12:45</div>
+                </div>
+              )}
 
-            {/* Icons */}
-            {(projectType === "Theme" || projectType === "Icon Pack") && (
-              <div className="grid grid-cols-4 gap-2 mb-4">
-                {[
-                  { name: "Galería", symbol: config.iconSymbol },
-                  { name: "Cámara", symbol: config.iconSymbol },
-                  { name: "Música", symbol: config.iconSymbol },
-                  { name: "Temas", symbol: config.iconSymbol },
-                  { name: "Ajustes", symbol: config.iconSymbol },
-                  { name: "Calendario", symbol: config.iconSymbol },
-                  { name: "Archivos", symbol: config.iconSymbol },
-                  { name: "Herramientas", symbol: config.iconSymbol },
-                ].map((icon, i) => (
-                  <div key={i} className="flex flex-col items-center gap-1">
-                    <div className={`w-11 h-11 rounded-xl flex items-center justify-center text-lg ${config.icon}`}>
-                      {icon.symbol}
+              {/* Icons */}
+              {(projectType === "Theme" || projectType === "Icon Pack") && (
+                <div className="grid grid-cols-4 gap-1.5 mb-2 flex-shrink-0">
+                  {icons.map((icon, i) => (
+                    <div key={i} className="flex flex-col items-center gap-0.5">
+                      <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-sm ${config.icon}`}>
+                        {icon.symbol}
+                      </div>
+                      <span className="text-white text-[7px] opacity-70 text-center leading-tight">
+                        {icon.name}
+                      </span>
                     </div>
-                    <span className="text-white text-[8px] opacity-70 text-center leading-tight">
-                      {icon.name}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            )}
+                  ))}
+                </div>
+              )}
 
-            {/* Character */}
-            {(projectType === "Theme" || projectType === "Character Pack") && (
-            <div className="mt-auto">
-              <div className="rounded-xl bg-black/20 p-2 text-center">
-                <div className="text-2xl">{config.character}</div>
-                <div className="text-xs text-white">{theme.character}</div>
-              </div>
+              {/* Character */}
+              {(projectType === "Theme" || projectType === "Character Pack") && (
+                <div className="mt-auto flex-shrink-0">
+                  <div className="rounded-xl bg-black/20 p-1.5 text-center">
+                    <div className="text-xl">{config.character}</div>
+                    <div className="text-xs text-white truncate">{theme.character}</div>
+                  </div>
+                </div>
+              )}
+
+              {/* Dock */}
+              {projectType === "Theme" && (
+                <div className="grid grid-cols-4 gap-1.5 mt-1 flex-shrink-0">
+                  {config.dock.map((icon, i) => (
+                    <div key={i} className="rounded-xl bg-white/10 p-1.5 text-center text-sm">
+                      {icon}
+                    </div>
+                  ))}
+                </div>
+              )}
+
             </div>
-          )}
-
-            {/* Dock */}
-            {projectType === "Theme" && (
-              <div className="grid grid-cols-4 gap-2">
-                {config.dock.map((icon, i) => (
-                  <div
-                    key={i}
-                    className="rounded-xl bg-white/10 p-2 text-center"
-                  >
-                    {icon}
-                  </div>
-                ))}
-              </div>
-            )}
-
           </div>
         </div>
       </div>
-      </div>
+
       {/* Botón Lanzar Vista Completa */}
       <button
         onClick={() => setShowFullPreview(true)}
-
         className="w-full mt-4 bg-violet-600 hover:bg-violet-700 transition py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2"
       >
         🚀 Lanzar Vista Completa
