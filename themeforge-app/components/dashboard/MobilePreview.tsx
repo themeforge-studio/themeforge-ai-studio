@@ -295,7 +295,7 @@ export default function MobilePreview({
               backgroundPosition: "center",
             }}
           >
-            <div className="absolute inset-0 rounded-[32px] bg-black/40" />
+            <div className="absolute inset-0 rounded-[32px] bg-black/20" />
             <div className="relative z-10 flex flex-col h-full">
             <div className={`mobile-preview-frame ${DEVICE_SIZE[device]} rounded-[40px] border-4 border-slate-700 bg-black p-3 transition-all duration-300`}></div>
 
@@ -333,9 +333,9 @@ export default function MobilePreview({
 
             {/* Widget */}
             {projectType === "Theme" && (
-              <div className={`rounded-xl p-3 text-center mb-4 ${config.widget}`}>
+              <div className={`rounded-xl p-2 text-center mb-2 ${config.widget}`}>
                 <div className="text-xs text-white opacity-70">{theme.widget}</div>
-                <div className="text-xl font-bold text-white">12:45</div>
+                <div className="text-lg font-bold text-white">12:45</div>
               </div>
             )}
 
@@ -366,13 +366,13 @@ export default function MobilePreview({
 
             {/* Character */}
             {(projectType === "Theme" || projectType === "Character Pack") && (
-              <div className="mt-auto mb-3">
-                <div className="rounded-xl bg-black/20 p-3 text-center">
-                  <div className="text-4xl mb-1">{config.character}</div>
-                  <div className="text-xs text-white">{theme.character}</div>
-                </div>
+            <div className="mt-auto">
+              <div className="rounded-xl bg-black/20 p-2 text-center">
+                <div className="text-2xl">{config.character}</div>
+                <div className="text-xs text-white">{theme.character}</div>
               </div>
-            )}
+            </div>
+          )}
 
             {/* Dock */}
             {projectType === "Theme" && (
