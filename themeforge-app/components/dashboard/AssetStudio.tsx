@@ -90,6 +90,7 @@ export default function AssetStudio({
   const [localAssets, setLocalAssets] = useState<Record<string, string>>({});
   const [regenerating, setRegenerating] = useState<string | null>(null);
   const [previewAsset, setPreviewAsset] = useState<any | null>(null);
+  const [uploadedImages, setUploadedImages] = useState<Record<string, string>>({});
 
   const style = (
     selectedProject?.style ||
@@ -266,7 +267,7 @@ const suggestions =
             >
               <div className="h-36 relative overflow-hidden">
                 <img
-                  src={card.image}
+                  src={uploadedImages[card.key] || card.image}
                   alt={card.name}
                   className={`w-full h-full object-cover transition ${isRegenerating ? "opacity-30" : ""}`}
                 />
@@ -283,21 +284,46 @@ const suggestions =
               <div className="p-4">
                 <h3 className="font-bold text-white mb-1 text-sm">{card.name}</h3>
                 <p className="text-xs text-slate-400 mb-3">{label.detail}</p>
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => setPreviewAsset(card)}
-                    className="flex-1 bg-slate-700 hover:bg-slate-600 text-sm py-2 rounded-lg transition"
-                  >
-                    Vista Previa
-                  </button>
-                  <button
-                    onClick={() => handleRegenerate(card.key)}
-                    disabled={isRegenerating}
-                    className="flex-1 bg-violet-600/20 hover:bg-violet-600/40 disabled:opacity-50 text-violet-400 text-sm py-2 rounded-lg border border-violet-500/30 transition"
-                  >
-                    Regenerar
-                  </button>
-                </div>
+                <div className="flex flex-col gap-2">
+  <div className="flex gap-2">
+      <button
+        onClick={() => setPreviewAsset(card)}
+        className="flex-1 bg-slate-700 hover:bg-slate-600 text-sm py-2 rounded-lg transition"
+      >
+        Vista Previa
+      </button>
+      <button
+        onClick={() => handleRegenerate(card.key)}
+        disabled={isRegenerating}
+        className="flex-1 bg-violet-600/20 hover:bg-violet-600/40 disabled:opacity-50 text-violet-400 text-sm py-2 rounded-lg border border-violet-500/30 transition"
+      >
+        Regenerar
+      </button>
+    </div>
+    <label className="w-full bg-cyan-600/20 hover:bg-cyan-600/40 text-cyan-400 text-sm py-2 rounded-lg border border-cyan-500/30 transition cursor-pointer text-center">
+      📁 Subir imagen
+      <input
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={(e) => {
+          const file = e.target.files?.[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = (ev) => {
+            const imageUrl = ev.target?.result as string;
+            setUploadedImages((prev) => ({ ...prev, [card.key]: imageUrl }));
+            if (selectedProject && setSelectedProject) {
+              const updated = { ...selectedProject, [`${card.key}Image`]: imageUrl };
+              setSelectedProject(updated);
+              localStorage.setItem("themeforge-selected-project", JSON.stringify(updated));
+            }
+          };
+          reader.readAsDataURL(file);
+        }}
+      />
+    </label>
+  </div>
               </div>
             </div>
           );
