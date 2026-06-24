@@ -343,7 +343,7 @@ export default function MobilePreview({
                       <img
                         src={theme.characterImage}
                         alt={theme.character}
-                        className="w-16 h-20 object-contain mx-auto"
+                        className="w-40 h-52 object-contain mx-auto"
                       />
                     ) : (
                       <div className="text-xl">{config.character}</div>
