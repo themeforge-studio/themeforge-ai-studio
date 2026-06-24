@@ -339,7 +339,15 @@ export default function MobilePreview({
               {(projectType === "Theme" || projectType === "Character Pack") && (
                 <div className="mt-auto flex-shrink-0">
                   <div className="rounded-xl bg-black/20 p-1.5 text-center">
-                    <div className="text-xl">{config.character}</div>
+                    {theme.characterImage ? (
+                      <img
+                        src={theme.characterImage}
+                        alt={theme.character}
+                        className="w-16 h-20 object-contain mx-auto"
+                      />
+                    ) : (
+                      <div className="text-xl">{config.character}</div>
+                    )}
                     <div className="text-xs text-white truncate">{theme.character}</div>
                   </div>
                 </div>

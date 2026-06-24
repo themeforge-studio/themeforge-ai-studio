@@ -340,9 +340,16 @@ const totalCharacters =
         {filteredProjects.map((project) => (
          <div
             key={project.id}
-            onClick={() =>
-              setSelectedProject?.(project)
-        }
+            onClick={() => {
+            // Lee la versión más actualizada desde LocalStorage
+            const savedProjects = JSON.parse(
+              localStorage.getItem("themeforge-projects") || "[]"
+            );
+            const updatedProject = savedProjects.find(
+              (p: any) => p.id === project.id
+            ) || project;
+            setSelectedProject?.(updatedProject);
+          }}
   className={`rounded-xl border p-5 cursor-pointer transition ${
     selectedProject?.id === project.id
       ? "border-violet-500 bg-slate-900"

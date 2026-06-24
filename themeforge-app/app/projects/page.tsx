@@ -31,7 +31,8 @@ export default function ProjectsPage() {
     localStorage.setItem("themeforge-selected-project", JSON.stringify(selectedProject));
   }, [selectedProject]);
 
-  useEffect(() => {
+useEffect(() => {
+  const loadProjects = () => {
     const savedProjects = localStorage.getItem("themeforge-projects");
     if (savedProjects) {
       setProjects(JSON.parse(savedProjects));
@@ -51,7 +52,12 @@ export default function ProjectsPage() {
         { id: 3, name: "Dark AMOLED", type: "Theme", status: "Published" },
       ]);
     }
-  }, []);
+  };
+
+  loadProjects();
+  window.addEventListener("storage", loadProjects);
+  return () => window.removeEventListener("storage", loadProjects);
+}, []);
 
   useEffect(() => {
     if (projects === null) return;
@@ -137,7 +143,13 @@ export default function ProjectsPage() {
                   <ProjectsManager
                     generatedTheme={generatedTheme}
                     selectedProject={selectedProject}
-                    setSelectedProject={setSelectedProject}
+                    setSelectedProject={(p: any) => {
+                      // Lee siempre la versión más actualizada del LocalStorage
+                      const saved = JSON.parse(localStorage.getItem("themeforge-projects") || "[]");
+                      const updated = saved.find((x: any) => x.id === p.id) || p;
+                      setSelectedProject(updated);
+                      localStorage.setItem("themeforge-selected-project", JSON.stringify(updated));
+                    }}
                     projects={projects}
                     setProjects={setProjects}
                   />

@@ -32,7 +32,6 @@ export default function ThemeOverview({
   setSelectedProject,
 }: ThemeOverviewProps) {
 
-
   const project = selectedProject || {
     name: "Cyber Samurai Theme",
     style: "cyberpunk",
@@ -41,15 +40,16 @@ export default function ThemeOverview({
 
   const style = (project.style || "cyberpunk").toLowerCase();
   const wallpaperImage = STYLE_IMAGES[style] || STYLE_IMAGES.cyberpunk;
+  
   const [customWallpaper, setCustomWallpaper] = useState<string | null>(null);
 
     useEffect(() => {
       if (selectedProject?.wallpaperImage) {
         setCustomWallpaper(selectedProject.wallpaperImage);
+      } else {
+        setCustomWallpaper(null);
       }
     }, [selectedProject]);
-  
-  
 
   const assetsCount =
     project.type === "Wallpaper Pack" ? 1
@@ -84,6 +84,50 @@ export default function ThemeOverview({
     link.download = `${project.name}.json`;
     link.click();
     URL.revokeObjectURL(url);
+  };
+
+  const handleUploadWallpaper = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !selectedProject) return;
+
+    // Muestra preview inmediato
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      setCustomWallpaper(ev.target?.result as string);
+    };
+    reader.readAsDataURL(file);
+
+    // Sube a Supabase
+    const publicUrl = await uploadImage(file, "wallpapers");
+    if (publicUrl) {
+      const updated = { 
+        ...selectedProject, 
+        wallpaperImage: publicUrl 
+      };
+      
+      // Actualiza el proyecto seleccionado
+      setSelectedProject?.(updated);
+      localStorage.setItem(
+        "themeforge-selected-project", 
+        JSON.stringify(updated)
+      );
+      
+      // Actualiza en la lista de proyectos
+      const savedProjects = JSON.parse(
+        localStorage.getItem("themeforge-projects") || "[]"
+      );
+      const updatedProjects = savedProjects.map((p: any) =>
+        p.id === selectedProject.id 
+          ? { ...p, wallpaperImage: publicUrl } 
+          : p
+      );
+      localStorage.setItem(
+        "themeforge-projects", 
+        JSON.stringify(updatedProjects)
+      );
+
+      setCustomWallpaper(publicUrl);
+    }
   };
 
   const tabs = [
@@ -189,7 +233,7 @@ export default function ThemeOverview({
             </div>
 
             {/* Right - Wallpaper Image */}
-            <div className="rounded-xl overflow-hidden h-64 relative group">
+            <div className="rounded-xl overflow-hidden h-64 relative">
               <img
                 src={customWallpaper || wallpaperImage}
                 alt={project.name}
@@ -200,32 +244,13 @@ export default function ThemeOverview({
                 <p className="text-white font-bold">{project.wallpaper || project.name}</p>
                 <p className="text-slate-300 text-xs mt-1">Vista previa del wallpaper principal</p>
               </div>
-              {/* Botón subir imagen */}
               <label className="absolute top-3 right-3 bg-black/60 hover:bg-violet-600/80 transition cursor-pointer px-3 py-2 rounded-xl text-xs text-white flex items-center gap-2">
                 📁 Subir wallpaper
                 <input
                   type="file"
                   accept="image/*"
                   className="hidden"
-                  onChange={async (e) => {
-                    const file = e.target.files?.[0];
-                    if (!file) return;
-
-                    // Muestra preview inmediato
-                    const reader = new FileReader();
-                    reader.onload = (ev) => {
-                      setCustomWallpaper(ev.target?.result as string);
-                    };
-                    reader.readAsDataURL(file);
-
-                    // Sube a Supabase
-                    const publicUrl = await uploadImage(file, "wallpapers");
-                    if (publicUrl && setSelectedProject) {
-                      const updated = { ...project, wallpaperImage: publicUrl };
-                      setSelectedProject(updated);
-                      localStorage.setItem("themeforge-selected-project", JSON.stringify(updated));
-                    }
-                  }}
+                  onChange={handleUploadWallpaper}
                 />
               </label>
             </div>
