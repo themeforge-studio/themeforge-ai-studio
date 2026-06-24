@@ -15,9 +15,8 @@ import {
   ShoppingBag,
   Bot,
   TrendingUp,
+  Ruler,
 } from "lucide-react";
-
-
 
 
 export default function Sidebar() {
@@ -31,10 +30,11 @@ export default function Sidebar() {
 ];
 
   const toolItems = [
-    { icon: Wand2, label: "Generador de Temas", href: "/generator" },
-    { icon: Image, label: "Estudio de Assets", href: "/assets" },
-    { icon: Smartphone, label: "Vista Previa", href: "/preview", badge: "NUEVO" },
-  ];
+  { icon: Wand2, label: "Generador de Temas", href: "/projects" },
+  { icon: Image, label: "Estudio de Assets", href: "/projects" },
+  { icon: Smartphone, label: "Vista Previa", href: "/projects", badge: "NUEVO" },
+  { icon: Ruler, label: "Especificaciones", href: "/specs" },
+];
 
   const manageItems = [
   { icon: Download, label: "Exportaciones", href: "/exports" },
