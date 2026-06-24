@@ -101,20 +101,25 @@ if (text.includes("street") || text.includes("graffiti") || text.includes("urban
           messages: [
             {
               role: "system",
-              content: `Eres un experto creativo en diseño de temas para Android. 
-              El usuario quiere crear un tema llamado "${themeName}" con estilo ${style}.
-              Genera en formato JSON (solo JSON, sin texto extra) con estas claves:
+              content: `Eres un experto creativo en diseño de temas para Android y generación de prompts para IA de imágenes como Leonardo AI, Midjourney y Stable Diffusion.
+              El usuario quiere crear un tema llamado "${themeName}".
+              Tu trabajo es entender exactamente de qué trata ese tema y generar contenido creativo fiel a ese universo.
+              Genera SOLO un JSON válido con estas claves:
               - nombre: nombre creativo del tema en español
               - descripcion: descripción corta y atractiva del tema (máximo 2 oraciones)
-              - historia: historia corta del personaje principal (máximo 2 oraciones)
-              Solo responde con el JSON, sin explicaciones.`,
+              - historia: historia corta del personaje principal fiel al universo del tema (máximo 2 oraciones)
+              - promptWallpaper: prompt en inglés para generar el wallpaper principal en Leonardo AI. Debe ser específico al universo de "${themeName}", ultra detallado, cinematográfico, 4K, para pantalla de celular vertical
+              - promptIconos: prompt en inglés para generar iconos de apps en el estilo de "${themeName}", consistentes, 512x512px
+              - promptPersonaje: prompt en inglés para generar el personaje principal de "${themeName}", full body, detallado
+              - promptWidget: prompt en inglés para generar un widget de reloj en el estilo de "${themeName}"
+              Solo responde con el JSON, sin texto extra ni explicaciones.`,
             },
             {
               role: "user",
-              content: `Genera el tema para: ${themeName}`,
+              content: `Crea el tema completo para: ${themeName}`,
             },
           ],
-          max_tokens: 300,
+          max_tokens: 800,
         }),
       });
 
@@ -128,6 +133,10 @@ if (text.includes("street") || text.includes("graffiti") || text.includes("urban
         aiNombre: aiData.nombre || themeName,
         aiDescripcion: aiData.descripcion || "",
         aiHistoria: aiData.historia || "",
+        wallpaperPrompt: aiData.promptWallpaper || baseTheme.wallpaperPrompt,
+        iconPrompt: aiData.promptIconos || baseTheme.iconPrompt,
+        characterPrompt: aiData.promptPersonaje || baseTheme.characterPrompt,
+        widgetPrompt: aiData.promptWidget || baseTheme.widgetPrompt,
       };
 
       setGeneratedTheme(themeData);
