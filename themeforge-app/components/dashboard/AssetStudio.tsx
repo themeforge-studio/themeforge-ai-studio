@@ -335,9 +335,12 @@ const suggestions =
           // Sube a Supabase
           const publicUrl = await uploadImage(file, card.key);
           if (publicUrl && selectedProject && setSelectedProject) {
-            const updated = { ...selectedProject, [`${card.key}Image`]: publicUrl };
+            const updated = { 
+              ...selectedProject, 
+              [`${card.key}Image`]: publicUrl 
+            };
             setSelectedProject(updated);
-            localStorage.setItem("themeforge-selected-project", JSON.stringify(updated));
+            setUploadedImages((prev) => ({ ...prev, [card.key]: publicUrl }));
           }
         }}
       />

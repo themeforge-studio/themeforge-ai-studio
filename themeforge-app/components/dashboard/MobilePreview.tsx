@@ -336,7 +336,7 @@ export default function MobilePreview({
               )}
 
               {/* Character */}
-              {(projectType === "Theme" || projectType === "Character Pack") && (
+              {(projectType === "Theme" || projectType === "Character Pack" || projectType === "Wallpaper Pack") && (
                 <div className="mt-auto flex-shrink-0">
                   <div className="rounded-xl bg-black/20 p-1.5 text-center">
                     {theme.characterImage ? (
