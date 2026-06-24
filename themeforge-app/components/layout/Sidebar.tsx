@@ -14,16 +14,21 @@ import {
   Package,
   ShoppingBag,
   Bot,
+  TrendingUp,
 } from "lucide-react";
+
+
+
 
 export default function Sidebar() {
   const pathname = usePathname();
 
   const mainItems = [
-    { icon: LayoutDashboard, label: "Dashboard", href: "/" },
-    { icon: FolderKanban, label: "Proyectos", href: "/projects" },
-    { icon: Bot, label: "Asistente IA", href: "/assistant" },
-  ];
+  { icon: LayoutDashboard, label: "Dashboard", href: "/" },
+  { icon: FolderKanban, label: "Proyectos", href: "/projects" },
+  { icon: Bot, label: "Asistente IA", href: "/assistant" },
+  { icon: TrendingUp, label: "Tendencias", href: "/tendencias" },
+];
 
   const toolItems = [
     { icon: Wand2, label: "Generador de Temas", href: "/generator" },
