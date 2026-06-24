@@ -27,42 +27,58 @@ export default function ProjectsPage() {
   }, []);
 
   useEffect(() => {
-    if (!selectedProject) return;
-    localStorage.setItem("themeforge-selected-project", JSON.stringify(selectedProject));
-  }, [selectedProject]);
+    const loadProjects = () => {
+      const savedProjects = localStorage.getItem("themeforge-projects");
+      if (savedProjects) {
+        setProjects(JSON.parse(savedProjects));
+      } else {
+        setProjects([
+          {
+            id: 1,
+            name: "Neon Future",
+            type: "Wallpaper Pack",
+            status: "Published",
+            wallpaper: "Neo Tokyo",
+            iconPack: "Fantasy Gold",
+            character: "Dark Knight",
+            widget: "Clock Widget",
+          },
+          { id: 2, name: "Cyber Icons", type: "Icon Pack", status: "Draft" },
+          { id: 3, name: "Dark AMOLED", type: "Theme", status: "Published" },
+        ]);
+      }
+    };
 
-useEffect(() => {
-  const loadProjects = () => {
-    const savedProjects = localStorage.getItem("themeforge-projects");
-    if (savedProjects) {
-      setProjects(JSON.parse(savedProjects));
-    } else {
-      setProjects([
-        {
-          id: 1,
-          name: "Neon Future",
-          type: "Wallpaper Pack",
-          status: "Published",
-          wallpaper: "Neo Tokyo",
-          iconPack: "Fantasy Gold",
-          character: "Dark Knight",
-          widget: "Clock Widget",
-        },
-        { id: 2, name: "Cyber Icons", type: "Icon Pack", status: "Draft" },
-        { id: 3, name: "Dark AMOLED", type: "Theme", status: "Published" },
-      ]);
-    }
-  };
-
-  loadProjects();
-  window.addEventListener("storage", loadProjects);
-  return () => window.removeEventListener("storage", loadProjects);
-}, []);
+    loadProjects();
+    window.addEventListener("storage", loadProjects);
+    return () => window.removeEventListener("storage", loadProjects);
+  }, []);
 
   useEffect(() => {
     if (projects === null) return;
     localStorage.setItem("themeforge-projects", JSON.stringify(projects));
   }, [projects]);
+
+  // ✅ Función centralizada para actualizar proyecto
+  const handleSetSelectedProject = (project: any) => {
+    setSelectedProject(project);
+    localStorage.setItem("themeforge-selected-project", JSON.stringify(project));
+    
+    // También actualiza en la lista de proyectos
+    setProjects((prev) => {
+      if (!prev) return prev;
+      const updated = prev.map((p) => p.id === project.id ? project : p);
+      localStorage.setItem("themeforge-projects", JSON.stringify(updated));
+      return updated;
+    });
+  };
+
+  // ✅ Cuando se selecciona desde ProjectsManager, lee versión más reciente
+  const handleSelectProject = (project: any) => {
+    const savedProjects = JSON.parse(localStorage.getItem("themeforge-projects") || "[]");
+    const latest = savedProjects.find((p: any) => p.id === project.id) || project;
+    handleSetSelectedProject(latest);
+  };
 
   const currentProject = selectedProject || {
     name: "Sin proyecto seleccionado",
@@ -76,7 +92,6 @@ useEffect(() => {
 
       <div className="flex-1 flex flex-col overflow-hidden">
 
-        {/* TopBar fijo arriba */}
         <div className="sticky top-0 z-10 bg-slate-950 border-b border-slate-800 px-8 py-4">
           <TopBar
             selectedProject={selectedProject}
@@ -84,10 +99,8 @@ useEffect(() => {
           />
         </div>
 
-        {/* Contenido scrolleable */}
         <div className="flex-1 overflow-y-auto px-8 py-6">
 
-          {/* Header del proyecto */}
           <div className="mb-8">
             <div className="flex items-center gap-3">
               <h1 className="text-4xl font-bold">
@@ -102,17 +115,15 @@ useEffect(() => {
             </p>
           </div>
 
-          {/* Grid principal */}
           <div className="grid grid-cols-12 gap-6">
 
-            {/* Workspace */}
             <div className="col-span-8 space-y-6">
 
               <ThemeOverview
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}
                 selectedProject={selectedProject}
-                setSelectedProject={setSelectedProject}
+                setSelectedProject={handleSetSelectedProject}
                 projects={projects ?? []}
                 setProjects={setProjects}
               />
@@ -122,7 +133,7 @@ useEffect(() => {
                   <AssetStudio
                     generatedTheme={generatedTheme}
                     selectedProject={selectedProject}
-                    setSelectedProject={setSelectedProject}
+                    setSelectedProject={handleSetSelectedProject}
                   />
 
                   <AIAssistant
@@ -133,7 +144,7 @@ useEffect(() => {
                   <ProjectForm
                     projects={projects ?? []}
                     setProjects={setProjects}
-                    setSelectedProject={setSelectedProject}
+                    setSelectedProject={handleSetSelectedProject}
                   />
 
                   <ThemeGenerator
@@ -143,13 +154,7 @@ useEffect(() => {
                   <ProjectsManager
                     generatedTheme={generatedTheme}
                     selectedProject={selectedProject}
-                    setSelectedProject={(p: any) => {
-                      // Lee siempre la versión más actualizada del LocalStorage
-                      const saved = JSON.parse(localStorage.getItem("themeforge-projects") || "[]");
-                      const updated = saved.find((x: any) => x.id === p.id) || p;
-                      setSelectedProject(updated);
-                      localStorage.setItem("themeforge-selected-project", JSON.stringify(updated));
-                    }}
+                    setSelectedProject={handleSelectProject}
                     projects={projects}
                     setProjects={setProjects}
                   />
@@ -160,7 +165,7 @@ useEffect(() => {
                 <AssetStudio
                   generatedTheme={generatedTheme}
                   selectedProject={selectedProject}
-                  setSelectedProject={setSelectedProject}
+                  setSelectedProject={handleSetSelectedProject}
                 />
               )}
 
@@ -180,7 +185,6 @@ useEffect(() => {
 
             </div>
 
-            {/* Preview Panel */}
             <div className="col-span-4">
               <div className="sticky top-6">
                 <MobilePreview

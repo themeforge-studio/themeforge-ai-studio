@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { assetLibrary } from "./assetLibrary";
 import { themeSuggestions } from "./aiData";
 import { uploadImage } from "../../lib/supabase";
@@ -91,7 +91,21 @@ export default function AssetStudio({
   const [localAssets, setLocalAssets] = useState<Record<string, string>>({});
   const [regenerating, setRegenerating] = useState<string | null>(null);
   const [previewAsset, setPreviewAsset] = useState<any | null>(null);
-  const [uploadedImages, setUploadedImages] = useState<Record<string, string>>({});
+  const [uploadedImages, setUploadedImages] = useState<Record<string, string>>({
+  wallpaper: selectedProject?.wallpaperImage || "",
+  iconPack: selectedProject?.iconPackImage || "",
+  character: selectedProject?.characterImage || "",
+  widget: selectedProject?.widgetImage || "",
+});
+
+useEffect(() => {
+  setUploadedImages({
+    wallpaper: selectedProject?.wallpaperImage || "",
+    iconPack: selectedProject?.iconPackImage || "",
+    character: selectedProject?.characterImage || "",
+    widget: selectedProject?.widgetImage || "",
+  });
+}, [selectedProject?.id, selectedProject?.wallpaperImage]);
 
   const style = (
     selectedProject?.style ||
