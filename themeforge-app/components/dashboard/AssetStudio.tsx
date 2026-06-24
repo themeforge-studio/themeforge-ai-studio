@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { assetLibrary } from "./assetLibrary";
 import { themeSuggestions } from "./aiData";
+import { uploadImage } from "../../lib/supabase";
 
 
 type AssetStudioProps = {
@@ -306,20 +307,24 @@ const suggestions =
         type="file"
         accept="image/*"
         className="hidden"
-        onChange={(e) => {
+        onChange={async (e) => {
           const file = e.target.files?.[0];
           if (!file) return;
+
+          // Muestra preview inmediato
           const reader = new FileReader();
           reader.onload = (ev) => {
-            const imageUrl = ev.target?.result as string;
-            setUploadedImages((prev) => ({ ...prev, [card.key]: imageUrl }));
-            if (selectedProject && setSelectedProject) {
-              const updated = { ...selectedProject, [`${card.key}Image`]: imageUrl };
-              setSelectedProject(updated);
-              localStorage.setItem("themeforge-selected-project", JSON.stringify(updated));
-            }
+            setUploadedImages((prev) => ({ ...prev, [card.key]: ev.target?.result as string }));
           };
           reader.readAsDataURL(file);
+
+          // Sube a Supabase
+          const publicUrl = await uploadImage(file, card.key);
+          if (publicUrl && selectedProject && setSelectedProject) {
+            const updated = { ...selectedProject, [`${card.key}Image`]: publicUrl };
+            setSelectedProject(updated);
+            localStorage.setItem("themeforge-selected-project", JSON.stringify(updated));
+          }
         }}
       />
     </label>

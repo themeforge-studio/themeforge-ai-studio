@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { uploadImage } from "../../lib/supabase";
 
 const STYLE_IMAGES: Record<string, string> = {
   cyberpunk: "https://images.unsplash.com/photo-1604076913837-52ab5629fde9?w=800&q=80",
@@ -40,9 +41,13 @@ export default function ThemeOverview({
 
   const style = (project.style || "cyberpunk").toLowerCase();
   const wallpaperImage = STYLE_IMAGES[style] || STYLE_IMAGES.cyberpunk;
-  const [customWallpaper, setCustomWallpaper] = useState<string | null>(
-    project.wallpaperImage || null
-  );
+  const [customWallpaper, setCustomWallpaper] = useState<string | null>(null);
+
+    useEffect(() => {
+      if (selectedProject?.wallpaperImage) {
+        setCustomWallpaper(selectedProject.wallpaperImage);
+      }
+    }, [selectedProject]);
   
   
 
@@ -202,20 +207,24 @@ export default function ThemeOverview({
                   type="file"
                   accept="image/*"
                   className="hidden"
-                  onChange={(e) => {
+                  onChange={async (e) => {
                     const file = e.target.files?.[0];
                     if (!file) return;
+
+                    // Muestra preview inmediato
                     const reader = new FileReader();
                     reader.onload = (ev) => {
-                      const imageUrl = ev.target?.result as string;
-                      setCustomWallpaper(imageUrl);
-                      if (setSelectedProject) {
-                        const updated = { ...project, wallpaperImage: imageUrl };
-                        setSelectedProject(updated);
-                        localStorage.setItem("themeforge-selected-project", JSON.stringify(updated));
-                      }
+                      setCustomWallpaper(ev.target?.result as string);
                     };
                     reader.readAsDataURL(file);
+
+                    // Sube a Supabase
+                    const publicUrl = await uploadImage(file, "wallpapers");
+                    if (publicUrl && setSelectedProject) {
+                      const updated = { ...project, wallpaperImage: publicUrl };
+                      setSelectedProject(updated);
+                      localStorage.setItem("themeforge-selected-project", JSON.stringify(updated));
+                    }
                   }}
                 />
               </label>
