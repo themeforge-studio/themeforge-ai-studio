@@ -320,13 +320,17 @@ export default function MobilePreview({
               )}
 
               {/* Icons */}
-              {(projectType === "Theme" || projectType === "Icon Pack") && (
+              {(projectType === "Theme" || projectType === "Icon Pack" || projectType === "Wallpaper Pack") && (
                 <div className="grid grid-cols-4 gap-1.5 mb-2 flex-shrink-0">
                   {icons.map((icon, i) => (
                     <div key={i} className="flex flex-col items-center gap-0.5">
-                      <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-sm ${config.icon}`}>
-                        {icon.symbol}
-                      </div>
+                      <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-sm overflow-hidden ${config.icon}`}>
+                      {theme.iconPackImage ? (
+                        <img src={theme.iconPackImage} alt="icon" className="w-full h-full object-cover" />
+                      ) : (
+                        icon.symbol
+                      )}
+                    </div>
                       <span className="text-white text-[7px] opacity-70 text-center leading-tight">
                         {icon.name}
                       </span>
