@@ -184,17 +184,27 @@ export default function MobilePreview({
   const projectType = theme.type || "Theme";
 
   const icons = [
-    { name: "Galería", symbol: config.iconSymbol },
-    { name: "Cámara", symbol: config.iconSymbol },
-    { name: "Música", symbol: config.iconSymbol },
-    { name: "Temas", symbol: config.iconSymbol },
-    { name: "Ajustes", symbol: config.iconSymbol },
-    { name: "Calendario", symbol: config.iconSymbol },
-    { name: "Archivos", symbol: config.iconSymbol },
-    { name: "Herramientas", symbol: config.iconSymbol },
-  ];
+  { name: "WhatsApp",   file: "whatsapp"   },
+  { name: "Instagram",  file: "instagram"  },
+  { name: "TikTok",     file: "tiktok"     },
+  { name: "Telegram",   file: "telegram"   },
+  { name: "Facebook",   file: "facebook"   },
+  { name: "X",          file: "X"    },
+  { name: "YouTube",    file: "youtube"    },
+  { name: "Gmail",      file: "gmail"      },
+  { name: "Teléfono",   file: "telefono"   },
+  { name: "Cámara",     file: "camara"     },
+  { name: "Galería",    file: "galeria"    },
+  { name: "Música",     file: "musica"     },
+  { name: "Calendario", file: "calendario" },
+  { name: "Archivos",   file: "archivos"   },
+  { name: "Mapa",       file: "mapa"       },
+  { name: "Ajustes",    file: "ajustes"    },
+];
 
-  return (
+const ICON_BASE_URL = "https://ubnjxkqgdbdrqgbihwuf.supabase.co/storage/v1/object/public/themeforge-images/iconPack/ghibli-magical-forest";
+  
+return (
     <div className="rounded-xl border border-slate-800 bg-slate-900 p-6">
 
       {/* Modal Vista Completa */}
@@ -229,19 +239,40 @@ export default function MobilePreview({
                     {new Date().toLocaleDateString("es-ES", { weekday: "long", day: "numeric", month: "long" })}
                   </div>
                   <div className="grid grid-cols-4 gap-3">
-                    {icons.map((icon, i) => (
-                      <div key={i} className="flex flex-col items-center gap-1">
-                        <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-2xl ${config.icon}`}>
-                          {icon.symbol}
+                    {icons.map((icon, i) => {
+                      const iconUrl = theme.iconPackUrls?.[i] 
+                        || (theme.style === "fantasy" ? `${ICON_BASE_URL}/${icon.file}.png` : null);
+
+                      return (
+                        <div key={i} className="flex flex-col items-center gap-1">
+                          <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-2xl overflow-hidden ${config.icon}`}>
+                            {iconUrl ? (
+                              <img
+                                src={iconUrl}
+                                alt={icon.name}
+                                className="w-full h-full object-contain"
+                              />
+                            ) : (
+                              config.iconSymbol
+                            )}
+                          </div>
+                          <span className="text-white text-[9px] opacity-70">{icon.name}</span>
                         </div>
-                        <span className="text-white text-[9px] opacity-70">{icon.name}</span>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                   <div className="mt-auto">
                     <div className="rounded-xl bg-black/20 p-2 text-center">
-                      <div className="text-2xl">{config.character}</div>
-                      <div className="text-xs text-white">{theme.character}</div>
+                      {theme.characterImage ? (
+                        <img
+                          src={theme.characterImage}
+                          alt={theme.character}
+                          className="w-40 h-52 object-contain mx-auto"
+                        />
+                      ) : (
+                        <div className="text-3xl">{config.character}</div>
+                      )}
+                      <div className="text-white text-xs opacity-60">{theme.character}</div>
                     </div>
                   </div>
                 </div>
@@ -322,23 +353,30 @@ export default function MobilePreview({
               {/* Icons */}
               {(projectType === "Theme" || projectType === "Icon Pack" || projectType === "Wallpaper Pack") && (
                 <div className="grid grid-cols-4 gap-1.5 mb-2 flex-shrink-0">
-                  {icons.map((icon, i) => (
-                    <div key={i} className="flex flex-col items-center gap-0.5">
-                      <div 
-                      className={`w-9 h-9 rounded-xl flex items-center justify-center text-sm overflow-hidden ${config.icon}`}
-                      style={theme.iconPackImage ? {
-                        backgroundImage: `url(${theme.iconPackImage})`,
-                        backgroundSize: `${4 * 100}%`,
-                        backgroundPosition: `${(i % 4) * (100/3)}% ${(Math.floor(i/4)) * (100/3)}%`,
-                      } : {}}
-                    >
-                      {!theme.iconPackImage && icon.symbol}
-                    </div>
-                      <span className="text-white text-[7px] opacity-70 text-center leading-tight">
-                        {icon.name}
-                      </span>
-                    </div>
-                  ))}
+                  {icons.map((icon, i) => {
+                    // Si el tema tiene iconos individuales en Supabase, úsalos
+                    const iconUrl = theme.iconPackUrls?.[i] 
+                      || (theme.style === "fantasy" ? `${ICON_BASE_URL}/${icon.file}.png` : null);
+                    
+                    return (
+                      <div key={i} className="flex flex-col items-center gap-0.5">
+                        <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-sm overflow-hidden ${config.icon}`}>
+                          {iconUrl ? (
+                            <img
+                              src={iconUrl}
+                              alt={icon.name}
+                              className="w-full h-full object-contain"
+                            />
+                          ) : (
+                            config.iconSymbol
+                          )}
+                        </div>
+                        <span className="text-white text-[7px] opacity-70 text-center leading-tight">
+                          {icon.name}
+                        </span>
+                      </div>
+                    );
+                  })}
                 </div>
               )}
 
