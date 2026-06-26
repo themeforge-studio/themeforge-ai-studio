@@ -324,12 +324,15 @@ export default function MobilePreview({
                 <div className="grid grid-cols-4 gap-1.5 mb-2 flex-shrink-0">
                   {icons.map((icon, i) => (
                     <div key={i} className="flex flex-col items-center gap-0.5">
-                      <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-sm overflow-hidden ${config.icon}`}>
-                      {theme.iconPackImage ? (
-                        <img src={theme.iconPackImage} alt="icon" className="w-full h-full object-cover" />
-                      ) : (
-                        icon.symbol
-                      )}
+                      <div 
+                      className={`w-9 h-9 rounded-xl flex items-center justify-center text-sm overflow-hidden ${config.icon}`}
+                      style={theme.iconPackImage ? {
+                        backgroundImage: `url(${theme.iconPackImage})`,
+                        backgroundSize: `${4 * 100}%`,
+                        backgroundPosition: `${(i % 4) * (100/3)}% ${(Math.floor(i/4)) * (100/3)}%`,
+                      } : {}}
+                    >
+                      {!theme.iconPackImage && icon.symbol}
                     </div>
                       <span className="text-white text-[7px] opacity-70 text-center leading-tight">
                         {icon.name}
