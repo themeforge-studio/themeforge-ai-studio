@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import GhibliClockWidget from "./GhibliClockWidget";
 
 type MobilePreviewProps = {
   generatedTheme?: any;
@@ -234,10 +235,18 @@ return (
                     <h3 className="font-bold text-white text-lg">{theme.name}</h3>
                     <p className="text-xs opacity-70 text-white">{theme.style} • {projectType}</p>
                   </div>
-                  <div className="text-center text-white text-4xl font-bold">12:45</div>
-                  <div className="text-center text-white text-sm opacity-70 mt-1 mb-4">
-                    {new Date().toLocaleDateString("es-ES", { weekday: "long", day: "numeric", month: "long" })}
-                  </div>
+                  {theme.style === "fantasy" ? (
+                    <div className="mb-4">
+                      <GhibliClockWidget compact={true} />
+                    </div>
+                  ) : (
+                    <>
+                      <div className="text-center text-white text-4xl font-bold">12:45</div>
+                      <div className="text-center text-white text-sm opacity-70 mt-1 mb-4">
+                        {new Date().toLocaleDateString("es-ES", { weekday: "long", day: "numeric", month: "long" })}
+                      </div>
+                    </>
+                  )}
                   <div className="grid grid-cols-4 gap-3">
                     {icons.map((icon, i) => {
                       const iconUrl = theme.iconPackUrls?.[i] 
@@ -343,10 +352,16 @@ return (
               )}
 
               {/* Widget */}
-              {projectType === "Theme" && (
-                <div className={`rounded-xl p-1.5 text-center mb-2 flex-shrink-0 ${config.widget}`}>
-                  <div className="text-xs text-white opacity-70 truncate">{theme.widget}</div>
-                  <div className="text-base font-bold text-white">12:45</div>
+              {(projectType === "Theme" || (projectType === "Wallpaper Pack" && theme.style === "fantasy")) && (
+                <div className="mb-2 flex-shrink-0">
+                  {theme.style === "fantasy" ? (
+                    <GhibliClockWidget compact={true} />
+                  ) : (
+                    <div className={`rounded-xl p-1.5 text-center ${config.widget}`}>
+                      <div className="text-xs text-white opacity-70 truncate">{theme.widget}</div>
+                      <div className="text-base font-bold text-white">12:45</div>
+                    </div>
+                  )}
                 </div>
               )}
 
