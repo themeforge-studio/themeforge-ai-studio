@@ -367,7 +367,7 @@ return (
 
               {/* Icons */}
               {(projectType === "Theme" || projectType === "Icon Pack" || projectType === "Wallpaper Pack") && (
-                <div className="grid grid-cols-4 gap-1.5 mb-2 flex-shrink-0">
+                <div className="grid grid-cols-4 gap-1.5 mb-2 flex-shrink-0" style={{ position: "relative", zIndex: 10 }}>
                   {icons.map((icon, i) => {
                     // Si el tema tiene iconos individuales en Supabase, úsalos
                     const iconUrl = theme.iconPackUrls?.[i] 
@@ -395,32 +395,40 @@ return (
                 </div>
               )}
 
-              {/* Character */}
-              {(projectType === "Theme" || projectType === "Character Pack" || projectType === "Wallpaper Pack") && (
-                <div className="mt-auto flex-shrink-0">
-                  <div className="rounded-xl bg-black/20 p-1.5 text-center">
-                    {theme.characterImage ? (
-                      <img
-                        src={theme.characterImage}
-                        alt={theme.character}
-                        className="w-40 h-52 object-contain mx-auto"
-                      />
-                    ) : (
-                      <div className="text-xl">{config.character}</div>
-                    )}
-                    <div className="text-xs text-white truncate">{theme.character}</div>
-                  </div>
+              {/* Character — posicionado como parte del wallpaper */}
+              {(projectType === "Theme" || projectType === "Character Pack" || projectType === "Wallpaper Pack") && theme.characterImage && (
+                <div className="absolute bottom-0 left-0 right-0 flex justify-end pointer-events-none" style={{ zIndex: 5 }}>
+                  <img
+                    src={theme.characterImage}
+                    alt={theme.character}
+                    className="object-contain"
+                    style={{ height: "220px", width: "auto", opacity: 0.95 }}
+                  />
                 </div>
               )}
 
               {/* Dock */}
-              {projectType === "Theme" && (
-                <div className="grid grid-cols-4 gap-1.5 mt-1 flex-shrink-0">
-                  {config.dock.map((icon, i) => (
-                    <div key={i} className="rounded-xl bg-white/10 p-1.5 text-center text-sm">
-                      {icon}
-                    </div>
-                  ))}
+              {(projectType === "Theme" || projectType === "Wallpaper Pack") && (
+                <div className="absolute bottom-2 left-2 right-2" style={{ zIndex: 20 }}>
+                  <div className="grid grid-cols-4 gap-1.5" style={{ position: "relative", zIndex: 20 }}>
+                    {theme.style === "fantasy" ? (
+                      ["whatsapp", "instagram", "camara", "galeria"].map((file, i) => (
+                        <div key={i} className="rounded-xl bg-black/30 backdrop-blur-sm p-1.5 flex items-center justify-center overflow-hidden">
+                          <img
+                            src={`${ICON_BASE_URL}/${file}.png`}
+                            alt={file}
+                            className="w-7 h-7 object-contain"
+                          />
+                        </div>
+                      ))
+                    ) : (
+                      config.dock.map((icon, i) => (
+                        <div key={i} className="rounded-xl bg-white/10 p-1.5 text-center text-sm">
+                          {icon}
+                        </div>
+                      ))
+                    )}
+                  </div>
                 </div>
               )}
 
