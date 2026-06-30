@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import GhibliClockWidget from "./GhibliClockWidget";
 
 type MobilePreviewProps = {
@@ -167,6 +167,12 @@ export default function MobilePreview({
 }: MobilePreviewProps) {
   const [device, setDevice] = useState<DeviceType>("Android");
   const [showFullPreview, setShowFullPreview] = useState(false);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setVisible(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
 
   const theme = selectedProject || generatedTheme || {
     name: "Cyber Samurai",
@@ -311,7 +317,11 @@ return (
       </div>
 
       {/* Phone frame */}
-      <div className="flex justify-center">
+      <div className="flex justify-center" style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(10px)",
+        transition: "opacity 0.6s ease, transform 0.6s ease"
+      }}>
         <div className={`${DEVICE_SIZE[device]} rounded-[40px] border-4 border-slate-700 bg-black p-3 transition-all duration-300 overflow-hidden`}>
           <div
             className="w-full h-full rounded-[32px] p-3 flex flex-col relative overflow-hidden"
