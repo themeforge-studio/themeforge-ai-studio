@@ -479,10 +479,16 @@ return (
         </div>
 
         {/* Widget Samsung */}
-        <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-4 mb-4">
-          <div className="text-white text-sm opacity-70 mb-1">{theme.widget}</div>
-          <div className="text-white text-2xl font-light">24° ☀️</div>
-          <div className="text-white/60 text-xs mt-1">Lima, Perú</div>
+        <div className="mb-4">
+          {theme.style === "fantasy" ? (
+            <GhibliClockWidget compact={true} />
+          ) : (
+            <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-4">
+              <div className="text-white text-sm opacity-70 mb-1">{theme.widget}</div>
+              <div className="text-white text-2xl font-light">24° ☀️</div>
+              <div className="text-white/60 text-xs mt-1">Lima, Perú</div>
+            </div>
+          )}
         </div>
 
         {/* Iconos Samsung One UI */}
@@ -545,13 +551,19 @@ return (
       }}
     >
       <div className="absolute inset-0 bg-black/30 rounded-full" />
-      <div className="relative z-10 text-center p-6">
-        <div className="text-white text-5xl font-bold mb-1">12:45</div>
-        <div className="text-white text-sm opacity-70 mb-4">
-          {new Date().toLocaleDateString("es-ES", { weekday: "short", day: "numeric", month: "short" })}
-        </div>
-        <div className="text-4xl mb-2">{config.character}</div>
-        <div className="text-white text-xs opacity-70">{theme.name}</div>
+      <div className="relative z-10 text-center p-2 w-full">
+        {theme.style === "fantasy" ? (
+          <GhibliClockWidget compact={true} />
+        ) : (
+          <>
+            <div className="text-white text-5xl font-bold mb-1">12:45</div>
+            <div className="text-white text-sm opacity-70 mb-4">
+              {new Date().toLocaleDateString("es-ES", { weekday: "short", day: "numeric", month: "short" })}
+            </div>
+            <div className="text-4xl mb-2">{config.character}</div>
+            <div className="text-white text-xs opacity-70">{theme.name}</div>
+          </>
+        )}
       </div>
     </div>
     <p className="text-slate-500 text-xs mt-3">
