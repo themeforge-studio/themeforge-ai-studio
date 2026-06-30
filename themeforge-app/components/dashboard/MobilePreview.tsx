@@ -347,7 +347,7 @@ return (
               </div>
 
               {/* Wallpaper preview */}
-              {(projectType === "Theme" || projectType === "Wallpaper Pack") && (
+              {(projectType === "Theme" || projectType === "Wallpaper Pack") && theme.style !== "fantasy" && (
                 <div className="h-24 rounded-xl overflow-hidden mb-2 relative flex-shrink-0">
                   <img
                     src={wallpaperImageUrl}
