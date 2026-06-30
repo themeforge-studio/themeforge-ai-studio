@@ -279,12 +279,12 @@ return (
                   </div>
                   <div className="mt-auto">
                   {theme.characterImage && (
-                    <div className="absolute bottom-0 left-0 right-0 flex justify-end pointer-events-none" style={{ zIndex: 5 }}>
+                    <div className="absolute bottom-0 left-0 right-0 flex justify-end pr-2 pointer-events-none" style={{ zIndex: 5 }}>
                       <img
                         src={theme.characterImage}
                         alt={theme.character}
                         className="object-contain"
-                        style={{ height: "260px", width: "auto", opacity: 0.95 }}
+                        style={{ height: "240px", width: "auto", opacity: 0.95, marginRight: "10px" }}
                       />
                     </div>
                   )}
