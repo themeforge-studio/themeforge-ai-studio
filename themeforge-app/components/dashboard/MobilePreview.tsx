@@ -275,21 +275,41 @@ return (
                         </div>
                       );
                     })}
+                    
                   </div>
                   <div className="mt-auto">
-                    <div className="rounded-xl bg-black/20 p-2 text-center">
-                      {theme.characterImage ? (
-                        <img
-                          src={theme.characterImage}
-                          alt={theme.character}
-                          className="w-40 h-52 object-contain mx-auto"
-                        />
+                  {theme.characterImage && (
+                    <div className="absolute bottom-0 left-0 right-0 flex justify-end pointer-events-none" style={{ zIndex: 5 }}>
+                      <img
+                        src={theme.characterImage}
+                        alt={theme.character}
+                        className="object-contain"
+                        style={{ height: "260px", width: "auto", opacity: 0.95 }}
+                      />
+                    </div>
+                  )}
+                  <div className="absolute bottom-4 left-4 right-4" style={{ zIndex: 20 }}>
+                    <div className="grid grid-cols-4 gap-2">
+                      {theme.style === "fantasy" ? (
+                        ["whatsapp", "instagram", "camara", "galeria"].map((file, i) => (
+                          <div key={i} className="rounded-2xl bg-black/30 backdrop-blur-sm p-2 flex items-center justify-center overflow-hidden">
+                            <img
+                              src={`${ICON_BASE_URL}/${file}.png`}
+                              alt={file}
+                              className="w-10 h-10 object-contain"
+                            />
+                          </div>
+                        ))
                       ) : (
-                        <div className="text-3xl">{config.character}</div>
+                        config.dock.map((icon, i) => (
+                          <div key={i} className="rounded-2xl bg-white/10 p-2 text-center text-lg">
+                            {icon}
+                          </div>
+                        ))
                       )}
-                      <div className="text-white text-xs opacity-60">{theme.character}</div>
                     </div>
                   </div>
+                </div>
                 </div>
               </div>
             </div>
