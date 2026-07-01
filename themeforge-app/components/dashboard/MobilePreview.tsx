@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import GhibliClockWidget from "./GhibliClockWidget";
+import SpaceClockWidget from "./SpaceClockWidget";
 
 type MobilePreviewProps = {
   generatedTheme?: any;
@@ -247,6 +248,10 @@ return (
                     <div className="mb-4">
                       <GhibliClockWidget compact={true} />
                     </div>
+                  ) : theme.style === "space" ? (
+                    <div className="mb-4">
+                      <SpaceClockWidget compact={true} />
+                    </div>
                   ) : (
                     <>
                       <div className="text-center text-white text-4xl font-bold">12:45</div>
@@ -389,6 +394,8 @@ return (
                 <div className="mb-2 flex-shrink-0">
                   {theme.style === "fantasy" ? (
                     <GhibliClockWidget compact={true} />
+                  ) : theme.style === "space" ? (
+                    <SpaceClockWidget compact={true} />
                   ) : (
                     <div className={`rounded-xl p-1.5 text-center ${config.widget}`}>
                       <div className="text-xs text-white opacity-70 truncate">{theme.widget}</div>
