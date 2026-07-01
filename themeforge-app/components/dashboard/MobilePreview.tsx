@@ -299,10 +299,10 @@ return (
                   <div className="absolute bottom-4 left-4 right-4" style={{ zIndex: 20 }}>
                     <div className="grid grid-cols-4 gap-2">
                       {theme.style === "fantasy" ? (
-                        ["whatsapp", "instagram", "camara", "galeria"].map((file, i) => (
-                          <div key={i} className="rounded-2xl bg-black/30 backdrop-blur-sm p-2 flex items-center justify-center overflow-hidden">
+                        (theme.style === "fantasy" ? ["whatsapp", "instagram", "camara", "galeria"] : ["whatsapp-estrella", "instagram-estrella", "camara-estrella", "galeria-estrella"]).map((file, i) => (
+                          <div key={i} className="rounded-xl bg-black/30 backdrop-blur-sm p-1.5 flex items-center justify-center overflow-hidden">
                             <img
-                              src={`${ICON_BASE_URL}/${file}.png`}
+                              src={theme.style === "fantasy" ? `${ICON_BASE_URL}/${file}.png` : `${ICON_BASE_URL_SPACE}/${file}.png`}
                               alt={file}
                               className="w-10 h-10 object-contain"
                             />
@@ -453,10 +453,10 @@ return (
                 <div className="absolute bottom-2 left-2 right-2" style={{ zIndex: 20 }}>
                   <div className="grid grid-cols-4 gap-1.5" style={{ position: "relative", zIndex: 20 }}>
                     {theme.style === "fantasy" ? (
-                      ["whatsapp", "instagram", "camara", "galeria"].map((file, i) => (
+                      (theme.style === "fantasy" ? ["whatsapp", "instagram", "camara", "galeria"] : ["whatsapp-estrella", "instagram-estrella", "camara-estrella", "galeria-estrella"]).map((file, i) => (
                         <div key={i} className="rounded-xl bg-black/30 backdrop-blur-sm p-1.5 flex items-center justify-center overflow-hidden">
                           <img
-                            src={`${ICON_BASE_URL}/${file}.png`}
+                            src={theme.style === "fantasy" ? `${ICON_BASE_URL}/${file}.png` : `${ICON_BASE_URL_SPACE}/${file}.png`}
                             alt={file}
                             className="w-7 h-7 object-contain"
                           />
