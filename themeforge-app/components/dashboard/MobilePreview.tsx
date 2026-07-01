@@ -298,9 +298,9 @@ return (
                   )}
                   <div className="absolute bottom-4 left-4 right-4" style={{ zIndex: 20 }}>
                     <div className="grid grid-cols-4 gap-2">
-                      {theme.style === "fantasy" ? (
+                      {(theme.style === "fantasy" || theme.style === "space") ? (
                         (theme.style === "fantasy" ? ["whatsapp", "instagram", "camara", "galeria"] : ["whatsapp-estrella", "instagram-estrella", "camara-estrella", "galeria-estrella"]).map((file, i) => (
-                          <div key={i} className="rounded-xl bg-black/30 backdrop-blur-sm p-1.5 flex items-center justify-center overflow-hidden">
+                          <div key={i} className="rounded-xl bg-black/30 backdrop-blur-sm p-2 flex items-center justify-center overflow-hidden">
                             <img
                               src={theme.style === "fantasy" ? `${ICON_BASE_URL}/${file}.png` : `${ICON_BASE_URL_SPACE}/${file}.png`}
                               alt={file}
@@ -310,7 +310,7 @@ return (
                         ))
                       ) : (
                         config.dock.map((icon, i) => (
-                          <div key={i} className="rounded-2xl bg-white/10 p-2 text-center text-lg">
+                          <div key={i} className="rounded-xl bg-white/10 p-1.5 text-center text-sm">
                             {icon}
                           </div>
                         ))
@@ -375,7 +375,7 @@ return (
               </div>
 
               {/* Wallpaper preview */}
-              {(projectType === "Theme" || projectType === "Wallpaper Pack") && theme.style !== "fantasy" && (
+              {(projectType === "Theme" || projectType === "Wallpaper Pack") && theme.style !== "fantasy" && theme.style !== "space" && (
                 <div className="h-24 rounded-xl overflow-hidden mb-2 relative flex-shrink-0">
                   <img
                     src={wallpaperImageUrl}
@@ -390,7 +390,7 @@ return (
               )}
 
               {/* Widget */}
-              {(projectType === "Theme" || (projectType === "Wallpaper Pack" && theme.style === "fantasy")) && (
+              {(projectType === "Theme" || (projectType === "Wallpaper Pack" && (theme.style === "fantasy" || theme.style === "space"))) && (
                 <div className="mb-2 flex-shrink-0">
                   {theme.style === "fantasy" ? (
                     <GhibliClockWidget compact={true} />
@@ -452,7 +452,7 @@ return (
               {(projectType === "Theme" || projectType === "Wallpaper Pack") && (
                 <div className="absolute bottom-2 left-2 right-2" style={{ zIndex: 20 }}>
                   <div className="grid grid-cols-4 gap-1.5" style={{ position: "relative", zIndex: 20 }}>
-                    {theme.style === "fantasy" ? (
+                    {(theme.style === "fantasy" || theme.style === "space") ? (
                       (theme.style === "fantasy" ? ["whatsapp", "instagram", "camara", "galeria"] : ["whatsapp-estrella", "instagram-estrella", "camara-estrella", "galeria-estrella"]).map((file, i) => (
                         <div key={i} className="rounded-xl bg-black/30 backdrop-blur-sm p-1.5 flex items-center justify-center overflow-hidden">
                           <img
