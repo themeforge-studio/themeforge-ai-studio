@@ -210,6 +210,8 @@ export default function MobilePreview({
 ];
 
 const ICON_BASE_URL = "https://ubnjxkqgdbdrqgbihwuf.supabase.co/storage/v1/object/public/themeforge-images/iconPack/ghibli-magical-forest";
+
+const ICON_BASE_URL_SPACE = "https://ubnjxkqgdbdrqgbihwuf.supabase.co/storage/v1/object/public/themeforge-images/iconPack/big-bang";
   
 return (
     <div className="rounded-xl border border-slate-800 bg-slate-900 p-6">
@@ -256,7 +258,8 @@ return (
                   <div className="grid grid-cols-4 gap-3">
                     {icons.map((icon, i) => {
                       const iconUrl = theme.iconPackUrls?.[i] 
-                        || (theme.style === "fantasy" ? `${ICON_BASE_URL}/${icon.file}.png` : null);
+                        || (theme.style === "fantasy" ? `${ICON_BASE_URL}/${icon.file}.png` : null)
+                        || (theme.style === "space" ? `${ICON_BASE_URL_SPACE}/${icon.file}-estrella.png` : null);
 
                       return (
                         <div key={i} className="flex flex-col items-center gap-1">
@@ -401,7 +404,8 @@ return (
                   {icons.map((icon, i) => {
                     // Si el tema tiene iconos individuales en Supabase, úsalos
                     const iconUrl = theme.iconPackUrls?.[i] 
-                      || (theme.style === "fantasy" ? `${ICON_BASE_URL}/${icon.file}.png` : null);
+                      || (theme.style === "fantasy" ? `${ICON_BASE_URL}/${icon.file}.png` : null)
+                      || (theme.style === "space" ? `${ICON_BASE_URL_SPACE}/${icon.file}-estrella.png` : null);
                     
                     return (
                       <div key={i} className="flex flex-col items-center gap-0.5">
